@@ -1,0 +1,22 @@
+{
+  "slides": [
+    {
+      "image": "images/hero/1.jpg",
+      "title": "La clé d’une trésorerie saine et d’un financement optimal",
+      "text": "Chez SOSC, nous simplifions l’accès au financement et optimisons la gestion de vos créances. Nos services se concentrent sur l’intermédiation financière ",
+      "buttonText": "Prendre rendez-vous"
+    },
+    {
+      "image": "images/hero/1.jpg",
+      "title": "Innovative Designs for Modern Living",
+      "text": "Experience the perfect blend of functionality and aesthetics with our bespoke designs.",
+      "buttonText": "Explore Our Projects"
+    },
+    {
+      "image": "images/hero/1.jpg",
+      "title": "Transforming Ideas into Reality",
+      "text": "From sketches to final construction, we ensure a seamless journey from start to finish.",
+      "buttonText": "Explore Our Projects"
+    }
+  ]
+}

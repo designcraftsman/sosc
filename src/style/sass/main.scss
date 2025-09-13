@@ -1,0 +1,16 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
+@import './utils/variables.scss';
+@import './components/logo.scss';
+@import './components/hero.scss';
+@import './components/home-body.scss';
+@import "../../../node_modules/bootstrap/scss/bootstrap.scss";
+
+body {
+  font-family: 'Inter', Arial, sans-serif;
+  color: $dark-color;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
