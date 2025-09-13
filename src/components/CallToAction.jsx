@@ -20,7 +20,7 @@ const CallToAction = () => {
         </h4>
         <a
           href="#contact"
-          className="btn mt-3 btn-secondary text-white fw-bold fs-5"
+          className="btn mt-3 btn-secondary text-white rounded-pill px-4 fw-bold fs-5"
         >
           <span className=" me-2"><CiPhone /></span>
           Contactez-nous

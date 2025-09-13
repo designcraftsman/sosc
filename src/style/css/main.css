@@ -18,6 +18,12 @@
   position: relative;
   overflow: hidden;
 }
+.hero-carousel .icon-underline {
+  width: 100px;
+  height: 12px;
+  background-color: #34A84A;
+  border-radius: 2px;
+}
 .hero-carousel__item {
   position: absolute;
   height: 100vh;
@@ -123,6 +129,36 @@
 .staggered-animations button {
   animation: slide-up 0.85s cubic-bezier(0.65, 0, 0.35, 1) both;
   animation-delay: 600ms;
+}
+
+.service-card {
+  background-color: #f9f9f9;
+  transition: all 0.3s ease;
+}
+.service-card:hover {
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+.service-card .icon-underline {
+  width: 40px;
+  height: 8px;
+  background-color: #34A84A;
+  border-radius: 2px;
+}
+
+.about-section .about-images {
+  position: relative;
+  display: inline-block;
+}
+.about-section .about-images .main-img {
+  width: 100%;
+  border-radius: 8px;
+}
+.about-section .about-images .secondary-img {
+  position: absolute;
+  bottom: -20px;
+  left: -40px;
+  width: 60%;
+  border-radius: 8px;
 }
 
 /*!

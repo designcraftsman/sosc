@@ -14,7 +14,7 @@ const Footer = () => {
       <div className="container pb-5">
         <div className="row justify-content-between align-content-start">
           <div className="col-md-3">
-            <h5 className="col-8 mb-3">Retrouvez-nous sur les réseaux sociaux</h5>
+            <h5 className="col-8 mb-3 fs-5 fw-semibold">Retrouvez-nous sur les réseaux sociaux</h5>
             <div className="d-flex gap-4">
               <div ><a href="#" className="text-white fs-3 border rounded-circle p-2 pt-1"><RiFacebookLine /></a></div>
               <div ><a href="#" className="text-white fs-3 border rounded-circle p-2 pt-1"><CiInstagram /></a></div>
@@ -45,7 +45,7 @@ const Footer = () => {
             <img src={logo} className="logo-footer" alt="Logo" />
           </div>
           <div className="col-md-4 text-start text-dark">
-            <p className="mb-0">© 2024 SOSC. All Rights Reserved.</p>
+            <p className="mb-0">© 2024 <span className="text-secondary">SOSC</span>. All Rights Reserved.</p>
           </div>
           <div className="d-flex gap-5 col-md-4 ">
             <a href="#" className="text-dark fs-6">Politique de confidentialité</a>

@@ -7,6 +7,14 @@ $nav-button-size: 20px;
   position: relative;
   overflow: hidden;
 
+  .icon-underline {
+    width: 100px;
+    height: 12px;
+    background-color: $secondary; // vert
+    border-radius: 2px;
+  }
+
+
   &__item{
     position: absolute;
     height: 100vh;

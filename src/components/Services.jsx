@@ -32,14 +32,24 @@ const Services = () => {
           </div>
           <div className="row justify-content-evenly col-9">
           {services.map((s, idx) => (
-            <div className="col-md-3 mb-3 bg-info border border-3" key={idx}>
-              <div className="h-100  p-3 border-0 ">
-                <img src={s.img} alt={s.title} className="mb-3 mx-auto rounded" style={{ width: "80px", height: "80px", objectFit: "cover" }} />
+            <div className="col-md-3 mb-3" key={idx}>
+              <div className="h-100 p-3 border border-1 service-card">
+                <img
+                  src={s.img}
+                  alt={s.title}
+                  className="mb-2  d-block"
+                  style={{ width: "60px", height: "60px", objectFit: "contain" }}
+                />
+                
+                {/* Barre verte sous l’icône */}
+                <div className="icon-underline  mb-3"></div>
+
                 <h5 className="fw-bold fs-5">{s.title}</h5>
                 <p className="fs-6 fw-light">{s.text}</p>
-                <a href="#" className="text-decoration-underline" >En savoir plus</a>
+                <a href="#" className="text-decoration-underline">En savoir plus</a>
               </div>
             </div>
+
           ))}
         </div>
         </div>

@@ -46,7 +46,7 @@ const Team = () => {
                   alt={member.name}
                   className="w-100 rounded-3"
                   style={{
-                    height: "300px",
+                    height: "400px",
                     objectFit: "cover",
                     transition: "transform 0.4s ease",
                   }}

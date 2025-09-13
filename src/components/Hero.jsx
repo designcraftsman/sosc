@@ -68,9 +68,10 @@ const Hero = () => {
           >
             <img src={slide.image} alt={slide.altText} className="d-none" /> {/* For SEO purposes */}
             <div className="hero-carousel__item__caption staggered-animations">
+              <div className="icon-underline slide-up mb-5"></div>
               <h1 className="display-4 fw-bold slide-up">{slide.title}</h1>
               <h2 className="fs-4 mb-3 fw-light slide-up">{slide.text}</h2>
-              <a href="/portfolio-v1" className="btn btn-secondary text-white hover-filled-slide-down slide-up fw-bold">
+              <a href="/portfolio-v1" className="btn btn-secondary text-white rounded-pill px-4 hover-filled-slide-down slide-up fw-bold">
                 <span>{slide.buttonText}</span>
               </a>
             </div>
