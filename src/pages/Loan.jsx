@@ -3,27 +3,31 @@ import Navbar from "../components/Navbar";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
 import ctaBg from '../assets/images/contact/contact-section-bg.png';
-import ServicesSection from "../components/Services";
-import Cta from '../components/CallToAction';
+import LoanPartner  from "../components/LoanPartner";
+import FinancialPartner from "../components/FinancialPartner";
+import LoanPacks from "../components/LoanPacks";
+import WhyChooseLoan from "../components/WhyChooseLoan";
 
-const Services = () => {
+const Loan = () => {
   return (
     <React.Fragment>
       <Navbar />
       <Header 
-        title="Nos Services"
-        text="Découvrez nos services et comment nous pouvons vous aider à atteindre vos objectifs"
+        title="Crédit 5/5"
         backgroundImage={ctaBg}
-        height="500px"
+        height="400px"
       />
       {/* Ajoutez ici d'autres sections spécifiques aux services si nécessaire */}
-      <ServicesSection />
-      <Cta />
+        <LoanPartner />
+        <FinancialPartner />
+        <WhyChooseLoan />
+        <LoanPacks />
+
       <Footer />
     </React.Fragment>
   );
 };
 
-export default Services;
+export default Loan;
 
 

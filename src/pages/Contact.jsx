@@ -1,17 +1,22 @@
 import React from "react";
 import Navbar from "../components/Navbar";
-import HeroContact from "../components/HeroContact";
+import Header from "../components/Header";
 import ContactSection from "../components/ContactSection";
 import Map from "../components/Map";
 import Footer from "../components/Footer";
+import ctaBg from '../assets/images/contact/contact-section-bg.png';
 
 const Contact = () => {
   return (
     <>
       <Navbar />
-      <HeroContact />
+      <Header 
+        title="Vous avez des questions ?"
+        text="Have a question or need to discuss your next project? Reach out to our team via the contact form below"
+        backgroundImage={ctaBg}
+        height="500px"
+      />
       <ContactSection />
-      <Map />
       <Footer />
     </>
   );

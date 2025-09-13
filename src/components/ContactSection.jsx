@@ -1,27 +1,53 @@
 import React from "react";
+import { CiLocationOn } from "react-icons/ci";
+import { CiPhone } from "react-icons/ci";
+import { AiOutlineMail } from "react-icons/ai";
+import Map from "./Map";
 
 const ContactSection = () => {
   return (
     <section className="py-5">
-      <div className="container">
-        <div className="row">
+      <div className="container bg-success ">
+        <div className="row align-items-center mb-5 p-5">
           {/* Contact Info */}
-          <div className="col-md-6">
-            <h3 className="fw-bold mb-4">Contactez-nous</h3>
-            <p><strong>Adresse :</strong> Résidence Louma, IMM G1, Etg 1 Apprt 263, BD Palestine, Mohammedia. Maroc</p>
-            <p><strong>Email :</strong> <a href="mailto:sosccarl@gmail.com">sosccarl@gmail.com</a></p>
-            <p><strong>Téléphone :</strong></p>
-            <p>+212 529 555 101</p>
-            <p>+212 703 17 18 08</p>
+          <div className="col-md-5 ">
+            <div className="icon-underline  mb-3"></div>
+            <h3 className="fw-bold mb-3">Contactez-nous</h3>
+            <h4 className="fs-5 fw-medium mb-5">Have a question or need to discuss your next project? Reach out to our team via the contact form below</h4>
+            <div className="d-flex align-items-center mb-3">
+              <div className="me-3 fs-1 text-secondary">
+                <CiLocationOn />
+              </div>
+              <div><p className="p-0 m-0">Résidence Louma, IMM G1, Etg 1 Apprt 263, BD Palestine, Mohammedia. Maroc</p></div>
+            </div>
+            
+
+            <div className="d-flex align-items-center mb-3">
+              <div className="me-3 fs-2 text-secondary">
+                <AiOutlineMail />
+              </div>
+              <div><p className="p-0 m-0">sosccarl@gmail.com</p></div>
+            </div>
+
+            
+            <div className="d-flex align-items-center mb-3">
+              <div className="me-3 fs-1 text-secondary">
+                <CiPhone />
+              </div>
+              <div>
+                <p className="p-0 m-0">+212 529 555 101</p>
+                <p className="p-0 m-0">+212 529 555 101</p>
+              </div>
+            </div>
           </div>
 
           {/* Contact Form */}
-          <div className="col-md-6">
-            <form>
-              <div className="mb-3">
+          <div className="col-md-5 mx-auto">
+            <form className="row g-1">
+              <div className="mb-3 col-6">
                 <input type="text" className="form-control" placeholder="Nom" required />
               </div>
-              <div className="mb-3">
+              <div className="mb-3 col-6">
                 <input type="email" className="form-control" placeholder="Email" required />
               </div>
               <div className="mb-3">
@@ -30,11 +56,17 @@ const ContactSection = () => {
               <div className="mb-3">
                 <textarea className="form-control" rows="5" placeholder="Votre message" required></textarea>
               </div>
-              <button type="submit" className="btn btn-success">Soumettre</button>
+              <div>
+                <button type="submit" className="btn btn-secondary text-white fw-bold rounded-pill px-4">Soumettre</button>
+              </div>
             </form>
           </div>
         </div>
+        <div>
+          <Map />
+        </div>
       </div>
+      
     </section>
   );
 };

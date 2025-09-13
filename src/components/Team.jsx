@@ -30,9 +30,9 @@ const Team = () => {
         <h2 className="fw-semibold mb-5 fs-3">Rencontrez notre équipe talentueuse</h2>
 
         {/* Team Grid */}
-        <div className="row justify-content-evenly">
+        <div className="row justify-content-evenly text-start">
           {team.map((member, idx) => (
-            <div className="col-md-3 col-sm-6 mb-4" key={idx}>
+            <div className="col-md-4 col-sm-6 mb-4" key={idx}>
               <div
                 className="position-relative overflow-hidden rounded-3 shadow-sm"
                 style={{
@@ -62,6 +62,7 @@ const Team = () => {
                 >
                   <h6 className="fw-bold mb-0">{member.name}</h6>
                   <small className="opacity-75">{member.role}</small>
+                  <div className="icon-underline mt-2"></div>
                 </div>
               </div>
             </div>

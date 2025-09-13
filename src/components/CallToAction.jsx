@@ -10,7 +10,7 @@ const CallToAction = () => {
         backgroundImage: `url(${ctaBg})`,
         backgroundSize: "cover",
         backgroundPosition: "center",
-        height: "400px",
+        height: "500px",
       }}
     >
       <div className="container text-start">

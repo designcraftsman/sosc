@@ -40,7 +40,7 @@ const Footer = () => {
         </div>
         
       </div>
-      <div className="d-flex justify-content-between px-5 py-3 align-items-center  bg-primary">
+      <div className="d-flex justify-content-between px-5 py-2 align-items-center  bg-primary">
           <div className="col-md-4">
             <img src={logo} className="logo-footer" alt="Logo" />
           </div>
