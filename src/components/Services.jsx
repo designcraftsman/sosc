@@ -46,7 +46,7 @@ const Services = () => {
 
                 <h5 className="fw-bold fs-5">{s.title}</h5>
                 <p className="fs-6 fw-light">{s.text}</p>
-                <a href="#" className="text-decoration-underline">En savoir plus</a>
+                <a href="/services/crédit" className="text-decoration-underline">En savoir plus</a>
               </div>
             </div>
 
