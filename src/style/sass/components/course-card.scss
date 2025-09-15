@@ -1,0 +1,32 @@
+.course-card {
+  border: none;
+
+  .card-body {
+    padding: 1.25rem;
+  }
+
+  .card-title {
+    font-size: 1.1rem;
+    font-weight: 600;
+  }
+
+  .card-text {
+    font-size: 0.95rem;
+    margin-bottom: 0.5rem;
+  }
+
+  a {
+    font-size: 0.9rem;
+  }
+
+  .course-footer {
+    background-color: $secondary; // Green bar
+    font-size: 0.9rem;
+    font-weight: 500;
+
+    span {
+      display: flex;
+      align-items: center;
+    }
+  }
+}

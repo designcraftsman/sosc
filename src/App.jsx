@@ -5,6 +5,7 @@ import Services from './pages/Services';
 import Contact from './pages/Contact';
 import Loan from './pages/Loan';
 import Recovery from './pages/Recovery';
+import Courses from './pages/Courses';
 
 function App() {
   return (
@@ -17,6 +18,7 @@ function App() {
           <Route path="/contact" element={<Contact />} />
           <Route path="/services/crédit" element={<Loan />} />
           <Route path="/services/recouvrement" element={<Recovery />} />
+          <Route path="/services/formations" element={<Courses />} />
         </Routes>
       </Router>
     </div>

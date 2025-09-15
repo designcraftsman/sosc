@@ -1,68 +1,57 @@
 import React from "react";
 import { FaSyncAlt } from "react-icons/fa";
+import Negotiation from '../assets/icons/negotiation.svg';
+import Friendly from '../assets/icons/friendly.svg';
+import Direction from '../assets/icons/direction.svg';
+import Analyze from '../assets/icons/analyze.svg';
+import BookMark from '../assets/icons/bookmark.svg';
+
 
 const DebtRecovery = () => {
   const services = [
-    {
+    { 
+      icon: Analyze,
       title: "Analyse des créances en souffrance",
       text: "Identification des créances impayées et évaluation de leur degré de risque pour établir une stratégie adaptée.",
     },
     {
+      icon: Direction,
       title: "Cadrage",
       text: "Définition des priorités, objectifs et plan d’action pour structurer les opérations de recouvrement.",
     },
     {
+      icon: Friendly,
       title: "Relance amiable",
-      text: "Identification des créances impayées et évaluation de leur degré de risque pour établir une stratégie adaptée.",
+      text: "Mise en place d’un suivi structuré pour rappeler vos débiteurs, prévenir les retards et éviter l’escalade des conflits.",
     },
     {
+      icon: Negotiation,
       title: "Négociation de règlement",
-      text: "Identification des créances impayées et évaluation de leur degré de risque pour établir une stratégie adaptée.",
+      text: "Nous facilitons les négociations pour obtenir des paiements partiels ou des échéanciers adaptés.",
     },
     {
+      icon: BookMark,
       title: "Suivi personnalisé",
-      text: "Identification des créances impayées et évaluation de leur degré de risque pour établir une stratégie adaptée.",
+      text: "Un suivi transparent et constant pour vous tenir informé de l’avancement du recouvrement et des actions entreprises.",
     },
   ];
 
   return (
     <section className="py-5 debt-section">
       <div className="container">
-        {/* Bloc haut */}
-        <div className="row align-items-center mb-5">
-          <div className="col-md-6">
-            <img
-              src="https://images.unsplash.com/photo-1565514022-2c9e1a3d8b17?auto=format&fit=crop&w=500&q=80"
-              alt="Gestion des créances"
-              className="img-fluid rounded"
-            />
-          </div>
-          <div className="col-md-6">
-            <h5 className="text-warning fw-bold">
-              Des Solutions Efficaces Pour La Gestion de Vos Créances
-            </h5>
-            <p className="mt-3">
-              Optimisez votre trésorerie avec des solutions de recouvrement sur mesure...
-              <br />
-              Découvrez comment nous transformons la gestion de vos créances en un levier de performance.
-            </p>
-          </div>
-        </div>
-
-        {/* Bloc bas */}
         <div className="row align-items-start">
-          <div className="col-md-7">
-            <h5 className="text-success fw-bold mb-4">
+          <div className="col-md-5 mx-auto">
+            <h5 className="text-primary fw-semibold mb-4">
               Nos services de recouvrement
             </h5>
             <div className="d-flex flex-column gap-3">
               {services.map((s, idx) => (
                 <div
                   key={idx}
-                  className="d-flex align-items-start p-3 border rounded shadow-sm bg-white"
+                  className="d-flex align-items-center p-3 border rounded shadow-sm bg-info"
                 >
                   <div className="icon-box me-3">
-                    <FaSyncAlt size={22} className="text-success" />
+                    <img src={s.icon} alt={s.title} />
                   </div>
                   <div>
                     <h6 className="fw-bold">{s.title}</h6>
@@ -74,17 +63,19 @@ const DebtRecovery = () => {
           </div>
 
           {/* Image à droite */}
-          <div className="col-md-5 mt-4 mt-md-0 position-relative">
-            <img
-              src="https://images.unsplash.com/photo-1600880292203-757bb62b4baf?auto=format&fit=crop&w=500&q=80"
-              alt="Team working"
-              className="img-fluid rounded mb-3"
-            />
-            <img
-              src="https://images.unsplash.com/photo-1600880292203-757bb62b4baf?auto=format&fit=crop&w=500&q=80"
-              alt="Secondary"
-              className="img-fluid rounded secondary-img"
-            />
+          <div className="col-md-5 mx-auto position-relative">
+            <div className="about-images">
+              <img
+                src="https://images.unsplash.com/photo-1559136555-9303baea8ebd?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80"
+                alt="Main"
+                className="img-fluid main-img rounded"
+              />
+              <img
+                src="https://images.unsplash.com/photo-1515378791036-0648a3ef77b2?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80"
+                alt="Secondary"
+                className="img-fluid secondary-img rounded shadow"
+              />
+            </div>
           </div>
         </div>
       </div>

@@ -138,6 +138,33 @@
   animation-delay: 600ms;
 }
 
+.course-card {
+  border: none;
+}
+.course-card .card-body {
+  padding: 1.25rem;
+}
+.course-card .card-title {
+  font-size: 1.1rem;
+  font-weight: 600;
+}
+.course-card .card-text {
+  font-size: 0.95rem;
+  margin-bottom: 0.5rem;
+}
+.course-card a {
+  font-size: 0.9rem;
+}
+.course-card .course-footer {
+  background-color: #34A84A;
+  font-size: 0.9rem;
+  font-weight: 500;
+}
+.course-card .course-footer span {
+  display: flex;
+  align-items: center;
+}
+
 .service-card {
   background-color: #f9f9f9;
   transition: all 0.3s ease;
