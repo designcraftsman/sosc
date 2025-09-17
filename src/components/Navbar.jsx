@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import logo from '../assets/images/logo.gif';
 import { CiLocationOn } from "react-icons/ci";
 import { CiPhone } from "react-icons/ci";
@@ -10,11 +10,13 @@ import { RiFacebookLine } from "react-icons/ri";
 import { CiInstagram } from "react-icons/ci";
 import { RiLinkedinLine } from "react-icons/ri";
 import { AiOutlineMail } from "react-icons/ai";
+import { RiArrowDropDownLine } from "react-icons/ri";
 
 
 const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [servicesOpen, setServicesOpen] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -30,6 +32,7 @@ const Navbar = () => {
     };
   }, []);
 
+
   const toggleModal = () => {
     setIsModalOpen(!isModalOpen);
   };
@@ -41,24 +44,13 @@ const Navbar = () => {
   return (
     <>
       <nav 
-        className="navbar navbar-expand-lg fixed-top"
-        style={{
-          backgroundColor: isScrolled 
-            ? '#BCB600' // Full opacity primary color
-            : 'rgba(188, 182, 0, 0.7)', // 50% opacity primary color
-          transition: 'background-color 0.3s ease',
-          zIndex: 1050
-        }}
+        className={`navbar navbar-expand-lg fixed-top sosc-navbar ${isScrolled ? 'scrolled' : ''}`}
       >
       <div className="container-fluid d-flex mx-5 justify-content-between">
         <div>
           <Link 
             className="navbar-brand fw-bold" 
             to="/" 
-            style={{ 
-              color: '#000',
-              textDecoration: 'none'
-            }}
           >
             <img src={logo} className="logo" alt="Logo"/>
           </Link>
@@ -68,73 +60,84 @@ const Navbar = () => {
           type="button" 
           data-bs-toggle="collapse" 
           data-bs-target="#navbarNav"
-          style={{
-            borderColor: '#000'
-          }}
         >
-          <span 
-            className="navbar-toggler-icon"
-            style={{
-              backgroundImage: "url(\"data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba%2833, 37, 41, 0.75%29' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e\")"
-            }}
-          ></span>
+          <span className="navbar-toggler-icon"></span>
         </button>
         <div className="collapse navbar-collapse justify-content-center" id="navbarNav">
           <ul className="navbar-nav">
             <li className="nav-item mx-2">
-              <Link 
-                className="nav-link fw-bold" 
+              <NavLink 
+                end
+                className={({ isActive }) => `nav-link ${isActive ? 'active fw-bold' : ''}`}
                 to="/"
                 style={{ color: '#000' }}
               >
                 Accueil
-              </Link>
+              </NavLink>
             </li>
             <li className="nav-item mx-2">
-              <Link 
-                className="nav-link" 
+              <NavLink 
+                className={({ isActive }) => `nav-link ${isActive ? 'active fw-bold' : ''}`} 
                 to="/about"
                 style={{ color: '#000' }}
               >
                 Qui sommes-nous
-              </Link>
+              </NavLink>
             </li>
-            <li className="nav-item mx-2">
-              <Link 
-                className="nav-link" 
+            <li 
+              className="nav-item dropdown mx-2"
+              onMouseEnter={() => setServicesOpen(true)}
+              onMouseLeave={() => setServicesOpen(false)}
+            >
+              <NavLink
+                id="servicesDropdown"
+                className={({ isActive }) => `nav-link dropdown-toggle ${isActive ? 'active' : ''}`}
+                aria-expanded={servicesOpen}
                 to="/services"
-                style={{ color: '#000' }}
+                onClick={(e) => {
+                  // Allow normal navigation to /services when clicked
+                  // Also toggle the dropdown for quick access on repeated clicks
+                  setServicesOpen(prev => !prev);
+                }}
               >
-                Nos services
-              </Link>
+                Nos services <RiArrowDropDownLine className="fs-4 mb-1" />
+              </NavLink>
+              <div 
+                className={`dropdown-menu  ${servicesOpen ? ' show' : ''}`}
+                aria-labelledby="servicesDropdown"
+              >
+                <NavLink className={({ isActive }) => `dropdown-item mb-2 ${isActive ? 'active' : ''}`} to="/services/crédit" onClick={() => setServicesOpen(false)}>
+                  Crédit 5/5
+                </NavLink>
+                <NavLink className={({ isActive }) => `dropdown-item mb-2 ${isActive ? 'active' : ''}`} to="/services/recouvrement" onClick={() => setServicesOpen(false)}>
+                  Recouvrement +
+                </NavLink>
+                <NavLink className={({ isActive }) => `dropdown-item ${isActive ? 'active' : ''}`} to="/services/formations" onClick={() => setServicesOpen(false)}>
+                  Formations
+                </NavLink>
+              </div>
             </li>
             <li className="nav-item mx-2">
-              <Link 
-                className="nav-link" 
+              <NavLink 
+                className={({ isActive }) => `nav-link ${isActive ? 'active' : ''}`} 
                 to="/contact"
-                style={{ color: '#000' }}
               >
                 Contactez-nous
-              </Link>
+              </NavLink>
             </li>
           </ul>
         </div>
         <div className="d-flex align-items-center fs-6">
-          <a href="/contact" className="btn btn-dark fw-medium text-white fs-6 rounded-pill px-2">
+          <a href="/contact" className="btn btn-dark fw-bold text-white fs-6 rounded-pill px-2">
             Discutons
             <FiArrowUpRight className="ms-2 fs-3" />
           </a>
           <div className="ms-5">
             <button 
               onClick={toggleModal}
-              style={{
-                background: 'none',
-                border: 'none',
-                color: '#000',
-                cursor: 'pointer'
-              }}
+              className="menu-toggle-btn"
             >
-              <HiOutlineMenuAlt1 className="fs-2" />
+              <HiOutlineMenuAlt1 className="fs-2 text-dark" />
             </button>
           </div>
         </div>
@@ -146,48 +149,19 @@ const Navbar = () => {
       <div 
         className="modal-overlay"
         onClick={closeModal}
-        style={{
-          position: 'fixed',
-          top: 0,
-          left: 0,
-          width: '100%',
-          height: '100%',
-          backgroundColor: 'rgba(0, 0, 0, 0.5)',
-          backdropFilter: 'blur(8px)',
-          zIndex: 1060,
-          transition: 'all 0.3s ease'
-        }}
       />
     )}
 
     {/* Side Modal */}
     <div 
       className={`side-modal ${isModalOpen ? 'open' : ''}`}
-      style={{
-        position: 'fixed',
-        top: 0,
-        right: isModalOpen ? 0 : '-400px',
-        width: '400px',
-        height: '100%',
-        backgroundColor: '#fff',
-        boxShadow: '-5px 0 15px rgba(0, 0, 0, 0.3)',
-        zIndex: 1070,
-        transition: 'right 0.3s ease',
-        padding: '20px',
-        overflow: 'auto'
-      }}
     >
       {/* Modal Header */}
       <div className="d-flex justify-content-between align-items-center mb-4">
-        <img src={logo} alt="Logo" style={{ height: '80px' }} />
+        <img src={logo} alt="Logo" className="modal-logo" />
         <button 
           onClick={closeModal}
-          style={{
-            background: 'none',
-            border: 'none',
-            fontSize: '28px',
-            cursor: 'pointer'
-          }}
+          className="btn-close-custom"
         >
           <TfiClose />
         </button>

@@ -14,13 +14,13 @@ const Services = () => {
     },
     { 
       title: "Recouvrement +", 
-      text: "Des solutions de financement sur mesure pour particuliers et entreprises", 
+      text: "Optimisez vos processus de recouvrement grâce à nos solutions spécialisées et notre expertise éprouvée.", 
       img: recover, 
       link: "/services/recouvrement"
     },
     { 
       title: "Formations", 
-      text: "Des solutions de financement sur mesure pour particuliers et entreprises", 
+      text: "Nos programmes vous offrent des compétences opérationnelles et stratégiques indispensables.", 
       img: learn, 
       link: "/services/formations"
     },

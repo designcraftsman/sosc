@@ -2,7 +2,7 @@ import React from "react";
 import Navbar from "../components/Navbar";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
-import ctaBg from '../assets/images/contact/contact-section-bg.png';
+import ctaBg from '../assets/images/bg/services.jpg';
 import ServicesSection from "../components/Services";
 import Cta from '../components/CallToAction';
 

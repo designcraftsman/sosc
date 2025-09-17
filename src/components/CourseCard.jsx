@@ -1,28 +1,29 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import { FaClock, FaUserGraduate } from "react-icons/fa";
 import courseImage from "../assets/images/contact/contact-section-bg.png";
 
 const CourseCard = ({ image, title, description, level, hours, link }) => {
   return (
-    <div className="course-card card mb-5 shadow-sm">
-      <div className="row g-0">
+    <div className="course-card card mb-5 border-0 shadow-sm">
+      <div className="row g-0 align-items-center">
         {/* Image Section */}
         <div className="col-md-4">
           <img
-            src={courseImage}
+            src={image || courseImage}
             alt={title}
-            className="img-fluid w-100 h-100 object-fit-cover"
+            className="course-card-img"
           />
         </div>
 
         {/* Content Section */}
-        <div className="col-md-8 d-flex flex-column justify-content-between">
+        <div className="col-md-5 d-flex flex-column justify-content-between">
           <div className="card-body">
             <h5 className="card-title fw-bold">{title}</h5>
             <p className="card-text text-muted">{description}</p>
-            <a href={link} className="text-decoration-underline text-muted">
+            <Link to={link} className="text-decoration-underline text-muted">
               En savoir plus
-            </a>
+            </Link>
           </div>
 
           

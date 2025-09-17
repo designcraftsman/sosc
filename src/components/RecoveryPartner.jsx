@@ -17,10 +17,14 @@ const RecoveryPartner = () => {
           {/* Texte */}
           <div className="col-md-5 mx-auto">
             <h4 className="text-primary fw-semibold">
-              Votre partenaire de confiance pour accéder aux meilleures offres de crédit au Maroc.
+              Des Solutions Efficaces Pour La Gestion de Vos Créances
             </h4>
             <p className="mt-3">
-              Chez SOSC, nous sommes votre partenaire stratégique dans la recherche et l’obtention de financements adaptés. Grâce à nos partenariats solides avec les institutions financières de premier plan, nous vous proposons des solutions de crédit exclusives, sur mesure et compétitives, que vous soyez un particulier ou une entreprise. Nous gérons chaque étape du processus de financement, de l’étude de vos besoins à l’obtention du financement, pour vous assurer les meilleures conditions possibles.
+              Optimisez votre trésorerie avec des solutions de recouvrement sur mesure
+
+En conformité avec le Code étique du recouvrement pré-judicaire des créances de BANK AL-MAGHRIB, nos services de recouvrement externalisé couvrent l’ensemble des étapes essentielles pour garantir un suivi efficace et une récupération rapide de vos créances. Nous mettons en œuvre des méthodes éprouvées qui assurent un taux de recouvrement élevé tout en préservant vos relations commerciales.
+
+Découvrez comment nous transformons la gestion de vos créances en un levier de performance.
             </p>
           </div>
         </div>

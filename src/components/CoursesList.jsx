@@ -1,25 +1,29 @@
 import React from "react";
 import TrainingCard from "./CourseCard";
+import course1 from '../assets/images/formations/1.jpg';
+import course2 from '../assets/images/formations/2.jpg';
 
 const CoursesList = () => {
   const trainings = [
     {
-      image: "https://via.placeholder.com/300x200",
+      id: "base-recouvrement",
+      image: course1,
       title: "Formation de base en recouvrement",
       description:
-        "Apprendre les bases du recouvrement amiable, de la gestion des créances et de la relation client.",
+        "Apprenez les fondamentaux du recouvrement amiable, la gestion des créances et la relation client.",
       level: "Débutant",
-      hours: "40 heures",
-      link: "#",
+      hours: "20 heures",
+      link: "/services/formations/base-recouvrement",
     },
     {
-      image: "https://via.placeholder.com/300x200",
+      id: "techniques-avancees",
+      image: course2,
       title: "Techniques avancées de recouvrement",
       description:
-        "Approfondir les techniques de recouvrement pour maximiser l’efficacité et les résultats.",
+        "Approfondissez les techniques de recouvrement pour maximiser l’efficacité et les résultats.",
       level: "Intermédiaire",
-      hours: "40 heures",
-      link: "#",
+      hours: "30 heures",
+      link: "/services/formations/techniques-avancees",
     },
   ];
 

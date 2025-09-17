@@ -1,6 +1,6 @@
 // Variables
 $white-color: #ffffff;
-$nav-button-size: 20px;
+$nav-button-size: 16px;
 
 // Hero Section Carousel Styles
 .hero-carousel {
@@ -12,6 +12,9 @@ $nav-button-size: 20px;
     height: 12px;
     background-color: $secondary; // vert
     border-radius: 2px;
+    transform: scaleX(0);
+    transform-origin: left center;
+    animation: underlineFill .6s ease-out forwards;
   }
 
 
@@ -124,17 +127,21 @@ $nav-button-size: 20px;
 .staggered-animations {
   h1 {
     animation: slide-up 0.85s cubic-bezier(0.65, 0, 0.35, 1) both;
-    animation-delay: 0ms;
+    animation-delay: 200ms; // after underline starts
   }
 
   h2 {
     animation: slide-up 0.85s cubic-bezier(0.65, 0, 0.35, 1) both;
-    animation-delay: 300ms; // 300ms delay after h1
+    animation-delay: 500ms; // after h1
   }
 
-  button {
+  a {
     animation: slide-up 0.85s cubic-bezier(0.65, 0, 0.35, 1) both;
-    animation-delay: 600ms; // 300ms delay after h2
+    animation-delay: 900ms; // animate last
   }
+}
+
+@keyframes underlineFill {
+  to { transform: scaleX(1); }
 }
 

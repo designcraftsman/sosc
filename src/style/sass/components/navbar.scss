@@ -1,0 +1,162 @@
+.sosc-navbar {
+	transition: background-color .3s ease;
+	z-index: 1050;
+	background-color: rgba(248, 240, 0, 0.7);
+
+	&.scrolled {
+		background-color: $primary;
+	}
+
+	.navbar-brand {
+		color: #000;
+		text-decoration: none;
+	}
+
+	.navbar-toggler {
+		border-color: #000;
+	}
+	.navbar-toggler-icon {
+		background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba%2833, 37, 41, 0.75%29' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
+	}
+
+	.nav-link {
+		color: $dark;
+		position: relative;
+		transition: color .2s ease, transform .2s ease;
+		&:hover { transform: translateY(-1px); }
+		&.active { color: #0b5d1e !important; }
+		&::after {
+			content: '';
+			position: absolute;
+			left: 0;
+			bottom: -6px;
+			height: 2px;
+			width: 0;
+			background: #34A84A;
+			transition: width .25s ease;
+		}
+		&:hover::after { width: 100%; }
+		&.active::after { width: 100%; }
+	}
+	/* Hide Bootstrap's default dropdown caret */
+	.dropdown-toggle::after { display: none !important; }
+	.dropdown-menu {
+		border: none;
+		border-radius: 10px;
+		box-shadow: 0 10px 25px rgba(0,0,0,.12);
+		animation: soscFadeIn .18s ease-out;
+		overflow: hidden;
+		background-color: rgba(248, 240, 0, 0.7);
+
+		.dropdown-item {
+			color: #000;
+			font-weight: 400;
+			position: relative;
+			transition: padding-left .2s ease, color .2s ease;
+			&:hover,
+				&:focus,
+				&:focus-visible {
+					background-color: transparent !important; /* override Bootstrap hover bg */
+				}
+			/* Same underline hover effect */
+			&::after {
+				content: '';
+				position: absolute;
+				left: 0;
+				bottom: 6px;
+				height: 1px;
+				width: 0;
+				background-color: $secondary;
+				transition: width .25s ease;
+			}
+
+			&:hover { padding-left: 14px; }
+			&:hover::after { width: calc(100% - 14px); }
+
+			&.active,
+			&:active {
+				color: $secondary;
+				font-weight: 600 !important;
+				&::after { width: 100%; }
+			}
+		}
+	}
+}
+
+/* When navbar is scrolled, match dropdown bg */
+.sosc-navbar.scrolled .dropdown-menu {
+	background-color: #dad30cff;
+}
+
+@keyframes soscFadeIn {
+	from { opacity: 0; transform: translateY(6px); }
+	to { opacity: 1; transform: translateY(0); }
+}
+
+/* Desktop dropdown positioning (keep default stacking on mobile) */
+@media (min-width: 992px) {
+	.sosc-navbar {
+		.dropdown { position: relative;  }
+		.dropdown-menu {
+			overflow: visible; /* allow hover bridge pseudo-element to extend */
+			top: 100% !important; /* attach to bottom of toggle */
+			margin-top: 16px; /* visual spacing without creating a hover gap due to parent padding */
+			/* Invisible hover bridge to prevent hover gap without changing layout */
+			&::before {
+				content: '';
+				position: absolute;
+				left: 0;
+				top: -16px; /* match margin-top */
+				width: 100%;
+				height: 16px; /* match margin-top */
+				background: transparent;
+				pointer-events: auto; /* keep hover active while crossing the gap */
+			}
+		}
+		/* If you want right-aligned menus, add 'dropdown-menu-end' to the menu */
+		.dropdown-menu-end {
+			right: 0 !important;
+			left: auto !important;
+		}
+	}
+}
+
+/* Modal overlay and side modal */
+.modal-overlay {
+	position: fixed;
+	top: 0; left: 0;
+	width: 100%; height: 100%;
+	background-color: rgba(0, 0, 0, 0.5);
+	backdrop-filter: blur(8px);
+	z-index: 1060;
+	transition: all .3s ease;
+}
+
+.side-modal {
+	position: fixed;
+	top: 0; right: -400px;
+	width: 400px; height: 100%;
+	background-color: #fff;
+	box-shadow: -5px 0 15px rgba(0, 0, 0, 0.3);
+	z-index: 1070;
+	transition: right .3s ease;
+	padding: 20px;
+	overflow: auto;
+
+	&.open { right: 0; }
+}
+
+.modal-logo { height: 80px; }
+.btn-close-custom {
+	background: none;
+	border: none;
+	font-size: 28px;
+	cursor: pointer;
+}
+
+.menu-toggle-btn {
+	background: none;
+	border: none;
+	color: #000;
+	cursor: pointer;
+}

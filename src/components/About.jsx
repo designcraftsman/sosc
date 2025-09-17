@@ -29,9 +29,9 @@ const About = () => {
               Nous sommes la meilleure agence pour améliorer vos transactions.
             </h5>
             <p className="text-muted">
-              Lorem Ipsum is simply dummy text of the printing and typesetting
-              industry. Lorem Ipsum has been the industry's standard dummy text
-              ever since the 1500s, when an unknown printer.
+              
+Chez SOSC, nous sommes le partenaire de confiance pour les entreprises et les particuliers dans la gestion de leurs finances et de leurs créances.
+Nous mettons à votre disposition des services de financement adaptés, des solutions efficaces de recouvrement de créances, et des formations spécialisées pour vous permettre de naviguer sereinement dans l’univers financier. 
             </p>
             <a
               href="#"

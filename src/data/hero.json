@@ -4,19 +4,25 @@
       "image": "images/hero/1.jpg",
       "title": "La clé d’une trésorerie saine et d’un financement optimal",
       "text": "Chez SOSC, nous simplifions l’accès au financement et optimisons la gestion de vos créances. Nos services se concentrent sur l’intermédiation financière ",
-      "buttonText": "Prendre rendez-vous"
+      "buttonText": "Contactez-nous"
     },
     {
-      "image": "images/hero/1.jpg",
-      "title": "Innovative Designs for Modern Living",
-      "text": "Experience the perfect blend of functionality and aesthetics with our bespoke designs.",
-      "buttonText": "Explore Our Projects"
+      "image": "images/bg/credit.jpg",
+      "title": "Crédit 5/5",
+      "text": "Accédez aux meilleures solutions de financement du marché grâce à notre réseau de partenaires financiers de premier plan.",
+      "buttonText": "Contactez-nous"
     },
     {
-      "image": "images/hero/1.jpg",
-      "title": "Transforming Ideas into Reality",
-      "text": "From sketches to final construction, we ensure a seamless journey from start to finish.",
-      "buttonText": "Explore Our Projects"
+      "image": "images/hero/recouvrement.jpg",
+      "title": "Recouvrement +",
+      "text": "Optimisez vos processus de recouvrement grâce à nos solutions spécialisées et notre expertise éprouvée. ",
+      "buttonText": "Contactez-nous"
+    },
+    {
+      "image": "images/hero/formations.jpg",
+      "title": "Formation en Recouvrement",
+      "text": "Nos formations spécialisées en recouvrement ont été conçues pour répondre aux besoins spécifiques des entreprises, des professionnels et du marché de l'emploi.",
+      "buttonText": "Contactez-nous"
     }
   ]
 }

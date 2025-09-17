@@ -1,6 +1,45 @@
+/* Underline fill + text reveal animations for Header */
 .icon-underline {
-    width: 100px;
-    height: 12px;
-    background-color: $secondary; // vert
-    border-radius: 2px;
+  width: 100px;
+  height: 12px;
+  background-color: $secondary; // vert
+  border-radius: 2px;
+}
+
+.header-animated {
+  .icon-underline {
+    transform: scaleX(0);
+    transform-origin: left center;
+    animation: underlineFill .6s ease-out forwards;
   }
+
+  h2.typewriter {
+    overflow: hidden;
+    white-space: nowrap;
+    display: inline-block;
+    opacity: 0; /* will be set to 1 when anim starts */
+    /* Reveal text in steps to mimic letter-by-letter */
+    animation: typing 1.2s steps(30, end) forwards;
+    animation-delay: .65s; /* After underline completes */
+  }
+
+  p.fade-in-delayed {
+    opacity: 0;
+    animation: fadeInUp .5s ease-out forwards;
+    animation-delay: 1.95s; /* After title finishes typing */
+  }
+}
+
+@keyframes underlineFill {
+  to { transform: scaleX(1); }
+}
+
+@keyframes typing {
+  from { width: 0; opacity: 1; }
+  to { width: 100%; opacity: 1; }
+}
+
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(6px); }
+  to { opacity: 1; transform: translateY(0); }
+}

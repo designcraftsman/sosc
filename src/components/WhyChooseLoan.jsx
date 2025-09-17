@@ -1,4 +1,9 @@
 import React from "react";
+import experience from '../assets/icons/experience.svg';
+import adaptive from '../assets/icons/adaptive.svg';
+import partner from '../assets/icons/partner.svg';
+import follow from '../assets/icons/follow.svg';
+
 
 const WhyChooseLoan = () => {
   return (
@@ -20,11 +25,11 @@ const WhyChooseLoan = () => {
             <h5 className="text-primary fs-4 mb-4 fw-semibold">
               Pourquoi choisir SOSC pour votre intermédiation financière ?
             </h5>
-            <ul className="list-unstyled mt-3">
-              <li className="mb-2">✔ Expertise reconnue dans le secteur financier marocain</li>
-              <li className="mb-2">✔ Expertise reconnue dans le secteur financier marocain</li>
-              <li className="mb-2">✔ Expertise reconnue dans le secteur financier marocain</li>
-              <li>✔ Expertise reconnue dans le secteur financier marocain</li>
+            <ul className="list-unstyled">
+              <li className="mb-3 d-flex align-items-center"><img src={experience} alt="Experience" className="me-2" /><p className="m-0">Expertise reconnue dans le secteur financier marocain</p></li>
+              <li className="mb-3 d-flex align-items-center"><img src={adaptive} alt="Adaptive" className="me-2" /><p className="m-0">Accès privilégié à des solutions de financement adaptées et compétitives.</p></li>
+              <li className="mb-3 d-flex align-items-center"><img src={partner} alt="Partner" className="me-2" /><p className="m-0">Accompagnement personnalisé pour garantir le succès de vos demandes de financement.</p></li>
+              <li className="d-flex align-items-center"><img src={follow} alt="Follow" className="me-2" /><p className="m-0">Réduction des démarches administratives grâce à notre réseau de partenaires.</p></li>
             </ul>
           </div>
         </div>

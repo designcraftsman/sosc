@@ -1,6 +1,7 @@
 import React from "react";
 import ctaBg from "../assets/images/contact/contact-section-bg.png";
 import { CiPhone } from "react-icons/ci";
+import { FiArrowUpRight } from "react-icons/fi";
 
 const CallToAction = () => {
   return (
@@ -20,10 +21,11 @@ const CallToAction = () => {
         </h4>
         <a
           href="#contact"
-          className="btn mt-3 btn-secondary text-white rounded-pill px-4 fw-bold fs-5"
+          className="btn mt-3 btn-secondary text-white rounded-pill px-3 fw-bold fs-5"
         >
-          <span className=" me-2"><CiPhone /></span>
           Contactez-nous
+          <FiArrowUpRight className="ms-2 fs-4" />
+
         </a>
       </div>
     </section>

@@ -1,5 +1,5 @@
 import React from "react";
-import courseImage from '../assets/images/about/why-choose-us.jpg';
+import courseImage from '../assets/images/formations/formationIntro.jpg';
 
 const CoursesIntro = () => {
   return (

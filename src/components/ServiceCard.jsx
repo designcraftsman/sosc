@@ -3,7 +3,7 @@ import React from "react";
 const ServiceCard = ({ img, title, text, link }) => {
   return (
     <div className="col-md-3 mb-3">
-      <div className="h-100 p-3 border border-1 service-card">
+      <div className="h-100 p-3 border border-1 service-card d-flex flex-column ">
         <img
           src={img}
           alt={title}
@@ -16,9 +16,11 @@ const ServiceCard = ({ img, title, text, link }) => {
 
         <h5 className="fw-bold fs-5">{title}</h5>
         <p className="fs-6 fw-light">{text}</p>
-        <a href={link} className="text-decoration-underline">
+        <div className="mt-auto">
+        <a href={link} className="text-decoration-underline "> 
           En savoir plus
         </a>
+        </div>
       </div>
     </div>
   );

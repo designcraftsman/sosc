@@ -4,7 +4,7 @@ import Header from "../components/Header";
 import ContactSection from "../components/ContactSection";
 import Map from "../components/Map";
 import Footer from "../components/Footer";
-import ctaBg from '../assets/images/contact/contact-section-bg.png';
+import ctaBg from '../assets/images/bg/contact.jpg';
 
 const Contact = () => {
   return (

@@ -6,7 +6,8 @@ import WhyChooseUs from "../components/WhyChooseUs";
 import CallToAction from "../components/CallToAction";
 import Team from "../components/Team";
 import Footer from "../components/Footer";
-import ctaBg from '../assets/images/contact/contact-section-bg.png';
+import ctaBg from '../assets/images/bg/about.jpg';
+
 
 const About = () => {
   return (
