@@ -5,14 +5,16 @@ import ContactSection from "../components/ContactSection";
 import Map from "../components/Map";
 import Footer from "../components/Footer";
 import ctaBg from '../assets/images/bg/contact.jpg';
+import { useLanguage } from "../context/LanguageContext";
 
 const Contact = () => {
+  const { t } = useLanguage();
   return (
     <>
       <Navbar />
       <Header 
-        title="Vous avez des questions ?"
-        text="Have a question or need to discuss your next project? Reach out to our team via the contact form below"
+        title={t('pages.contact.headerTitle')}
+        text={t('pages.contact.headerText')}
         backgroundImage={ctaBg}
         height="500px"
       />

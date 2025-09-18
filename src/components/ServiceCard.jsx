@@ -1,6 +1,8 @@
 import React from "react";
+import { useLanguage } from "../context/LanguageContext";
 
 const ServiceCard = ({ img, title, text, link }) => {
+  const { t } = useLanguage();
   return (
     <div className="col-md-3 mb-3">
       <div className="h-100 p-3 border border-1 service-card d-flex flex-column ">
@@ -18,7 +20,7 @@ const ServiceCard = ({ img, title, text, link }) => {
         <p className="fs-6 fw-light">{text}</p>
         <div className="mt-auto">
         <a href={link} className="text-decoration-underline "> 
-          En savoir plus
+          {t('common.learnMore')}
         </a>
         </div>
       </div>

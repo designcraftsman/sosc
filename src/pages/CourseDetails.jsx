@@ -6,36 +6,21 @@ import backgroundImage from '../assets/images/contact/contact-section-bg.png';
 import { FaClock, FaUserGraduate } from "react-icons/fa";
 import CallToAction from "../components/CallToAction";
 import { FaLightbulb } from "react-icons/fa";
+import { useLanguage } from "../context/LanguageContext";
 
 const CourseDetails = () => {
-  const learnPoints = [
-    "Comprendre les fondamentaux du recouvrement amiable et ses étapes clés.",
-    "Maîtriser les techniques de relance (automatique, manuelle, mise en demeure).",
-    "Développer une communication claire et efficace avec les débiteurs.",
-  ];
-
-  const audience = [
-    "Novices souhaitant acquérir des compétences en recouvrement",
-    "Étudiants : Bac+2 en droit, économie, gestion, ou lauréats de l’OFPPT.",
-    "Entreprises débutant la gestion du recouvrement en interne.",
-  ];
-
-  const contenu = [
-    "Introduction au recouvrement : objectifs et étapes clés.",
-    "Les bonnes pratiques de relance amiable. – Comment communiquer efficacement avec les débiteurs.",
-    "Escalade de communication.",
-    "Relance Automatique, Manuelle et mise en demeure.",
-    "La gestion des objections et des conflits.",
-    "La gestion préventive du stress.",
-    "Introduction à l’utilisation des outils de suivi.",
-  ];
+  const { t } = useLanguage();
+  const learnPoints = t('courseDetails.learnPoints');
+  const audience = t('courseDetails.audience');
+  const contenu = t('courseDetails.content');
 
   const { id } = useParams();
-  const titleMap = {
-    "base-recouvrement": "Formation de base en recouvrement",
-    "techniques-avancees": "Techniques avancées de recouvrement",
-  };
-  const pageTitle = titleMap[id] || "Détails de la formation";
+  const titleMap = t('courseDetails.titleMap');
+  const pageTitle = titleMap[id] || '';
+  const coursesList = t('coursesList.items');
+  const courseInfo = Array.isArray(coursesList)
+    ? (coursesList.find((c) => c.id === id) || coursesList[0])
+    : null;
 
   return (
     <React.Fragment>
@@ -55,8 +40,8 @@ const CourseDetails = () => {
             <div className="icon-underline mb-4"></div>
             <h1 className="fw-bold m-0">{pageTitle}</h1>
             <div className="d-flex align-items-center justify-content-start fw-light text-white-75 mt-3">
-              <p className=" "><FaUserGraduate /> Débutant</p>
-              <p className="mx-5"><FaClock /> 40 heures</p>
+              <p className=" "><FaUserGraduate /> {courseInfo?.level || t('courseDetails.levelBeginner')}</p>
+              <p className="mx-5"><FaClock /> {courseInfo?.hours || '40'} {t('courseDetails.hoursUnit')}</p>
             </div>
           </div>
         </div>
@@ -65,17 +50,14 @@ const CourseDetails = () => {
       <section className="py-5">
         <div className="container">
         {/* Description */}
-        <h5 className="fw-semibold fs-4 mb-4 text-primary">Description</h5>
-        <p>
-          Apprendre les bases du recouvrement amiable, de la gestion des
-          créances et de la relation client.
-        </p>
+        <h5 className="fw-semibold fs-4 mb-4 text-primary">{t('courseDetails.labels.description')}</h5>
+        <p>{courseInfo?.description}</p>
 
         {/* Boxes */}
         <div className="row my-5">
           <div className="col-md-6 mb-3">
             <div className="p-4 bg-light rounded shadow-sm h-100 text-start">
-              <h6 className="fw-semibold fs-4 text-primary">Ce cours est destiné aux</h6>
+              <h6 className="fw-semibold fs-4 text-primary">{t('courseDetails.labels.audience')}</h6>
               <ul className="mt-4">
                 {audience.map((item, idx) => (
                   <li key={idx} className="mb-3">{item}</li>
@@ -86,7 +68,7 @@ const CourseDetails = () => {
 
           <div className="col-md-6 mb-3">
             <div className="p-4 bg-light rounded shadow-sm h-100 text-start">
-              <h6 className="fw-semibold fs-4 text-primary">Ce que vous allez apprendre</h6>
+              <h6 className="fw-semibold fs-4 text-primary">{t('courseDetails.labels.learn')}</h6>
               <ul className="mt-4 list-unstyled">
                 {learnPoints.map((point, idx) => (
                   <li className="d-flex align-items-start mb-3" key={idx}>
@@ -100,7 +82,7 @@ const CourseDetails = () => {
         </div>
 
         {/* Contenu de la formation */}
-        <h5 className="fw-semibold fs-4 text-primary mt-5">Contenu de la formation</h5>
+  <h5 className="fw-semibold fs-4 text-primary mt-5">{t('courseDetails.labels.content')}</h5>
         <ul className="list-unstyled mt-4">
           {contenu.map((item, idx) => (
             <li className="d-flex align-items-start mb-3" key={idx}>

@@ -5,35 +5,18 @@ import Friendly from '../assets/icons/friendly.svg';
 import Direction from '../assets/icons/direction.svg';
 import Analyze from '../assets/icons/analyze.svg';
 import BookMark from '../assets/icons/bookmark.svg';
+import { useLanguage } from "../context/LanguageContext";
 
 
 const DebtRecovery = () => {
+  const { t } = useLanguage();
+  const debtItems = t('debtRecovery.items');
   const services = [
-    { 
-      icon: Analyze,
-      title: "Analyse des créances en souffrance",
-      text: "Identification des créances impayées et évaluation de leur degré de risque pour établir une stratégie adaptée.",
-    },
-    {
-      icon: Direction,
-      title: "Cadrage",
-      text: "Définition des priorités, objectifs et plan d’action pour structurer les opérations de recouvrement.",
-    },
-    {
-      icon: Friendly,
-      title: "Relance amiable",
-      text: "Mise en place d’un suivi structuré pour rappeler vos débiteurs, prévenir les retards et éviter l’escalade des conflits.",
-    },
-    {
-      icon: Negotiation,
-      title: "Négociation de règlement",
-      text: "Nous facilitons les négociations pour obtenir des paiements partiels ou des échéanciers adaptés.",
-    },
-    {
-      icon: BookMark,
-      title: "Suivi personnalisé",
-      text: "Un suivi transparent et constant pour vous tenir informé de l’avancement du recouvrement et des actions entreprises.",
-    },
+    { icon: Analyze, title: debtItems[0].title, text: debtItems[0].text },
+    { icon: Direction, title: debtItems[1].title, text: debtItems[1].text },
+    { icon: Friendly, title: debtItems[2].title, text: debtItems[2].text },
+    { icon: Negotiation, title: debtItems[3].title, text: debtItems[3].text },
+    { icon: BookMark, title: debtItems[4].title, text: debtItems[4].text },
   ];
 
   return (
@@ -41,9 +24,7 @@ const DebtRecovery = () => {
       <div className="container">
         <div className="row align-items-start">
           <div className="col-md-5 mx-auto">
-            <h5 className="text-primary fw-semibold mb-4">
-              Nos services de recouvrement
-            </h5>
+            <h5 className="text-primary fw-semibold mb-4">{t('debtRecovery.sectionTitle')}</h5>
             <div className="d-flex flex-column gap-3">
               {services.map((s, idx) => (
                 <div

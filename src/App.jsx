@@ -8,6 +8,7 @@ import Recovery from './pages/Recovery';
 import Courses from './pages/Courses';
 import CourseDetails from './pages/CourseDetails';
 import ScrollToTop from './components/ScrollToTop';
+import { LanguageProvider } from './context/LanguageContext';
 
 function AnimatedRoutes() {
   const location = useLocation();
@@ -30,10 +31,12 @@ function AnimatedRoutes() {
 function App() {
   return (
     <div className="App">
-      <Router>
-        <ScrollToTop />
-        <AnimatedRoutes />
-      </Router>
+      <LanguageProvider>
+        <Router>
+          <ScrollToTop />
+          <AnimatedRoutes />
+        </Router>
+      </LanguageProvider>
     </div>
   );
 }

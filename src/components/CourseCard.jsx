@@ -2,8 +2,10 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { FaClock, FaUserGraduate } from "react-icons/fa";
 import courseImage from "../assets/images/contact/contact-section-bg.png";
+import { useLanguage } from "../context/LanguageContext";
 
 const CourseCard = ({ image, title, description, level, hours, link }) => {
+  const { t } = useLanguage();
   return (
     <div className="course-card card mb-5 border-0 shadow-sm">
       <div className="row g-0 align-items-center">
@@ -22,7 +24,7 @@ const CourseCard = ({ image, title, description, level, hours, link }) => {
             <h5 className="card-title fw-bold">{title}</h5>
             <p className="card-text text-muted">{description}</p>
             <Link to={link} className="text-decoration-underline text-muted">
-              En savoir plus
+              {t('common.learnMore')}
             </Link>
           </div>
 

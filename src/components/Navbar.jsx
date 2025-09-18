@@ -11,12 +11,15 @@ import { CiInstagram } from "react-icons/ci";
 import { RiLinkedinLine } from "react-icons/ri";
 import { AiOutlineMail } from "react-icons/ai";
 import { RiArrowDropDownLine } from "react-icons/ri";
+import { useLanguage } from "../context/LanguageContext";
 
 
 const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [servicesOpen, setServicesOpen] = useState(false);
+  const [langOpen, setLangOpen] = useState(false);
+  const { language, setLanguage, t } = useLanguage();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -72,7 +75,7 @@ const Navbar = () => {
                 to="/"
                 style={{ color: '#000' }}
               >
-                Accueil
+                {t('nav.home')}
               </NavLink>
             </li>
             <li className="nav-item mx-2">
@@ -81,7 +84,7 @@ const Navbar = () => {
                 to="/about"
                 style={{ color: '#000' }}
               >
-                Qui sommes-nous
+                {t('nav.about')}
               </NavLink>
             </li>
             <li 
@@ -100,20 +103,20 @@ const Navbar = () => {
                   setServicesOpen(prev => !prev);
                 }}
               >
-                Nos services <RiArrowDropDownLine className="fs-4 mb-1" />
+                {t('nav.services')} <RiArrowDropDownLine className="fs-4 mb-1" />
               </NavLink>
               <div 
                 className={`dropdown-menu  ${servicesOpen ? ' show' : ''}`}
                 aria-labelledby="servicesDropdown"
               >
                 <NavLink className={({ isActive }) => `dropdown-item mb-2 ${isActive ? 'active' : ''}`} to="/services/crédit" onClick={() => setServicesOpen(false)}>
-                  Crédit 5/5
+                  {t('nav.credit')}
                 </NavLink>
                 <NavLink className={({ isActive }) => `dropdown-item mb-2 ${isActive ? 'active' : ''}`} to="/services/recouvrement" onClick={() => setServicesOpen(false)}>
-                  Recouvrement +
+                  {t('nav.recovery')}
                 </NavLink>
                 <NavLink className={({ isActive }) => `dropdown-item ${isActive ? 'active' : ''}`} to="/services/formations" onClick={() => setServicesOpen(false)}>
-                  Formations
+                  {t('nav.courses')}
                 </NavLink>
               </div>
             </li>
@@ -122,14 +125,32 @@ const Navbar = () => {
                 className={({ isActive }) => `nav-link ${isActive ? 'active' : ''}`} 
                 to="/contact"
               >
-                Contactez-nous
+                {t('nav.contact')}
               </NavLink>
             </li>
           </ul>
         </div>
         <div className="d-flex align-items-center fs-6">
+          {/* Language dropdown */}
+          <div 
+            className="dropdown me-3"
+            onMouseLeave={() => setLangOpen(false)}
+          >
+            <button
+              type="button"
+              className="btn btn-outline-dark fw-medium rounded-pill px-3 dropdown-toggle"
+              aria-expanded={langOpen}
+              onClick={() => setLangOpen(prev => !prev)}
+            >
+              {language === 'ar' ? 'Ar' : 'Fr'}
+            </button>
+            <div className={`dropdown-menu dropdown-menu-end ${langOpen ? ' show' : ''}`}>
+              <button className="dropdown-item" onClick={() => { setLanguage('fr'); setLangOpen(false); }}>Fr</button>
+              <button className="dropdown-item" onClick={() => { setLanguage('ar'); setLangOpen(false); }}>Ar</button>
+            </div>
+          </div>
           <a href="/contact" className="btn btn-dark fw-bold text-white fs-6 rounded-pill px-2">
-            Discutons
+            {t('nav.discuss')}
             <FiArrowUpRight className="ms-2 fs-3" />
           </a>
           <div className="ms-5">
@@ -168,12 +189,12 @@ const Navbar = () => {
       </div>
           
       <div className="container">
-        <p className="fs-6 opacity-75 fw-light">Chez SOSC, nous sommes le partenaire de confiance pour les entreprises et les particuliers dans la gestion de leurs finances et de leurs créances.</p>
+        <p className="fs-6 opacity-75 fw-light">{t('navbar.modal.description')}</p>
       </div>
       <hr />
       {/* Contact Information */}
       <div className="mt-5">
-        <h6 className="fw-semibold fs-5 mb-4">Contactez-nous</h6>
+        <h6 className="fw-semibold fs-5 mb-4">{t('navbar.modal.contactHeading')}</h6>
         <div className="d-flex align-items-center mb-3">
                       <div className="me-3 fs-2 text-dark opacity-75">
                         <CiLocationOn />
@@ -203,7 +224,7 @@ const Navbar = () => {
           <hr />
       {/* Contact Information */}
       <div className="mt-5">
-        <h6 className="fw-semibold fs-5 mb-4">Suivez-nous</h6>
+        <h6 className="fw-semibold fs-5 mb-4">{t('navbar.modal.followHeading')}</h6>
          <div className="d-flex gap-4">
                       <div ><a href="#" className=" fs-3 border rounded-circle p-2 pt-1"><RiFacebookLine /></a></div>
                       <div ><a href="#" className=" fs-3 border rounded-circle p-2 pt-1"><CiInstagram /></a></div>

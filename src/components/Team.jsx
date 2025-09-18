@@ -2,22 +2,24 @@ import React from "react";
 import ahmed from "../assets/images/team/ahmed.jpg";
 import said from "../assets/images/team/said.jpg";
 import bengon from "../assets/images/team/bengon.jpg";
+import { useLanguage } from "../context/LanguageContext";
 
 const Team = () => {
+  const { t } = useLanguage();
   const team = [
     {
       name: "Beaujean Philippe",
-      role: "Coaching en Soft Skills",
+      role: t('teamSection.roles')[0],
       img: bengon,
     },
     {
       name: "Ahmed Bouknani",
-      role: "Dr en Droit Privé",
+      role: t('teamSection.roles')[1],
       img: ahmed,
     },
     {
       name: "El Amrani Said",
-      role: "Associé et Directeur Commercial Exécutif",
+      role: t('teamSection.roles')[2],
       img: said,
     },
   ];
@@ -26,8 +28,8 @@ const Team = () => {
     <section className="py-5">
       <div className="container text-center">
         {/* Section Titles */}
-        <h5 className="text-primary mb-4 fs-4">Notre équipe</h5>
-        <h2 className="fw-semibold mb-5 fs-3">Rencontrez notre équipe talentueuse</h2>
+  <h5 className="text-primary mb-4 fs-4">{t('teamSection.title')}</h5>
+  <h2 className="fw-semibold mb-5 fs-3">{t('teamSection.subtitle')}</h2>
 
         {/* Team Grid */}
         <div className="row justify-content-evenly text-start">

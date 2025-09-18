@@ -1,31 +1,32 @@
-import React from "react";
+import React, { useMemo } from "react";
 import TrainingCard from "./CourseCard";
 import course1 from '../assets/images/formations/1.jpg';
 import course2 from '../assets/images/formations/2.jpg';
+import { useLanguage } from "../context/LanguageContext";
 
 const CoursesList = () => {
-  const trainings = [
+  const { t } = useLanguage();
+  const list = t('coursesList.items');
+  const trainings = useMemo(() => ([
     {
-      id: "base-recouvrement",
+      id: list[0].id,
       image: course1,
-      title: "Formation de base en recouvrement",
-      description:
-        "Apprenez les fondamentaux du recouvrement amiable, la gestion des créances et la relation client.",
-      level: "Débutant",
-      hours: "20 heures",
+      title: list[0].title,
+      description: list[0].description,
+      level: list[0].level,
+      hours: `${list[0].hours} ${t('common.hours')}`,
       link: "/services/formations/base-recouvrement",
     },
     {
-      id: "techniques-avancees",
+      id: list[1].id,
       image: course2,
-      title: "Techniques avancées de recouvrement",
-      description:
-        "Approfondissez les techniques de recouvrement pour maximiser l’efficacité et les résultats.",
-      level: "Intermédiaire",
-      hours: "30 heures",
+      title: list[1].title,
+      description: list[1].description,
+      level: list[1].level,
+      hours: `${list[1].hours} ${t('common.hours')}`,
       link: "/services/formations/techniques-avancees",
     },
-  ];
+  ]), [list, t]);
 
   return (
     <section className="training-list py-5">

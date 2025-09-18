@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Carousel } from 'react-bootstrap';
 import heroData from '../data/hero.json';
+import { useLanguage } from "../context/LanguageContext";
 
 
 // Import images dynamically and optimize for SEO
@@ -9,6 +10,7 @@ const importImage = (imagePath) => {
 };
 
 const Hero = () => {
+  const { t } = useLanguage();
   const [index, setIndex] = useState(0);
   const [isPaused, setIsPaused] = useState(false);
   const [slides, setSlides] = useState([]);
@@ -16,9 +18,13 @@ const Hero = () => {
   // Load images and set up slides with SEO optimization
   useEffect(() => {
     const loadSlides = async () => {
+      const localized = t('hero.slides');
       const loadedSlides = await Promise.all(
-        heroData.slides.map(async (slide) => ({
+        heroData.slides.map(async (slide, i) => ({
           ...slide,
+          title: localized[i]?.title ?? slide.title,
+          text: localized[i]?.text ?? slide.text,
+          buttonText: localized[i]?.buttonText ?? slide.buttonText,
           image: await importImage(slide.image),
           altText: slide.altText, // Assuming altText is available in heroData for SEO
         }))
@@ -26,7 +32,8 @@ const Hero = () => {
       setSlides(loadedSlides);
     };
     loadSlides();
-  }, []);
+    // re-run when language changes
+  }, [t]);
 
   // Handle slide selection
   const handleSelect = (selectedIndex) => {

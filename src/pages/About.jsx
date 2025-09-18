@@ -7,15 +7,17 @@ import CallToAction from "../components/CallToAction";
 import Team from "../components/Team";
 import Footer from "../components/Footer";
 import ctaBg from '../assets/images/bg/about.jpg';
+import { useLanguage } from "../context/LanguageContext";
 
 
 const About = () => {
+  const { t } = useLanguage();
   return (
     <>
       <Navbar />
       <Header 
-        title="À Propos de Nous"
-        text="Chez SOSC, nous sommes le partenaire de confiance pour les entreprises et les particuliers dans la gestion de leurs finances et de leurs créances."
+        title={t('pages.about.headerTitle')}
+        text={t('pages.about.headerText')}
         backgroundImage={ctaBg}
         height="500px"
       />

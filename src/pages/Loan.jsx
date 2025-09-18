@@ -7,13 +7,15 @@ import LoanPartner  from "../components/LoanPartner";
 import FinancialPartner from "../components/FinancialPartner";
 import LoanPacks from "../components/LoanPacks";
 import WhyChooseLoan from "../components/WhyChooseLoan";
+import { useLanguage } from "../context/LanguageContext";
 
 const Loan = () => {
+  const { t } = useLanguage();
   return (
     <React.Fragment>
       <Navbar />
       <Header 
-        title="Crédit 5/5"
+        title={t('pages.loan.headerTitle')}
         backgroundImage={ctaBg}
         height="400px"
       />

@@ -45,7 +45,7 @@ $nav-button-size: 16px;
       position: absolute;
       top: 50%; // Center vertically
       left: 10%;
-      transform: translateY(-50%); // Adjust to align to the center vertically
+      transform: translateY(-50%);
       text-align: start;
       color: $white-color;
       max-width: 50%;
@@ -84,6 +84,18 @@ $nav-button-size: 16px;
         opacity: 1;
       }
     }
+  }
+}
+
+/* RTL adjustments */
+[dir='rtl'] .hero-carousel {
+  .hero-carousel__item__caption {
+    left: auto;
+    right: 10%;
+    text-align: start; // start respects RTL
+  }
+  .icon-underline {
+    transform-origin: right center; // fill from right to left in RTL
   }
 }
 

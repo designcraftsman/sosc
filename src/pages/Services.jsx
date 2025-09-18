@@ -5,14 +5,16 @@ import Footer from "../components/Footer";
 import ctaBg from '../assets/images/bg/services.jpg';
 import ServicesSection from "../components/Services";
 import Cta from '../components/CallToAction';
+import { useLanguage } from "../context/LanguageContext";
 
 const Services = () => {
+  const { t } = useLanguage();
   return (
     <React.Fragment>
       <Navbar />
       <Header 
-        title="Nos Services"
-        text="Découvrez nos services et comment nous pouvons vous aider à atteindre vos objectifs"
+        title={t('pages.services.headerTitle')}
+        text={t('pages.services.headerText')}
         backgroundImage={ctaBg}
         height="500px"
       />

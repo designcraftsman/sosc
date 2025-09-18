@@ -4,16 +4,19 @@ import jeune from '../assets/images/crédit/jeune.jpg';
 import success from '../assets/images/crédit/success.jpg';
 import retired from '../assets/images/crédit/retired.jpg';
 import employee from '../assets/images/crédit/employee.jpg';
+import { useLanguage } from "../context/LanguageContext";
 
 
 const LoanPacks = () => {
+  const { t } = useLanguage();
+  const packTexts = t('loanPacks.items');
   const packs = [
-    { title: "El Hana", text: "Conçu pour les Fonctionnaires, ce pack vous aide à réaliser vos projets personnels.", image: employee },
-    { title: "El Baraka", text: "Destiné aux entrepreneurs, ce pack soutient vos ambitions commerciales.", image: success },
-    { title: "El Nour", text: "Pour les jeunes diplômés, ce pack facilite votre insertion professionnelle.", image: jeune },
-    { title: "El Khair", text: "Adapté aux retraités, ce pack sécurise votre avenir financier.", image: retired },
-    { title: "El Amal", text: "Conçu pour les familles, ce pack réalise vos rêves immobiliers.", image: crédit0 },
-    { title: "El Najah", text: "Pour les étudiants, ce pack finance votre éducation et formation.", image: success },
+    { title: "El Hana", text: packTexts[0].text, image: employee },
+    { title: "El Baraka", text: packTexts[1].text, image: success },
+    { title: "El Nour", text: packTexts[2].text, image: jeune },
+    { title: "El Khair", text: packTexts[3].text, image: retired },
+    { title: "El Amal", text: packTexts[4].text, image: crédit0 },
+    { title: "El Najah", text: packTexts[5].text, image: success },
   ];
 
   // Duplicate the packs array for seamless infinite scroll
@@ -23,7 +26,7 @@ const LoanPacks = () => {
     <section className="py-5 text-center">
       <div className="container-fluid">
         <div className="icon-underline mx-auto mb-3"></div>
-        <h5 className="text-primary fs-4 fw-bold mb-5">Découvrez Nos Packs</h5>
+  <h5 className="text-primary fs-4 fw-bold mb-5">{t('loanPacks.title')}</h5>
         
         <div 
           className="carousel-container"

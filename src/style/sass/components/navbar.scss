@@ -160,3 +160,12 @@
 	color: #000;
 	cursor: pointer;
 }
+
+/* RTL: open side modal from the left */
+[dir='rtl'] .side-modal {
+	right: auto;
+	left: -400px;
+	box-shadow: 5px 0 15px rgba(0, 0, 0, 0.3);
+	transition: left .3s ease;
+}
+[dir='rtl'] .side-modal.open { left: 0; }

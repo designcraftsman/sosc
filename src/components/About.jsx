@@ -1,7 +1,9 @@
 import React from "react";
+import { useLanguage } from "../context/LanguageContext";
 
 
 const About = () => {
+  const { t } = useLanguage();
   return (
     <section className="py-5 about-section">
       <div className="container">
@@ -24,20 +26,14 @@ const About = () => {
 
           {/* Text */}
           <div className="col-md-6">
-            <h3 className="text-primary fs-4 mb-4">À propos de nous</h3>
-            <h5 className="fw-semibold fs-3 mb-3">
-              Nous sommes la meilleure agence pour améliorer vos transactions.
-            </h5>
-            <p className="text-muted">
-              
-Chez SOSC, nous sommes le partenaire de confiance pour les entreprises et les particuliers dans la gestion de leurs finances et de leurs créances.
-Nous mettons à votre disposition des services de financement adaptés, des solutions efficaces de recouvrement de créances, et des formations spécialisées pour vous permettre de naviguer sereinement dans l’univers financier. 
-            </p>
+            <h3 className="text-primary fs-4 mb-4">{t('aboutSection.title')}</h3>
+            <h5 className="fw-semibold fs-3 mb-3">{t('aboutSection.subtitle')}</h5>
+            <p className="text-muted">{t('aboutSection.paragraph')}</p>
             <a
               href="#"
               className="btn btn-secondary text-white fw-bold rounded-pill px-4"
             >
-              En Savoir Plus
+              {t('aboutSection.more')}
             </a>
           </div>
         </div>
