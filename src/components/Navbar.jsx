@@ -19,7 +19,8 @@ const Navbar = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [servicesOpen, setServicesOpen] = useState(false);
   const [langOpen, setLangOpen] = useState(false);
-  const { language, setLanguage, t } = useLanguage();
+  const { language, setLanguage, t, dir } = useLanguage();
+  const dropdownTextAlign = dir === 'rtl' ? 'text-end' : 'text-start';
 
   useEffect(() => {
     const handleScroll = () => {
@@ -106,7 +107,7 @@ const Navbar = () => {
                 {t('nav.services')} <RiArrowDropDownLine className="fs-4 mb-1" />
               </NavLink>
               <div 
-                className={`dropdown-menu  ${servicesOpen ? ' show' : ''}`}
+                className={`dropdown-menu ${servicesOpen ? ' show' : ''} ${dropdownTextAlign}`}
                 aria-labelledby="servicesDropdown"
               >
                 <NavLink className={({ isActive }) => `dropdown-item mb-2 ${isActive ? 'active' : ''}`} to="/services/crédit" onClick={() => setServicesOpen(false)}>
@@ -138,22 +139,22 @@ const Navbar = () => {
           >
             <button
               type="button"
-              className="btn btn-outline-dark fw-medium rounded-pill px-3 dropdown-toggle"
+              className="btn btn-outline-dark fw-medium rounded-pill px-3 mx-2 dropdown-toggle"
               aria-expanded={langOpen}
               onClick={() => setLangOpen(prev => !prev)}
             >
               {language === 'ar' ? 'Ar' : 'Fr'}
             </button>
-            <div className={`dropdown-menu dropdown-menu-end ${langOpen ? ' show' : ''}`}>
+            <div className={`dropdown-menu dropdown-menu-end ${langOpen ? ' show' : ''} ${dropdownTextAlign}`}>
               <button className="dropdown-item" onClick={() => { setLanguage('fr'); setLangOpen(false); }}>Fr</button>
               <button className="dropdown-item" onClick={() => { setLanguage('ar'); setLangOpen(false); }}>Ar</button>
             </div>
           </div>
-          <a href="/contact" className="btn btn-dark fw-bold text-white fs-6 rounded-pill px-2">
+          <a href="/contact" className="btn btn-dark fw-bold text-white fs-6 rounded-pill px-2 mx-2">
             {t('nav.discuss')}
             <FiArrowUpRight className="ms-2 fs-3" />
           </a>
-          <div className="ms-5">
+          <div className="mx-3">
             <button 
               onClick={toggleModal}
               className="menu-toggle-btn"

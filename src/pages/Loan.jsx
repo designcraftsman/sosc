@@ -17,7 +17,7 @@ const Loan = () => {
       <Header 
         title={t('pages.loan.headerTitle')}
         backgroundImage={ctaBg}
-        height="400px"
+        height="500px"
       />
       {/* Ajoutez ici d'autres sections spécifiques aux services si nécessaire */}
         <LoanPartner />

@@ -16,7 +16,7 @@ const Loan = () => {
       <Header 
         title={t('pages.recovery.headerTitle')}
         backgroundImage={ctaBg}
-        height="400px"
+        height="500px"
       />
 
         <RecoveryPartner />

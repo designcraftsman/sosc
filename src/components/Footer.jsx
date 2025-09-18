@@ -25,7 +25,7 @@ const Footer = () => {
           </div>
           <div className="col-md-3">
             <h5 className="fs-semibold fs-5 mb-3">{t('footer.company')}</h5>
-            <ul className="list-unstyled">
+            <ul className="list-unstyled m-0 p-0">
               <li className="mb-2"><a href="#" className="text-white opacity-75  fw-light">{t('footer.about')}</a></li>
               <li className="mb-2"><a href="#" className="text-white opacity-75 fw-light">{t('footer.services')}</a></li>
               <li className="mb-2"><a href="#" className="text-white opacity-75 fw-light">{t('footer.team')}</a></li>
@@ -33,7 +33,7 @@ const Footer = () => {
           </div>
           <div className="col-md-3">
             <h5 className="fs-semibold fs-5 mb-3">{t('footer.contact')}</h5>
-            <ul className="list-unstyled">
+            <ul className="list-unstyled m-0 p-0">
               <li className="mb-2 text-white opacity-75 fw-light"> <CiLocationOn /> Mohammedia,Maroc</li>
               <li className="mb-2 text-white opacity-75 fw-light"> <CiPhone /> +212-652976002</li>
               <li className="mb-2 text-white opacity-75 fw-light"> <AiOutlineMail /> sosc@gmail.com</li>
@@ -42,16 +42,17 @@ const Footer = () => {
         </div>
         
       </div>
-      <div className="d-flex justify-content-between px-5 py-2 align-items-center  bg-primary">
+      <hr />
+      <div className="d-flex justify-content-between px-5 py-2 align-items-center   bg-dark">
           <div className="col-md-4">
             <img src={logo} className="logo-footer" alt="Logo" />
           </div>
-          <div className="col-md-4 text-start text-dark">
+          <div className="col-md-3  text-white">
             <p className="mb-0">© 2024 <span className="text-secondary">SOSC</span>. {t('footer.rights')}</p>
           </div>
           <div className="d-flex gap-5 col-md-4 ">
-            <a href="#" className="text-dark fs-6">{t('footer.privacy')}</a>
-            <a href="#" className="text-dark fs-6">{t('footer.terms')}</a>
+            <a href="#" className="text-white fs-6">{t('footer.privacy')}</a>
+            <a href="#" className="text-white fs-6">{t('footer.terms')}</a>
           </div>
         </div>
     </footer>

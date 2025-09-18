@@ -5,20 +5,22 @@ import bengon from "../assets/images/team/bengon.jpg";
 import { useLanguage } from "../context/LanguageContext";
 
 const Team = () => {
-  const { t } = useLanguage();
+  const { t, dir } = useLanguage();
+  const names = t('teamSection.names');
+  const alignClass = dir === 'rtl' ? 'text-end' : 'text-start';
   const team = [
     {
-      name: "Beaujean Philippe",
+      name: names?.[0] || "Beaujean Philippe",
       role: t('teamSection.roles')[0],
       img: bengon,
     },
     {
-      name: "Ahmed Bouknani",
+      name: names?.[1] || "Ahmed Bouknani",
       role: t('teamSection.roles')[1],
       img: ahmed,
     },
     {
-      name: "El Amrani Said",
+      name: names?.[2] || "El Amrani Said",
       role: t('teamSection.roles')[2],
       img: said,
     },
@@ -32,7 +34,7 @@ const Team = () => {
   <h2 className="fw-semibold mb-5 fs-3">{t('teamSection.subtitle')}</h2>
 
         {/* Team Grid */}
-        <div className="row justify-content-evenly text-start">
+        <div className={`row justify-content-evenly ${alignClass}`}>
           {team.map((member, idx) => (
             <div className="col-md-4 col-sm-6 mb-4" key={idx}>
               <div
@@ -56,7 +58,7 @@ const Team = () => {
 
                 {/* Overlay text */}
                 <div
-                  className="position-absolute bottom-0 w-100 text-white p-3"
+                  className={`position-absolute bottom-0 w-100 text-white p-3 ${alignClass}`}
                   style={{
                     background:
                       "linear-gradient(to top, rgba(0,0,0,0.7), rgba(0,0,0,0))",

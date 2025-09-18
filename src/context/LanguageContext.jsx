@@ -258,6 +258,11 @@ const TRANSLATIONS = {
     teamSection: {
       title: 'Notre équipe',
       subtitle: 'Rencontrez notre équipe talentueuse',
+      names: [
+        'Beaujean Philippe',
+        'Ahmed Bouknani',
+        'El Amrani Said',
+      ],
       roles: [
         'Coaching en Soft Skills',
         'Dr en Droit Privé',
@@ -537,6 +542,11 @@ const TRANSLATIONS = {
     teamSection: {
       title: 'فريقنا',
       subtitle: 'تعرّفوا على فريقنا الموهوب',
+      names: [
+        'بوجون فيليب',
+        'أحمد بوكناني',
+        'العمراني سعيد',
+      ],
       roles: [
         'تدريب على المهارات الناعمة',
         'دكتوراه في القانون الخاص',
