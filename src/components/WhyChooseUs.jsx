@@ -8,10 +8,10 @@ const WhyChooseUs = () => {
     <section className="py-5">
       <div className="container">
         <div className="row align-items-center">  
-          <div className="col-5 mx-auto">
+          <div className="col-md-5 mx-auto mb-md-0 mb-4 ">
             <img src={whychooseus} className="img-fluid" alt="" />
           </div>
-          <div className="col-5 mx-auto">
+          <div className="col-md-5 mx-auto">
           <h3 className="fw-semibold mb-4 fs-4 text-primary">{t('whyChooseUs.title')}</h3>
             <ul className="">
               <li className="mb-3 fs-6 fw-medium">{t('whyChooseUs.bullets.0')}</li>

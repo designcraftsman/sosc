@@ -5,11 +5,11 @@ import { useLanguage } from "../context/LanguageContext";
 const About = () => {
   const { t } = useLanguage();
   return (
-    <section className="py-5 about-section">
+    <section className="my-5 py-5 about-section">
       <div className="container">
         <div className="row align-items-center">
           {/* Images */}
-          <div className="col-md-6 position-relative">
+          <div className="col-md-5 col-10 mx-auto mb-md-0 mb-5 position-relative">
             <div className="about-images">
               <img
                 src="https://images.unsplash.com/photo-1559136555-9303baea8ebd?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80"

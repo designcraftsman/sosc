@@ -6,9 +6,9 @@ const FinancialPartners = () => {
   const { t } = useLanguage();
   return (
     <section>
-      <div className="container-fluid">
+      <div className="container-fluid my-md-5 py-5">
         <div className="row align-items-center ">
-          <div className="col-md-6 p-5">
+          <div className="col-md-6 p-md-5">
             <h5 className="text-primary fs-4 fw-semibold mb-4">{t('financialPartners.title')}</h5>
             <p className="mt-3 fs-5">{t('financialPartners.text')}</p>
           </div>

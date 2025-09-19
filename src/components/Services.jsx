@@ -31,12 +31,12 @@ const Services = () => {
   return (
     <section className="py-5">
       <div className="container">
-        <div className="d-flex align-items-start justify-content-between mb-4">
-          <div className="col-3">
+        <div className="d-flex align-items-start flex-wrap justify-content-between mb-4">
+          <div className="col-md-3 mb-md-0 mb-4">
             <h2 className="text-primary fs-4 mb-4">{t('servicesSection.title')}</h2>
             <h3 className="fs-3 fw-semibold">{t('servicesSection.subtitle')}</h3>
           </div>
-          <div className="row justify-content-evenly col-9">
+          <div className="row justify-content-evenly col-md-9">
             {services.map((s, idx) => (
               <ServiceCard 
                 key={idx} 

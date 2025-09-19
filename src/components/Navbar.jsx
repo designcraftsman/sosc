@@ -49,8 +49,9 @@ const Navbar = () => {
     <>
       <nav 
         className={`navbar navbar-expand-lg fixed-top sosc-navbar ${isScrolled ? 'scrolled' : ''}`}
+        dir={dir}
       >
-      <div className="container-fluid d-flex mx-5 justify-content-between">
+      <div className="container-fluid d-flex mx-5 justify-content-between align-items-center">
         <div>
           <Link 
             className="navbar-brand fw-bold" 
@@ -59,15 +60,8 @@ const Navbar = () => {
             <img src={logo} className="logo" alt="Logo"/>
           </Link>
         </div>
-        <button 
-          className="navbar-toggler" 
-          type="button" 
-          data-bs-toggle="collapse" 
-          data-bs-target="#navbarNav"
-        >
-          <span className="navbar-toggler-icon"></span>
-        </button>
-        <div className="collapse navbar-collapse justify-content-center" id="navbarNav">
+        {/* Center nav - desktop only */}
+        <div className="collapse navbar-collapse justify-content-center d-none d-lg-flex" id="navbarNav">
           <ul className="navbar-nav">
             <li className="nav-item mx-2">
               <NavLink 
@@ -104,7 +98,11 @@ const Navbar = () => {
                   setServicesOpen(prev => !prev);
                 }}
               >
-                {t('nav.services')} <RiArrowDropDownLine className="fs-4 mb-1" />
+                {t('nav.services')}
+                <RiArrowDropDownLine
+                  className="fs-4 mb-1"
+                  style={{ transition: 'transform .2s ease', transform: servicesOpen ? 'rotate(180deg)' : 'rotate(0deg)' }}
+                />
               </NavLink>
               <div 
                 className={`dropdown-menu ${servicesOpen ? ' show' : ''} ${dropdownTextAlign}`}
@@ -129,12 +127,22 @@ const Navbar = () => {
                 {t('nav.contact')}
               </NavLink>
             </li>
+            <li className="nav-item mx-2">
+              <NavLink 
+                className={({ isActive }) => `nav-link ${isActive ? 'active' : ''}`} 
+                to="/faq"
+              >
+                {t('nav.faq')}
+              </NavLink>
+            </li>
           </ul>
         </div>
+        {/* Right controls - hide on mobile, show menu button always */}
         <div className="d-flex align-items-center fs-6">
           {/* Language dropdown */}
           <div 
-            className="dropdown me-3"
+            className="dropdown me-3 d-none d-lg-block"
+            onMouseEnter={() => setLangOpen(true)}
             onMouseLeave={() => setLangOpen(false)}
           >
             <button
@@ -144,13 +152,17 @@ const Navbar = () => {
               onClick={() => setLangOpen(prev => !prev)}
             >
               {language === 'ar' ? 'Ar' : 'Fr'}
+              <RiArrowDropDownLine
+                className={`fs-4 ${dir === 'rtl' ? 'me-1' : 'ms-1'}`}
+                style={{ transition: 'transform .2s ease', transform: langOpen ? 'rotate(180deg)' : 'rotate(0deg)' }}
+              />
             </button>
             <div className={`dropdown-menu dropdown-menu-end ${langOpen ? ' show' : ''} ${dropdownTextAlign}`}>
               <button className="dropdown-item" onClick={() => { setLanguage('fr'); setLangOpen(false); }}>Fr</button>
               <button className="dropdown-item" onClick={() => { setLanguage('ar'); setLangOpen(false); }}>Ar</button>
             </div>
           </div>
-          <a href="/contact" className="btn btn-dark fw-bold text-white fs-6 rounded-pill px-2 mx-2">
+          <a href="/contact" className="btn btn-dark fw-bold text-white fs-6 rounded-pill px-2 mx-2 d-none d-lg-inline-flex">
             {t('nav.discuss')}
             <FiArrowUpRight className="ms-2 fs-3" />
           </a>
@@ -177,6 +189,7 @@ const Navbar = () => {
     {/* Side Modal */}
     <div 
       className={`side-modal ${isModalOpen ? 'open' : ''}`}
+      dir={dir}
     >
       {/* Modal Header */}
       <div className="d-flex justify-content-between align-items-center mb-4">
@@ -188,7 +201,41 @@ const Navbar = () => {
           <TfiClose />
         </button>
       </div>
-          
+      {/* Mobile Menu Options */}
+      <div className={`mt-2 ${dropdownTextAlign}`}>
+        <ul className="list-unstyled">
+          <li className="mb-2">
+            <NavLink to="/" className="text-decoration-none" onClick={closeModal}>{t('nav.home')}</NavLink>
+          </li>
+          <li className="mb-2">
+            <NavLink to="/about" className="text-decoration-none" onClick={closeModal}>{t('nav.about')}</NavLink>
+          </li>
+          <li className="mb-2">
+            <NavLink to="/services" className="text-decoration-none" onClick={closeModal}>{t('nav.services')}</NavLink>
+            <ul className="list-unstyled small mt-2">
+              <li className="mb-1"><NavLink to="/services/crédit" className="text-decoration-none" onClick={closeModal}>• {t('nav.credit')}</NavLink></li>
+              <li className="mb-1"><NavLink to="/services/recouvrement" className="text-decoration-none" onClick={closeModal}>• {t('nav.recovery')}</NavLink></li>
+              <li className="mb-1"><NavLink to="/services/formations" className="text-decoration-none" onClick={closeModal}>• {t('nav.courses')}</NavLink></li>
+            </ul>
+          </li>
+          <li className="mb-2">
+            <NavLink to="/faq" className="text-decoration-none" onClick={closeModal}>{t('nav.faq')}</NavLink>
+          </li>
+          <li className="mb-2">
+            <NavLink to="/contact" className="text-decoration-none" onClick={closeModal}>{t('nav.contact')}</NavLink>
+          </li>
+        </ul>
+        {/* Language quick switch for mobile */}
+        <div className="d-flex gap-2 my-3">
+          <button className={`btn btn-outline-dark btn-sm ${language === 'fr' ? 'active' : ''}`} onClick={() => { setLanguage('fr'); }}>{'Fr'}</button>
+          <button className={`btn btn-outline-dark btn-sm ${language === 'ar' ? 'active' : ''}`} onClick={() => { setLanguage('ar'); }}>{'Ar'}</button>
+        </div>
+        <Link to="/contact" className="btn btn-dark fw-bold text-white rounded-pill px-3" onClick={closeModal}>
+          {t('nav.discuss')}
+          <FiArrowUpRight className={`${dir === 'rtl' ? 'me-2' : 'ms-2'} fs-5`} />
+        </Link>
+      </div>
+      
       <div className="container">
         <p className="fs-6 opacity-75 fw-light">{t('navbar.modal.description')}</p>
       </div>

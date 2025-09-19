@@ -8,6 +8,9 @@ import Recovery from './pages/Recovery';
 import Courses from './pages/Courses';
 import CourseDetails from './pages/CourseDetails';
 import FAQ from './pages/FAQ';
+import Terms from './pages/Terms';
+import Policy from './pages/Policy';
+import LegalMentions from './pages/LegalMentions';
 import ScrollToTop from './components/ScrollToTop';
 import { LanguageProvider } from './context/LanguageContext';
 
@@ -25,6 +28,9 @@ function AnimatedRoutes() {
         <Route path="/services/formations" element={<Courses />} />
         <Route path="/services/formations/:id" element={<CourseDetails />} />
         <Route path="/faq" element={<FAQ />} />
+        <Route path="/terms" element={<Terms />} />
+        <Route path="/policy" element={<Policy />} />
+        <Route path="/legal-mentions" element={<LegalMentions />} />
       </Routes>
     </div>
   );

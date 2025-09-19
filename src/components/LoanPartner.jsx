@@ -9,7 +9,7 @@ const LoanPartner = () => {
       <div className="container">
         <div className="row align-items-center">
           {/* Image */}
-          <div className="col-md-5 mx-auto">
+          <div className="col-md-5 mb-md-0 mb-4 mx-auto">
             <img
               src={loanPartnerImg}
               alt="Partner"

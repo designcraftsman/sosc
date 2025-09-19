@@ -4,7 +4,7 @@ import { useLanguage } from "../context/LanguageContext";
 const Mission = () => {
   const { t } = useLanguage();
   return (
-    <section className="py-5">
+    <section className="my-5 py-5">
       <div className="container">
         <div className="row align-items-center">
           <div className="col-md-6">

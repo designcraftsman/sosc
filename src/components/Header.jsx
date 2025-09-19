@@ -13,7 +13,7 @@ const Header = ({ title, text, backgroundImage, height = "500px", overlay = 0.55
       }}
     >
       <div className="container mt-5">
-        <div className="col-5 header-animated">
+        <div className="col-md-5 header-animated">
           <div className="icon-underline mb-5"></div>
           <h2 className="fw-bold fs-3 typewriter">{title}</h2>
           <p className="fs-4 fw-light fade-in-delayed">{text}</p>

@@ -17,7 +17,7 @@ const CallToAction = () => {
       }}
     >
       <div className="container ">
-        <h4 className="fw-bold col-6 fs-1" >{t('cta.heading')}</h4>
+        <h4 className="fw-bold col-md-6 fs-1" >{t('cta.heading')}</h4>
         <a
           href="#contact"
           className="btn mt-3 btn-secondary text-white rounded-pill px-3 fw-bold fs-5"

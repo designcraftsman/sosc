@@ -27,7 +27,7 @@ const Team = () => {
   ];
 
   return (
-    <section className="py-5">
+    <section id="team" className="py-5">
       <div className="container text-center">
         {/* Section Titles */}
   <h5 className="text-primary mb-4 fs-4">{t('teamSection.title')}</h5>

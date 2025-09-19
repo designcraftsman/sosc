@@ -13,6 +13,7 @@ const TRANSLATIONS = {
       recovery: 'Recouvrement +',
       courses: 'Formations',
       discuss: 'Discutons',
+      faq: 'FAQ',
     },
     navbar: {
       modal: {
@@ -58,6 +59,18 @@ const TRANSLATIONS = {
       faq: {
         headerTitle: 'FAQ',
         headerText: 'Questions fréquentes et conseils',
+      },
+      terms: {
+        headerTitle: 'Termes et conditions',
+        headerText: '',
+      },
+      policy: {
+        headerTitle: 'Politique de confidentialité',
+        headerText: '',
+      },
+      legalMentions: {
+        headerTitle: 'Mentions légales',
+        headerText: '',
       },
       courses: {
         headerTitle: 'Nos Formations',
@@ -316,7 +329,8 @@ const TRANSLATIONS = {
       team: 'Notre équipe',
       contact: 'Contact',
       privacy: 'Politique de confidentialité',
-      terms: "Conditions d'utilisation",
+      terms: 'Termes et conditions',
+      legalMentions: 'Mentions légales',
       rights: 'Tous droits réservés.',
     },
   },
@@ -330,6 +344,7 @@ const TRANSLATIONS = {
       recovery: 'التحصيل +',
       courses: 'تكوينات',
       discuss: 'لنتحدث',
+      faq: 'الأسئلة الشائعة',
     },
     navbar: {
       modal: {
@@ -375,6 +390,18 @@ const TRANSLATIONS = {
       faq: {
         headerTitle: 'الأسئلة الشائعة',
         headerText: 'أسئلة متكررة ونصائح',
+      },
+      terms: {
+        headerTitle: 'الشروط والأحكام',
+        headerText: '',
+      },
+      policy: {
+        headerTitle: 'سياسة الخصوصية',
+        headerText: '',
+      },
+      legalMentions: {
+        headerTitle: 'البيانات القانونية',
+        headerText: '',
       },
       courses: {
         headerTitle: 'تكويناتنا',
@@ -631,9 +658,254 @@ const TRANSLATIONS = {
       contact: 'اتصل',
       privacy: 'سياسة الخصوصية',
       terms: 'شروط الاستخدام',
+      legalMentions: 'البيانات القانونية',
       rights: 'جميع الحقوق محفوظة.',
     },
   },
+};
+
+// AboutExpertise section translations (FR/AR)
+TRANSLATIONS.fr.aboutExpertise = {
+  title: "Nos domaines d'expertise",
+  items: {
+    credit: {
+      alt: 'Intermédiation financière',
+      text:
+        "Intermédiation financière : Solutions de financement personnalisées pour les entreprises et les particuliers, en collaboration avec des institutions financières de premier plan.",
+    },
+    recover: {
+      alt: 'Recouvrement de créances',
+      text:
+        "Recouvrement de créances : Services spécialisés pour la gestion et la récupération de créances impayées, en garantissant une approche professionnelle et préservant vos relations commerciales.",
+    },
+    learn: {
+      alt: 'Formation en recouvrement',
+      text:
+        "Formation en recouvrement : Programmes sur mesure pour former vos équipes à la gestion efficace du recouvrement, de la négociation à la gestion des litiges, en passant par la stratégie de prévention.",
+    },
+  },
+};
+
+TRANSLATIONS.ar.aboutExpertise = {
+  title: 'مجالات خبرتنا',
+  items: {
+    credit: {
+      alt: 'الوساطة المالية',
+      text:
+        'الوساطة المالية: حلول تمويل مخصّصة للشركات والأفراد بالتعاون مع مؤسسات مالية رائدة.',
+    },
+    recover: {
+      alt: 'تحصيل الديون',
+      text:
+        'تحصيل الديون: خدمات متخصصة لإدارة واسترجاع الديون غير المؤدّاة، مع ضمان نهج مهني يحافظ على علاقاتكم التجارية.',
+    },
+    learn: {
+      alt: 'تكوين في التحصيل',
+      text:
+        'التكوين في التحصيل: برامج مُصمّمة لتكوين فرقكم على التدبير الفعّال للتحصيل، من التفاوض إلى تدبير النزاعات مرورًا باستراتيجيات الوقاية.',
+    },
+  },
+};
+
+// Structured content for legal pages (FR/AR)
+// Keep outside of pages.* to avoid coupling with header UI copies
+TRANSLATIONS.fr.termsPage = {
+  intro:
+    "Ces termes et conditions régissent l'utilisation du site web et les services fournis par SOSC. En accédant à ce site ou en utilisant nos services, vous acceptez de vous conformer à ces termes. Si vous n'êtes pas d'accord, veuillez cesser toute utilisation du site.",
+  sections: [
+    {
+      title: '1. Prestations de Services',
+      paragraphs: ['Nous proposons les services suivants :'],
+      list: ['Intermédiation Financière', 'Recouvrement', 'Formation spécialisée', 'Consulting'],
+      after: "Chaque prestation est régie par un contrat spécifique détaillant les obligations des deux parties.",
+    },
+    {
+      title: '2. Utilisation du Site',
+      list: [
+        "Les informations disponibles sur ce site sont fournies à titre informatif uniquement.",
+        "Vous ne pouvez pas copier, reproduire ou distribuer le contenu du site sans autorisation préalable.",
+      ],
+    },
+    {
+      title: '3. Tarifs et Paiements',
+      list: [
+        "Les tarifs sont communiqués sur devis et peuvent être ajustés en fonction des besoins spécifiques du client.",
+        "Tous les paiements doivent être effectués selon les modalités convenues dans le contrat.",
+      ],
+    },
+    {
+      title: '4. Annulation et Résiliation',
+      list: [
+        "Pour les services de consulting, développement IT, et recouvrement : toute annulation doit être notifiée au moins 15 jours à l'avance.",
+        "Pour les formations : les annulations effectuées moins de 7 jours avant le début de la session entraîneront des frais équivalents à 50 % du coût total.",
+      ],
+    },
+    {
+      title: '5. Limitation de Responsabilité',
+      paragraphs: [
+        "Nous ne pouvons être tenus responsables des pertes ou dommages indirects résultant de l'utilisation de nos services ou du site web.",
+      ],
+    },
+    {
+      title: '6. Propriété Intellectuelle',
+      paragraphs: [
+        "Tous les contenus, y compris les textes, images, et graphiques, sont la propriété de SOSC et protégés par les lois sur la propriété intellectuelle.",
+      ],
+    },
+    {
+      title: '7. Confidentialité',
+      paragraphs: [
+        "Les informations échangées dans le cadre de nos prestations sont strictement confidentielles. Veuillez consulter notre Politique de Confidentialité pour plus de détails.",
+      ],
+    },
+    {
+      title: '8. Modifications des Termes',
+      paragraphs: [
+        "Nous nous réservons le droit de modifier ces termes à tout moment. Les changements prendront effet dès leur publication sur le site.",
+      ],
+    },
+  ],
+};
+
+TRANSLATIONS.ar.termsPage = {
+  intro:
+    'تحكم هذه الشروط والأحكام استخدام الموقع والخدمات المقدمة من طرف SOSC. بدخولكم إلى هذا الموقع أو باستخدام خدماتنا، فإنكم توافقون على الالتزام بهذه الشروط. إذا لم توافقوا، يرجى التوقف عن استخدام الموقع.',
+  sections: [
+    {
+      title: '1. الخدمات المقدَّمة',
+      paragraphs: ['نقدم الخدمات التالية:'],
+      list: ['الوساطة المالية', 'التحصيل', 'تكوينات متخصصة', 'الاستشارة'],
+      after:
+        'تخضع كل خدمة لعقد خاص يحدد بالتفصيل التزامات الطرفين.',
+    },
+    {
+      title: '2. استخدام الموقع',
+      list: [
+        'تُقدم المعلومات المتاحة على هذا الموقع لأغراض إعلامية فقط.',
+        'لا يجوز لكم نسخ أو إعادة إنتاج أو توزيع محتوى الموقع دون ترخيص مسبق.',
+      ],
+    },
+    {
+      title: '3. الأسعار والدفع',
+      list: [
+        'تُحدد الأسعار عبر عرض سعر ويمكن تعديلها وفقًا للاحتياجات الخاصة بالعميل.',
+        'يجب سداد جميع الدفعات وفق الشروط المتفق عليها في العقد.',
+      ],
+    },
+    {
+      title: '4. الإلغاء والفسخ',
+      list: [
+        'بالنسبة لخدمات الاستشارة والتطوير المعلوماتي والتحصيل: يجب إشعار الإلغاء قبل 15 يومًا على الأقل.',
+        'بالنسبة للتكوينات: أي إلغاء قبل أقل من 7 أيام من تاريخ بداية الدورة سيترتب عنه رسوم تعادل 50% من التكلفة الإجمالية.',
+      ],
+    },
+    {
+      title: '5. تحديد المسؤولية',
+      paragraphs: [
+        'لا نتحمل أي مسؤولية عن الخسائر أو الأضرار غير المباشرة الناتجة عن استخدام خدماتنا أو موقعنا الإلكتروني.',
+      ],
+    },
+    {
+      title: '6. الملكية الفكرية',
+      paragraphs: [
+        'جميع المحتويات بما في ذلك النصوص والصور والرسوم هي ملك لـ SOSC ومحمية بموجب قوانين الملكية الفكرية.',
+      ],
+    },
+    {
+      title: '7. السرية',
+      paragraphs: [
+        'تُعتبر المعلومات المتبادلة في إطار خدماتنا سرية للغاية. يُرجى الاطلاع على سياسة الخصوصية لمزيد من التفاصيل.',
+      ],
+    },
+    {
+      title: '8. تعديل الشروط',
+      paragraphs: [
+        'نحتفظ بالحق في تعديل هذه الشروط في أي وقت، وتصبح التغييرات سارية فور نشرها على الموقع.',
+      ],
+    },
+  ],
+};
+
+TRANSLATIONS.fr.policyPage = {
+  paragraph:
+    "Chez SOSC, nous attachons une grande importance à la confidentialité de vos données. Nous collectons et utilisons vos informations personnelles, telles que votre nom, adresse email, numéro de téléphone et données techniques (comme votre adresse IP), dans le strict respect des lois applicables, afin de fournir et d’améliorer nos services, communiquer avec vous et respecter nos obligations légales. Vos données ne sont partagées avec des tiers que dans des cas spécifiques, tels que des prestataires de services ou en conformité avec la loi, et sont protégées par des mesures de sécurité appropriées. Vous avez le droit d'accéder à vos données, de les rectifier, de demander leur suppression ou de vous opposer à leur traitement à tout moment en nous contactant via Email ou par Téléphone. En utilisant notre site ou nos services, vous acceptez cette Politique de Confidentialité, que nous pouvons mettre à jour régulièrement, les modifications étant publiées directement sur cette page.",
+};
+
+TRANSLATIONS.ar.policyPage = {
+  paragraph:
+    'في SOSC نولي أهمية كبيرة لخصوصية بياناتكم. نجمع ونستخدم معلوماتكم الشخصية مثل الاسم وعنوان البريد الإلكتروني ورقم الهاتف والبيانات التقنية (مثل عنوان IP) وفقًا للقوانين المعمول بها، وذلك لتقديم خدماتنا وتحسينها والتواصل معكم والامتثال لالتزاماتنا القانونية. لا تتم مشاركة بياناتكم مع أطراف ثالثة إلا في حالات محددة مثل مزودي الخدمات أو وفقًا لما تقتضيه القوانين، ويتم حمايتها بإجراءات أمنية مناسبة. لكم الحق في الوصول إلى بياناتكم وتصحيحها وطلب حذفها أو الاعتراض على معالجتها في أي وقت عبر التواصل معنا بالبريد الإلكتروني أو الهاتف. باستخدامكم لموقعنا أو خدماتنا، فإنكم توافقون على سياسة الخصوصية هذه، والتي قد نقوم بتحديثها بانتظام وسيتم نشر أي تعديلات مباشرةً على هذه الصفحة.',
+};
+
+TRANSLATIONS.fr.legalMentionsPage = {
+  headings: {
+    identification: "Identification de l'entreprise",
+    activity: 'Activité commerciale',
+    personalData: 'Données personnelles',
+    intellectualProperty: 'Propriété intellectuelle',
+  },
+  identification: {
+    items: [
+      { label: 'Nom de la société', value: 'SOSC' },
+      { label: 'Forme juridique', value: 'SARL' },
+      { label: 'Capital social', value: '100.000 MAD' },
+      { label: 'Date de création', value: '06/06/2023' },
+      { label: 'Numéro de registre de commerce (RC)', value: '33167' },
+      { label: 'Numéro d’identification fiscale (IF)', value: '53782899' },
+      { label: 'ICE', value: '003223628000047' },
+      { label: 'Taxe professionnelle', value: '39581333' },
+      { label: 'Adresse du siège social', value: 'Bd Palestine complexe LOUMA Imm.G1 N°263  MOHAMMEDIA, Maroc' },
+      { label: 'Téléphone', value: '+212 529555101' },
+      { label: 'Adresse email', value: 'soscsarl@gmail.com' },
+      { label: 'Responsable de la publication', value: 'Dr. Bouknani Ahmed' },
+      { label: 'Site Conçu et développé par', value: 'Kettani Mohamed Wail - Proprima' },
+    ],
+  },
+  activityParagraphs: [
+    "SOSC est un bureau d'étude, d'enquête et de recherche, conseil de gestion, recouvrement de créances, conformément aux dispositions légales en vigueur, notamment le Code éthique du recouvrement pré-judiciaire des créances dues.",
+    "ainsi que le Code éthique en matière d’intermédiation en opérations de crédit à la consommation",
+  ],
+  personalDataParagraphs: [
+    "Les informations collectées via ce site sont destinées exclusivement à SOSC dans le cadre de la gestion des demandes d’audit et des services de recouvrement. Elles ne seront ni vendues, ni transmises à des tiers sans consentement préalable.",
+    "Conformément à la loi n° 09-08 relative à la protection des personnes physiques à l'égard du traitement des données à caractère personnel, les utilisateurs disposent d’un droit d’accès, de rectification et de suppression des informations les concernant. Pour exercer ces droits, vous pouvez nous contacter à l’adresse suivante : [À définir après Publication].",
+  ],
+  intellectualPropertyParagraph:
+    "Tout le contenu présent sur ce site (textes, images, logos, graphiques) est la propriété exclusive de SOSC, sauf mention contraire. Toute reproduction, représentation ou diffusion, en tout ou partie, sans autorisation préalable, est interdite.",
+};
+
+TRANSLATIONS.ar.legalMentionsPage = {
+  headings: {
+    identification: 'التعريف بالشركة',
+    activity: 'النشاط التجاري',
+    personalData: 'البيانات الشخصية',
+    intellectualProperty: 'الملكية الفكرية',
+  },
+  identification: {
+    items: [
+      { label: 'اسم الشركة', value: 'SOSC' },
+      { label: 'الشكل القانوني', value: 'شركة ذات مسؤولية محدودة (SARL)' },
+      { label: 'رأس المال', value: '100.000 درهم' },
+      { label: 'تاريخ الإنشاء', value: '06/06/2023' },
+      { label: 'رقم السجل التجاري (RC)', value: '33167' },
+      { label: 'رقم التعريف الضريبي (IF)', value: '53782899' },
+      { label: 'ICE', value: '003223628000047' },
+      { label: 'الضريبة المهنية', value: '39581333' },
+      { label: 'عنوان المقر الاجتماعي', value: 'Bd Palestine complexe LOUMA Imm.G1 N°263 المحمدية، المغرب' },
+      { label: 'الهاتف', value: '+212 529555101' },
+      { label: 'البريد الإلكتروني', value: 'soscsarl@gmail.com' },
+      { label: 'المسؤول عن النشر', value: 'الدكتور أحمد بوكناني' },
+      { label: 'تصميم وتطوير الموقع', value: 'كتّاني محمد وائل - Proprima' },
+    ],
+  },
+  activityParagraphs: [
+    'SOSC مكتب للدراسات والبحث والتحقيق، والاستشارة في التسيير، وتحصل الديون، وفقًا للمقتضيات القانونية الجاري بها العمل، لا سيما ميثاق الأخلاقيات المتعلق بالتحصيل قبل القضائي للديون المستحقة.',
+    'وكذلك ميثاق الأخلاقيات الخاص بالوساطة في عمليات الائتمان للاستهلاك.',
+  ],
+  personalDataParagraphs: [
+    'تُخصص المعلومات المُجمّعة عبر هذا الموقع لاستعمال SOSC فقط في إطار تدبير طلبات التدقيق وخدمات التحصيل. ولن تُباع هذه المعلومات أو تُنقل إلى أطراف ثالثة دون موافقة مسبقة.',
+    'طبقًا للقانون رقم 09-08 المتعلق بحماية الأشخاص الذاتيين تجاه معالجة المعطيات ذات الطابع الشخصي، يملك المستخدمون حق الولوج والتصحيح والحذف لبياناتهم. لممارسة هذه الحقوق، يُمكنكم التواصل معنا على العنوان التالي: [يُحدد بعد النشر].',
+  ],
+  intellectualPropertyParagraph:
+    'جميع المحتويات الموجودة على هذا الموقع (نصوص، صور، شعارات، رسوم) هي ملكية حصرية لـ SOSC ما لم يُذكر خلاف ذلك. يُمنع أي نسخ أو تمثيل أو نشر كلي أو جزئي دون ترخيص مسبق.',
 };
 
 export function LanguageProvider({ children }) {
