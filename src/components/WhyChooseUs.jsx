@@ -14,9 +14,9 @@ const WhyChooseUs = () => {
           <div className="col-5 mx-auto">
           <h3 className="fw-semibold mb-4 fs-4 text-primary">{t('whyChooseUs.title')}</h3>
             <ul className="">
-              <li className="mb-3">{t('whyChooseUs.bullets.0')}</li>
-              <li className="mb-3">{t('whyChooseUs.bullets.1')}</li>
-              <li className="mb-3">{t('whyChooseUs.bullets.2')}</li>
+              <li className="mb-3 fs-6 fw-medium">{t('whyChooseUs.bullets.0')}</li>
+              <li className="mb-3 fs-6 fw-medium">{t('whyChooseUs.bullets.1')}</li>
+              <li className="mb-3 fs-6 fw-medium">{t('whyChooseUs.bullets.2')}</li>
             </ul>
           </div>
           

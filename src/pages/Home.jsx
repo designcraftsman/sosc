@@ -16,7 +16,6 @@ const Home = () => {
       <Hero />
       <HomeBody />
       <CallToAction />
-      <Team />
       <Footer />
     </>
   );

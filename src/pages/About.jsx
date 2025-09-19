@@ -7,6 +7,7 @@ import CallToAction from "../components/CallToAction";
 import Team from "../components/Team";
 import Footer from "../components/Footer";
 import ctaBg from '../assets/images/bg/about.jpg';
+import AboutExpertise from "../components/AboutExpertise";
 import { useLanguage } from "../context/LanguageContext";
 
 
@@ -21,10 +22,13 @@ const About = () => {
         backgroundImage={ctaBg}
         height="500px"
       />
-      <Mission />
-      <WhyChooseUs />
+      <div className="container">
+        <Mission />
+        <WhyChooseUs />
+        <AboutExpertise />
+        <Team />
+      </div>
       <CallToAction />
-      <Team />
       <Footer />
     </>
   );

@@ -55,6 +55,10 @@ const TRANSLATIONS = {
         headerTitle: 'À Propos de Nous',
         headerText: 'Chez SOSC, nous sommes le partenaire de confiance pour les entreprises et les particuliers dans la gestion de leurs finances et de leurs créances.',
       },
+      faq: {
+        headerTitle: 'FAQ',
+        headerText: 'Questions fréquentes et conseils',
+      },
       courses: {
         headerTitle: 'Nos Formations',
         headerText: '',
@@ -135,6 +139,32 @@ const TRANSLATIONS = {
         'Accès privilégié à des solutions de financement adaptées et compétitives.',
         'Accompagnement personnalisé pour garantir le succès de vos demandes de financement.',
         'Réduction des démarches administratives grâce à notre réseau de partenaires.',
+      ],
+    },
+    faq: {
+      heading: "On répond à vos questions",
+      subheading: "Nous sommes là pour vous aider ! Notre FAQ répond rapidement aux questions les plus fréquentes.",
+      items: [
+        {
+          question: 'Où se procurer le programme?',
+          answer:
+            "Vous pouvez consulter et télécharger le programme directement sur notre site web dans la section 'Formation'. Vous pouvez également le demander par e-mail ou lors de votre visite au centre.",
+        },
+        {
+          question: 'Est-il possible de visiter SOSC?',
+          answer:
+            "Oui, nous accueillons avec plaisir les visiteurs. Veuillez nous contacter pour convenir d’un rendez-vous afin de vous offrir une visite personnalisée et répondre à toutes vos questions.",
+        },
+        {
+          question: 'Quels sont les frais d’inscription?',
+          answer:
+            "Les frais varient en fonction de la formation choisie. Pour plus de détails, consultez la section Formation sur notre site ou contactez-nous directement.",
+        },
+        {
+          question: 'Quels diplômes sont proposés ?',
+          answer:
+            "Nous délivrons des certificats de participation et, pour certaines formations, des certifications reconnues. Consultez les informations spécifiques à chaque programme pour plus de détails.",
+        },
       ],
     },
     loan: {
@@ -342,6 +372,10 @@ const TRANSLATIONS = {
         headerTitle: 'من نحن',
         headerText: 'في SOSC نحن الشريك الموثوق للشركات والأفراد في إدارة شؤونهم المالية ومطالباتهم.',
       },
+      faq: {
+        headerTitle: 'الأسئلة الشائعة',
+        headerText: 'أسئلة متكررة ونصائح',
+      },
       courses: {
         headerTitle: 'تكويناتنا',
         headerText: '',
@@ -421,6 +455,32 @@ const TRANSLATIONS = {
         'ولوج مميز إلى حلول تمويل مناسبة وتنافسية.',
         'مواكبة شخصية لضمان نجاح طلباتكم للتمويل.',
         'تقليص الإجراءات الإدارية بفضل شبكة شركائنا.',
+      ],
+    },
+    faq: {
+      heading: 'لا تترددوا في الاتصال بنا مباشرةً، سنكون سعداء بمساعدتكم.',
+      subheading: 'نحن هنا لمساعدتكم! يقدّم قسم الأسئلة الشائعة إجابات سريعة على أكثر الأسئلة تكرارًا حول خدماتنا المعلوماتية.',
+      items: [
+        {
+          question: 'أين يمكن الحصول على البرنامج؟',
+          answer:
+            "يمكنكم الاطلاع على البرنامج وتحميله مباشرةً من موقعنا الإلكتروني ضمن قسم 'التكوين'. كما يمكنكم طلبه عبر البريد الإلكتروني أو خلال زيارتكم للمركز.",
+        },
+        {
+          question: 'هل يمكن زيارة SOSC؟',
+          answer:
+            'نعم، نرحّب بالزوّار بكل سرور. يرجى التواصل معنا لتحديد موعد زيارة مخصّصة والإجابة عن جميع أسئلتكم.',
+        },
+        {
+          question: 'ما هي رسوم التسجيل؟',
+          answer:
+            'تختلف الرسوم حسب التكوين المختار. للمزيد من التفاصيل، يُرجى الاطلاع على قسم التكوين بموقعنا أو الاتصال بنا مباشرةً.',
+        },
+        {
+          question: 'ما هي الشهادات المقدَّمة؟',
+          answer:
+            'نُسلّم شهادات مشاركة، وبالنسبة لبعض التكوينات، شهادات معترف بها. يُرجى الاطلاع على معلومات كل برنامج لمعرفة التفاصيل.',
+        },
       ],
     },
     loan: {

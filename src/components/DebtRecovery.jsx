@@ -22,8 +22,8 @@ const DebtRecovery = () => {
   return (
     <section className="py-5 debt-section">
       <div className="container">
-        <div className="row align-items-start">
-          <div className="col-md-5 mx-auto">
+        <div className="row align-items-center">
+          <div className="col-md-6">
             <h5 className="text-primary fw-semibold mb-4">{t('debtRecovery.sectionTitle')}</h5>
             <div className="d-flex flex-column gap-3">
               {services.map((s, idx) => (

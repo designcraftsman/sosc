@@ -4,6 +4,7 @@ import Header from "../components/Header";
 import Footer from "../components/Footer";
 import ctaBg from '../assets/images/hero/recouvrement.jpg';
 import RecoveryPartner from "../components/RecoveryPartner";
+import RecoveryEngagement  from "../components/RecoveryEngagement";
 import DebtRecovery  from "../components/DebtRecovery";
 import { useLanguage } from "../context/LanguageContext";
 
@@ -21,6 +22,7 @@ const Loan = () => {
 
         <RecoveryPartner />
         <DebtRecovery />
+        <RecoveryEngagement />
       <Footer />
     </React.Fragment>
   );

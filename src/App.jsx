@@ -7,6 +7,7 @@ import Loan from './pages/Loan';
 import Recovery from './pages/Recovery';
 import Courses from './pages/Courses';
 import CourseDetails from './pages/CourseDetails';
+import FAQ from './pages/FAQ';
 import ScrollToTop from './components/ScrollToTop';
 import { LanguageProvider } from './context/LanguageContext';
 
@@ -23,6 +24,7 @@ function AnimatedRoutes() {
         <Route path="/services/recouvrement" element={<Recovery />} />
         <Route path="/services/formations" element={<Courses />} />
         <Route path="/services/formations/:id" element={<CourseDetails />} />
+        <Route path="/faq" element={<FAQ />} />
       </Routes>
     </div>
   );
