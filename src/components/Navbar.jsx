@@ -17,7 +17,9 @@ import { useLanguage } from "../context/LanguageContext";
 const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isMobileModalOpen, setIsMobileModalOpen] = useState(false);
   const [servicesOpen, setServicesOpen] = useState(false);
+  const [mobileServicesOpen, setMobileServicesOpen] = useState(false);
   const [langOpen, setLangOpen] = useState(false);
   const { language, setLanguage, t, dir } = useLanguage();
   const dropdownTextAlign = dir === 'rtl' ? 'text-end' : 'text-start';
@@ -45,14 +47,37 @@ const Navbar = () => {
     setIsModalOpen(false);
   };
 
+  const toggleMobileModal = () => {
+    setIsMobileModalOpen(!isMobileModalOpen);
+  };
+
+  const closeMobileModal = () => {
+    setIsMobileModalOpen(false);
+  };
+
   return (
     <>
       <nav 
         className={`navbar navbar-expand-lg fixed-top sosc-navbar ${isScrolled ? 'scrolled' : ''}`}
         dir={dir}
       >
-      <div className="container-fluid d-flex mx-5 justify-content-between align-items-center">
-        <div>
+      <div className="container-fluid d-flex mx-md-5 justify-content-between align-items-center">
+        {/* Mobile: Menu button on left */}
+        <div className="d-lg-none">
+          <button 
+            onClick={toggleMobileModal}
+            className="menu-toggle-btn btn btn-outline-secondary"
+            style={{ 
+              transition: 'all 0.2s ease',
+              transform: isMobileModalOpen ? 'scale(0.95)' : 'scale(1)'
+            }}
+          >
+            <HiOutlineMenuAlt1 className="fs-2 text-dark" />
+          </button>
+        </div>
+        
+        {/* Logo - center on mobile, left on desktop */}
+        <div className="d-lg-block">
           <Link 
             className="navbar-brand fw-bold" 
             to="/" 
@@ -60,6 +85,7 @@ const Navbar = () => {
             <img src={logo} className="logo" alt="Logo"/>
           </Link>
         </div>
+
         {/* Center nav - desktop only */}
         <div className="collapse navbar-collapse justify-content-center d-none d-lg-flex" id="navbarNav">
           <ul className="navbar-nav">
@@ -84,29 +110,28 @@ const Navbar = () => {
             </li>
             <li 
               className="nav-item dropdown mx-2"
-              onMouseEnter={() => setServicesOpen(true)}
-              onMouseLeave={() => setServicesOpen(false)}
+              onClick={() => setServicesOpen(prev => !prev)}
             >
-              <NavLink
-                id="servicesDropdown"
-                className={({ isActive }) => `nav-link dropdown-toggle ${isActive ? 'active' : ''}`}
-                aria-expanded={servicesOpen}
-                to="/services"
-                onClick={(e) => {
-                  // Allow normal navigation to /services when clicked
-                  // Also toggle the dropdown for quick access on repeated clicks
-                  setServicesOpen(prev => !prev);
+              <button
+                className={`nav-link dropdown-toggle btn btn-link ${servicesOpen ? 'active' : ''}`}
+                style={{ 
+                  color: '#000',
+                  textDecoration: 'none',
+                  border: 'none',
+                  background: 'transparent',
+                  padding: '0.5rem 1rem'
                 }}
+                aria-expanded={servicesOpen}
               >
                 {t('nav.services')}
                 <RiArrowDropDownLine
                   className="fs-4 mb-1"
                   style={{ transition: 'transform .2s ease', transform: servicesOpen ? 'rotate(180deg)' : 'rotate(0deg)' }}
                 />
-              </NavLink>
+              </button>
               <div 
                 className={`dropdown-menu ${servicesOpen ? ' show' : ''} ${dropdownTextAlign}`}
-                aria-labelledby="servicesDropdown"
+                style={{ position: 'absolute' }}
               >
                 <NavLink className={({ isActive }) => `dropdown-item mb-2 ${isActive ? 'active' : ''}`} to="/services/crédit" onClick={() => setServicesOpen(false)}>
                   {t('nav.credit')}
@@ -137,17 +162,18 @@ const Navbar = () => {
             </li>
           </ul>
         </div>
-        {/* Right controls - hide on mobile, show menu button always */}
+
+        {/* Right controls */}
         <div className="d-flex align-items-center fs-6">
-          {/* Language dropdown */}
+          {/* Language dropdown - show on mobile and desktop */}
           <div 
-            className="dropdown me-3 d-none d-lg-block"
+            className="dropdown me-md-3"
             onMouseEnter={() => setLangOpen(true)}
             onMouseLeave={() => setLangOpen(false)}
           >
             <button
               type="button"
-              className="btn btn-outline-dark fw-medium rounded-pill px-3 mx-2 dropdown-toggle"
+              className="btn btn-outline-dark fw-medium rounded-pill px-3 mx-md-2 dropdown-toggle"
               aria-expanded={langOpen}
               onClick={() => setLangOpen(prev => !prev)}
             >
@@ -162,11 +188,13 @@ const Navbar = () => {
               <button className="dropdown-item" onClick={() => { setLanguage('ar'); setLangOpen(false); }}>Ar</button>
             </div>
           </div>
+          {/* Discuss button - desktop only */}
           <a href="/contact" className="btn btn-dark fw-bold text-white fs-6 rounded-pill px-2 mx-2 d-none d-lg-inline-flex">
             {t('nav.discuss')}
             <FiArrowUpRight className="ms-2 fs-3" />
           </a>
-          <div className="mx-3">
+          {/* Desktop menu button */}
+          <div className="mx-3 d-none d-lg-block">
             <button 
               onClick={toggleModal}
               className="menu-toggle-btn"
@@ -178,17 +206,17 @@ const Navbar = () => {
       </div>
     </nav>
 
-    {/* Background Blur Overlay */}
+    {/* Background Blur Overlay - Large screens only */}
     {isModalOpen && (
       <div 
-        className="modal-overlay"
+        className="modal-overlay d-none d-lg-block"
         onClick={closeModal}
       />
     )}
 
-    {/* Side Modal */}
+    {/* Side Modal - Large screens only - Original Content */}
     <div 
-      className={`side-modal ${isModalOpen ? 'open' : ''}`}
+      className={`side-modal d-none d-lg-block ${isModalOpen ? 'open' : ''}`}
       dir={dir}
     >
       {/* Modal Header */}
@@ -201,41 +229,7 @@ const Navbar = () => {
           <TfiClose />
         </button>
       </div>
-      {/* Mobile Menu Options */}
-      <div className={`mt-2 ${dropdownTextAlign}`}>
-        <ul className="list-unstyled">
-          <li className="mb-2">
-            <NavLink to="/" className="text-decoration-none" onClick={closeModal}>{t('nav.home')}</NavLink>
-          </li>
-          <li className="mb-2">
-            <NavLink to="/about" className="text-decoration-none" onClick={closeModal}>{t('nav.about')}</NavLink>
-          </li>
-          <li className="mb-2">
-            <NavLink to="/services" className="text-decoration-none" onClick={closeModal}>{t('nav.services')}</NavLink>
-            <ul className="list-unstyled small mt-2">
-              <li className="mb-1"><NavLink to="/services/crédit" className="text-decoration-none" onClick={closeModal}>• {t('nav.credit')}</NavLink></li>
-              <li className="mb-1"><NavLink to="/services/recouvrement" className="text-decoration-none" onClick={closeModal}>• {t('nav.recovery')}</NavLink></li>
-              <li className="mb-1"><NavLink to="/services/formations" className="text-decoration-none" onClick={closeModal}>• {t('nav.courses')}</NavLink></li>
-            </ul>
-          </li>
-          <li className="mb-2">
-            <NavLink to="/faq" className="text-decoration-none" onClick={closeModal}>{t('nav.faq')}</NavLink>
-          </li>
-          <li className="mb-2">
-            <NavLink to="/contact" className="text-decoration-none" onClick={closeModal}>{t('nav.contact')}</NavLink>
-          </li>
-        </ul>
-        {/* Language quick switch for mobile */}
-        <div className="d-flex gap-2 my-3">
-          <button className={`btn btn-outline-dark btn-sm ${language === 'fr' ? 'active' : ''}`} onClick={() => { setLanguage('fr'); }}>{'Fr'}</button>
-          <button className={`btn btn-outline-dark btn-sm ${language === 'ar' ? 'active' : ''}`} onClick={() => { setLanguage('ar'); }}>{'Ar'}</button>
-        </div>
-        <Link to="/contact" className="btn btn-dark fw-bold text-white rounded-pill px-3" onClick={closeModal}>
-          {t('nav.discuss')}
-          <FiArrowUpRight className={`${dir === 'rtl' ? 'me-2' : 'ms-2'} fs-5`} />
-        </Link>
-      </div>
-      
+          
       <div className="container">
         <p className="fs-6 opacity-75 fw-light">{t('navbar.modal.description')}</p>
       </div>
@@ -270,7 +264,7 @@ const Navbar = () => {
                     </div>
       </div>
           <hr />
-      {/* Contact Information */}
+      {/* Social Media */}
       <div className="mt-5">
         <h6 className="fw-semibold fs-5 mb-4">{t('navbar.modal.followHeading')}</h6>
          <div className="d-flex gap-4">
@@ -279,9 +273,171 @@ const Navbar = () => {
                       <div ><a href="#" className=" fs-3 border rounded-circle p-2 pt-1"><RiLinkedinLine /></a></div>
           </div>
       </div>
-
-      
     </div>
+
+    {/* Bootstrap Modal - Small screens only */}
+    <div className={`modal d-lg-none ${isMobileModalOpen ? 'show' : ''}`} 
+         id="mobileNavModal" 
+         tabIndex="-1" 
+         style={{ 
+           display: 'block',
+           opacity: isMobileModalOpen ? 1 : 0,
+           visibility: isMobileModalOpen ? 'visible' : 'hidden',
+           transition: 'opacity 0.3s ease, visibility 0.3s ease'
+         }}
+         dir={dir}>
+      <div className="modal-dialog modal-fullscreen">
+        <div className="modal-content" 
+             style={{
+               transform: isMobileModalOpen ? 'translateX(0)' : 'translateX(-100%)',
+               transition: 'transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94)',
+               willChange: 'transform'
+             }}>
+          <div className="modal-header">
+            <img src={logo} alt="Logo" className="modal-logo" style={{ height: '40px' }} />
+            <button 
+              type="button" 
+              className="btn-close" 
+              onClick={closeMobileModal}
+              aria-label="Close"
+            ></button>
+          </div>
+          <div className="modal-body">
+            <div className={`${dropdownTextAlign} d-flex flex-column h-100 justify-content-between`}>
+              <ul className="list-unstyled text-center">
+                <li className="mb-3" 
+                    style={{
+                      transform: isMobileModalOpen ? 'translateX(0)' : 'translateX(-30px)',
+                      opacity: isMobileModalOpen ? 1 : 0,
+                      transition: 'all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.2s'
+                    }}>
+                  <NavLink to="/" className="text-decoration-none fs-5" onClick={closeMobileModal}>{t('nav.home')}</NavLink>
+                </li>
+                <hr />
+                <li className="mb-3"
+                    style={{
+                      transform: isMobileModalOpen ? 'translateX(0)' : 'translateX(-30px)',
+                      opacity: isMobileModalOpen ? 1 : 0,
+                      transition: 'all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.3s'
+                    }}>
+                  <NavLink to="/about" className="text-decoration-none fs-5" onClick={closeMobileModal}>{t('nav.about')}</NavLink>
+                </li>
+                <hr />
+                <li className="mb-3"
+                    style={{
+                      transform: isMobileModalOpen ? 'translateX(0)' : 'translateX(-30px)',
+                      opacity: isMobileModalOpen ? 1 : 0,
+                      transition: 'all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.4s'
+                    }}>
+                  <button 
+                    onClick={() => setMobileServicesOpen(prev => !prev)}
+                    className="btn btn-link text-decoration-none fs-5 p-0"
+                    style={{ 
+                      color: 'inherit',
+                      border: 'none',
+                      background: 'transparent',
+                      transition: 'all 0.2s ease'
+                    }}
+                  >
+                    {t('nav.services')}
+                    <RiArrowDropDownLine
+                      className="fs-4 ms-1"
+                      style={{ 
+                        transition: 'transform .2s ease', 
+                        transform: mobileServicesOpen ? 'rotate(180deg)' : 'rotate(0deg)' 
+                      }}
+                    />
+                  </button>
+                  <div 
+                    className={`mt-2`}
+                    style={{ 
+                      transition: 'all 0.4s ease-in-out',
+                      maxHeight: mobileServicesOpen ? '300px' : '0',
+                      opacity: mobileServicesOpen ? 1 : 0,
+                      overflow: 'hidden',
+                      transform: mobileServicesOpen ? 'translateY(0)' : 'translateY(-10px)'
+                    }}
+                  >
+                    <ul className="list-unstyled mt-2 ms-3">
+                      <li className="mb-2"><NavLink to="/services/crédit" className="text-decoration-none" onClick={closeMobileModal}>{t('nav.credit')}</NavLink></li>
+                      <hr />
+                      <li className="mb-2"><NavLink to="/services/recouvrement" className="text-decoration-none" onClick={closeMobileModal}>{t('nav.recovery')}</NavLink></li>
+                      <hr />
+                      <li className="mb-2"><NavLink to="/services/formations" className="text-decoration-none" onClick={closeMobileModal}>{t('nav.courses')}</NavLink></li>
+                    </ul>
+                  </div>
+                </li>
+                <hr />
+                <li className="mb-3"
+                    style={{
+                      transform: isMobileModalOpen ? 'translateX(0)' : 'translateX(-30px)',
+                      opacity: isMobileModalOpen ? 1 : 0,
+                      transition: 'all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.5s'
+                    }}>
+                  <NavLink to="/faq" className="text-decoration-none fs-5" onClick={closeMobileModal}>{t('nav.faq')}</NavLink>
+                </li>
+                <hr />
+                <li className="mb-3"
+                    style={{
+                      transform: isMobileModalOpen ? 'translateX(0)' : 'translateX(-30px)',
+                      opacity: isMobileModalOpen ? 1 : 0,
+                      transition: 'all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.6s'
+                    }}>
+                  <NavLink to="/contact" className="text-decoration-none fs-5" onClick={closeMobileModal}>{t('nav.contact')}</NavLink>
+                </li>
+              </ul>
+
+            
+
+              {/* Social Media Links */}
+              <div className="mt-auto text-center"
+                   style={{
+                     transform: isMobileModalOpen ? 'translateY(0)' : 'translateY(30px)',
+                     opacity: isMobileModalOpen ? 1 : 0,
+                     transition: 'all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.7s'
+                   }}>
+                <h6 className="fw-semibold fs-6 mb-3">{t('navbar.modal.followHeading')}</h6>
+                <div className="d-flex justify-content-center gap-3">
+                  <a href="#" className="fs-3 border rounded-circle p-2 pt-1 text-decoration-none"
+                     style={{ 
+                       transition: 'transform 0.2s ease',
+                       ':hover': { transform: 'scale(1.1)' }
+                     }}>
+                    <RiFacebookLine />
+                  </a>
+                  <a href="#" className="fs-3 border rounded-circle p-2 pt-1 text-decoration-none"
+                     style={{ 
+                       transition: 'transform 0.2s ease',
+                       ':hover': { transform: 'scale(1.1)' }
+                     }}>
+                    <CiInstagram />
+                  </a>
+                  <a href="#" className="fs-3 border rounded-circle p-2 pt-1 text-decoration-none"
+                     style={{ 
+                       transition: 'transform 0.2s ease',
+                       ':hover': { transform: 'scale(1.1)' }
+                     }}>
+                    <RiLinkedinLine />
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    {/* Bootstrap Modal Backdrop - Small screens only */}
+    <div 
+      className="modal-backdrop d-lg-none"
+      style={{
+        display: 'block',
+        opacity: isMobileModalOpen ? 0.5 : 0,
+        visibility: isMobileModalOpen ? 'visible' : 'hidden',
+        transition: 'opacity 0.3s ease, visibility 0.3s ease'
+      }}
+      onClick={closeMobileModal}
+    ></div>
     </>
   );
 };

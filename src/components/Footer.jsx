@@ -15,10 +15,10 @@ const Footer = () => {
   return (
     <footer className="text-white pt-5 text-md-start text-center bg-dark"> 
       <div className="container pb-5">
-        <div className="row justify-content-between align-content-start">
+        <div className="row justify-content-between align-content-md-start ">
           <div className="col-md-3  mb-5">
-            <h5 className="col-8 mb-3 fs-5 fw-semibold">{t('footer.followUs')}</h5>
-            <div className="d-flex  gap-4">
+            <h5 className="col-md-8 col-10 mx-auto mb-3 fs-5 fw-semibold">{t('footer.followUs')}</h5>
+            <div className="d-flex justify-content-md-start justify-content-center gap-4">
               <div ><a href="#" className="text-white fs-3 border rounded-circle p-2 pt-1"><RiFacebookLine /></a></div>
               <div ><a href="#" className="text-white fs-3 border rounded-circle p-2 pt-1"><CiInstagram /></a></div>
               <div ><a href="#" className="text-white fs-3 border rounded-circle p-2 pt-1"><RiLinkedinLine /></a></div>
@@ -50,14 +50,14 @@ const Footer = () => {
         
       </div>
       <hr />
-      <div className="d-flex justify-content-between px-5 py-2 align-items-center flex-wrap   bg-dark">
-          <div className="col-md-4">
+      <div className="d-flex justify-content-between px-5 py-2 align-items-center flex-wrap text-md-start text-center   bg-dark">
+          <div className="col-md-4 order-md-0 order-1">
             <img src={logo} className="logo-footer" alt="Logo" />
           </div>
-          <div className="col-md-3  text-white">
+          <div className="col-md-3  text-white order-md-1 order-2">
             <p className="mb-0 small">© 2024 <span className="text-secondary">SOSC</span>. {t('footer.rights')}</p>
           </div>
-          <div className="d-flex flex-wrap gap-5 col-md-5 col-12 footer-links">
+          <div className="d-flex flex-wrap gap-5 justify-content-center col-md-5 col-12 footer-links mb-md-0 mb-5 order-md-2">
             <Link to="/policy" className="text-white opacity-75 small footer-link">{t('footer.privacy')}</Link>
             <Link to="/terms" className="text-white opacity-75 small footer-link">{t('footer.terms')}</Link>
             <Link to="/legal-mentions" className="text-white opacity-75 small footer-link">{t('footer.legalMentions')}</Link>

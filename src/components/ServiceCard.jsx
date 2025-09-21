@@ -4,7 +4,7 @@ import { useLanguage } from "../context/LanguageContext";
 const ServiceCard = ({ img, title, text, link }) => {
   const { t } = useLanguage();
   return (
-    <div className="col-md-3 mb-3">
+    <div className="col-md-3 col-11 mb-3">
       <div className="h-100 p-3 border border-1 service-card d-flex flex-column ">
         <img
           src={img}

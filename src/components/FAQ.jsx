@@ -16,11 +16,11 @@ const FAQ = () => {
   return (
     <section className="py-5">
       {/* Header */}
-      <div className={`d-flex align-items-start justify-content-between mb-5 ${alignClass}`}>
-        <h2 className="fw-semibold fs-3 text-primary col-12 col-lg-5">
+      <div className={`d-flex align-items-start flex-wrap justify-content-between mb-5 ${alignClass}`}>
+        <h2 className="fw-semibold fs-3 text-primary col-10 col-lg-5">
           {t('faq.heading')}
         </h2>
-        <p className="text-dark col-12 col-lg-5 fs-5 text-end mt-3 mt-lg-0">
+        <p className="text-dark col-10 col-lg-5 fs-5 text-md-end mt-3 mt-lg-0">
           {t('faq.subheading')}
         </p>
       </div>
@@ -42,7 +42,7 @@ const FAQ = () => {
                   aria-controls={contentId}
                 style={{ cursor: 'pointer' }}
               >
-                <div className={`d-flex justify-content-between align-items-center ${alignClass}`}>
+                <div className={`d-flex justify-content-between  align-items-center ${alignClass}`}>
                   <span className="fw-semibold text-dark mb-3">{item.question}</span>
                   <FiChevronDown className={`text-primary chev ${isOpen ? 'open' : ''}`} />
                 </div>

@@ -14,6 +14,16 @@
   border-radius: 50%;
 }
 
+@media screen and (max-width: 768px) {
+  .logo {
+    width: 50px;
+    height: 50px;
+  }
+  .logo-footer {
+    width: 30px;
+    height: 30px;
+  }
+}
 /* Underline fill + text reveal animations for Header */
 .icon-underline {
   width: 100px;
