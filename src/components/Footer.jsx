@@ -17,15 +17,15 @@ const Footer = () => {
       <div className="container pb-5">
         <div className="row justify-content-between align-content-md-start ">
           <div className="col-md-3  mb-5">
-            <h5 className="col-md-8 col-10 mx-auto mb-3 fs-5 fw-semibold">{t('footer.followUs')}</h5>
-            <div className="d-flex justify-content-md-start justify-content-center gap-4">
-              <div ><a href="#" className="text-white fs-3 border rounded-circle p-2 pt-1"><RiFacebookLine /></a></div>
-              <div ><a href="#" className="text-white fs-3 border rounded-circle p-2 pt-1"><CiInstagram /></a></div>
-              <div ><a href="#" className="text-white fs-3 border rounded-circle p-2 pt-1"><RiLinkedinLine /></a></div>
+            <h5 className="col-md-8 col-10 mx-md-0 mx-auto mb-3 fs-5 fw-medium">{t('footer.followUs')}</h5>
+            <div className="d-flex justify-content-md-start  justify-content-center gap-4">
+              <div ><a href="#" className="text-white fs-3 opacity-75 border rounded-circle p-2 pt-1"><RiFacebookLine /></a></div>
+              <div ><a href="#" className="text-white fs-3 opacity-75 border rounded-circle p-2 pt-1"><CiInstagram /></a></div>
+              <div ><a href="#" className="text-white fs-3 opacity-75 border rounded-circle p-2 pt-1"><RiLinkedinLine /></a></div>
             </div>
           </div>
           <div className="col-md-3 mb-5">
-            <h5 className="fs-semibold fs-5 mb-3">{t('footer.company')}</h5>
+            <h5 className="fw-medium fs-5 mb-3">{t('footer.company')}</h5>
             <ul className="list-unstyled m-0 p-0 footer-links">
               <li className="mb-2">
                 <Link to="/about" className="text-white opacity-75 fw-light small footer-link">{t('footer.about')}</Link>
@@ -39,7 +39,7 @@ const Footer = () => {
             </ul>
           </div>
           <div className="col-md-3">
-            <h5 className="fs-semibold fs-5 mb-3">{t('footer.contact')}</h5>
+            <h5 className="fw-medium fs-5 mb-3">{t('footer.contact')}</h5>
             <ul className="list-unstyled m-0 p-0">
               <li className="mb-2 text-white opacity-75 fw-light small"> <CiLocationOn /> Mohammedia,Maroc</li>
               <li className="mb-2 text-white opacity-75 fw-light small"> <CiPhone /> +212-652976002</li>

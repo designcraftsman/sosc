@@ -6,6 +6,8 @@ import Direction from '../assets/icons/direction.svg';
 import Analyze from '../assets/icons/analyze.svg';
 import BookMark from '../assets/icons/bookmark.svg';
 import { useLanguage } from "../context/LanguageContext";
+import analyse from '../assets/images/recovery/analyse.jpg';
+import guidance from '../assets/images/recovery/guidance.jpg';
 
 
 const DebtRecovery = () => {
@@ -44,17 +46,17 @@ const DebtRecovery = () => {
           </div>
 
           {/* Image à droite */}
-          <div className="col-md-5 mx-auto position-relative">
+          <div className="col-md-4 col-10 mx-auto mb-md-0 mb-5 position-relative">
             <div className="about-images">
               <img
-                src="https://images.unsplash.com/photo-1559136555-9303baea8ebd?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80"
+                src={analyse}
                 alt="Main"
-                className="img-fluid main-img rounded"
+                className="img-fluid main-img"
               />
               <img
-                src="https://images.unsplash.com/photo-1515378791036-0648a3ef77b2?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80"
+                src={guidance}  
                 alt="Secondary"
-                className="img-fluid secondary-img rounded shadow"
+                className="img-fluid secondary-img "
               />
             </div>
           </div>

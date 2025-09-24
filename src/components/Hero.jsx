@@ -45,7 +45,7 @@ const Hero = () => {
     if (!isPaused && slides.length > 0) {
       const interval = setInterval(() => {
         setIndex((prevIndex) => (prevIndex === slides.length - 1 ? 0 : prevIndex + 1));
-      }, 5000); // Change slide every 5 seconds
+      }, 2000); // Change slide every 5 seconds
 
       return () => clearInterval(interval);
     }
@@ -57,8 +57,7 @@ const Hero = () => {
   return (
     <div
       className="hero-carousel"
-      onMouseEnter={() => setIsPaused(true)}
-      onMouseLeave={() => setIsPaused(false)}
+  
     >
       <Carousel
         activeIndex={index}

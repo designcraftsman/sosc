@@ -10,17 +10,17 @@ const ContactSection = () => {
   return (
     <section className="py-5">
       <div className="container bg-success ">
-        <div className="row align-items-center mb-5 p-5">
+        <div className="row align-items-end mb-5 py-5 p-md-5">
           {/* Contact Info */}
-          <div className="col-md-5 ">
+          <div className="col-md-5 mb-md-0 mb-4">
             <div className="icon-underline  mb-3"></div>
             <h3 className="fw-bold mb-3">{t('contactSection.title')}</h3>
-            <h4 className="fs-5 fw-medium mb-5">{t('contactSection.subtitle')}</h4>
+            <h4 className="fs-5 fw-normal mb-5">{t('contactSection.subtitle')}</h4>
             <div className="d-flex align-items-center mb-3">
               <div className="me-3 fs-1 text-secondary">
                 <CiLocationOn />
               </div>
-              <div><p className="p-0 m-0">Résidence Louma, IMM G1, Etg 1 Apprt 263, BD Palestine, Mohammedia. Maroc</p></div>
+              <div><p className="p-0 m-0 fw-light">Résidence Louma, IMM G1, Etg 1 Apprt 263, BD Palestine, Mohammedia. Maroc</p></div>
             </div>
             
 
@@ -28,7 +28,7 @@ const ContactSection = () => {
               <div className="me-3 fs-2 text-secondary">
                 <AiOutlineMail />
               </div>
-              <div><p className="p-0 m-0">sosccarl@gmail.com</p></div>
+              <div><p className="p-0 m-0 fw-light">sosccarl@gmail.com</p></div>
             </div>
 
             
@@ -36,7 +36,7 @@ const ContactSection = () => {
               <div className="me-3 fs-1 text-secondary">
                 <CiPhone />
               </div>
-              <div>
+              <div className="fw-light">
                 <p className="p-0 m-0">+212 529 555 101</p>
                 <p className="p-0 m-0">+212 529 555 101</p>
               </div>
@@ -44,19 +44,19 @@ const ContactSection = () => {
           </div>
 
           {/* Contact Form */}
-          <div className="col-md-5 mx-auto">
+          <div className="col-md-6 mx-auto">
             <form className="row g-1">
               <div className="mb-3 col-6">
-                <input type="text" className="form-control" placeholder={t('contactSection.placeholders.name')} required />
+                <input type="text" className="form-control rounded-pill px-4 py-3" placeholder={t('contactSection.placeholders.name')} required />
               </div>
               <div className="mb-3 col-6">
-                <input type="email" className="form-control" placeholder={t('contactSection.placeholders.email')} required />
+                <input type="email" className="form-control rounded-pill px-4 py-3" placeholder={t('contactSection.placeholders.email')} required />
               </div>
               <div className="mb-3">
-                <input type="text" className="form-control" placeholder={t('contactSection.placeholders.subject')} required />
+                <input type="text" className="form-control rounded-pill px-4 py-3 " placeholder={t('contactSection.placeholders.subject')} required />
               </div>
               <div className="mb-3">
-                <textarea className="form-control" rows="5" placeholder={t('contactSection.placeholders.message')} required></textarea>
+                <textarea className="form-control rounded-5 px-4 py-3" rows="5" placeholder={t('contactSection.placeholders.message')} required></textarea>
               </div>
               <div>
                 <button type="submit" className="btn btn-secondary text-white fw-bold rounded-pill px-4">{t('contactSection.submit')}</button>

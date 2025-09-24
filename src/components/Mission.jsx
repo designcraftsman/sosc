@@ -1,4 +1,5 @@
 import React from "react";
+import mission from '../assets/images/about/mission.jpg';
 import { useLanguage } from "../context/LanguageContext";
 
 const Mission = () => {
@@ -12,8 +13,8 @@ const Mission = () => {
             <h5 className="fw-semibold fs-3">{t('mission.subtitle')}</h5>
             <p>{t('mission.paragraph')}</p>
           </div>
-          <div className="col-md-6">
-            <img src="https://images.unsplash.com/photo-1600880292203-757bb62b4baf?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=80" alt="Mission" className="img-fluid rounded" />
+          <div className="col-md-5 mx-auto">
+            <img src={mission} alt="Mission" className="img-fluid rounded" />
           </div>
         </div>
       </div>

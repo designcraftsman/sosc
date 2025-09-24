@@ -189,7 +189,7 @@ const Navbar = () => {
             </div>
           </div>
           {/* Discuss button - desktop only */}
-          <a href="/contact" className="btn btn-dark fw-bold text-white fs-6 rounded-pill px-2 mx-2 d-none d-lg-inline-flex">
+          <a href="/contact" className="btn btn-dark fw-bold text-white fs-6 rounded-pill py-2 px-3 mx-2 d-none d-lg-inline-flex">
             {t('nav.discuss')}
             <FiArrowUpRight className="ms-2 fs-3" />
           </a>
