@@ -1,5 +1,6 @@
 const ContactService = require('../services/ContactService');
 const ContactSubmission = require('../models/ContactSubmission');
+const MailService = require('../services/MailService');
 
 exports.submitForm = async (req, res) => {  
     try {
@@ -16,11 +17,33 @@ exports.submitForm = async (req, res) => {
             });
         }
 
+        // Save to database
         const submission = await ContactService.createSubmission(name, email, subject, message);
-        res.status(201).json({ 
-            message: 'Form submitted successfully',
-            submission: submission 
+        
+        // Send emails (admin notification + client confirmation)
+        const emailResult = await MailService.sendContactFormEmails({
+            ...submission,
+            submissionDate: submission.submissionDate
         });
+
+        // Respond with success (even if emails fail, the form submission succeeded)
+        const response = {
+            message: 'Form submitted successfully',
+            submission: submission
+        };
+
+        // Add email status if there were issues
+        if (!emailResult.success) {
+            response.emailWarning = 'Form saved but there was an issue sending notification emails';
+            response.emailDetails = emailResult;
+        } else {
+            response.emailsSent = {
+                adminNotification: emailResult.adminEmail.success,
+                clientConfirmation: emailResult.clientEmail.success
+            };
+        }
+
+        res.status(201).json(response);
     
     } catch(error) {
         console.error('Error processing form submission:', error);
