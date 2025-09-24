@@ -51,6 +51,53 @@ exports.submitForm = async (req, res) => {
     }
 };
 
+exports.exportSubmissionsCSV = async (req, res) => {
+    try {
+        const submissions = await ContactService.getAllSubmissions();
+        
+        if (!submissions || submissions.length === 0) {
+            return res.status(404).json({ error: 'No submissions found' });
+        }
+
+        // Create CSV headers
+        const headers = ['ID', 'Name', 'Email', 'Subject', 'Message', 'Status', 'Submission Date'];
+        
+        // Create CSV rows
+        const csvRows = [];
+        csvRows.push(headers.join(','));
+        
+        submissions.forEach(submission => {
+            const row = [
+                submission.id,
+                `"${submission.name || ''}"`,
+                `"${submission.email || ''}"`,
+                `"${submission.subject || ''}"`,
+                `"${(submission.message || '').replace(/"/g, '""')}"`, // Escape quotes
+                `"${submission.status || 'unread'}"`,
+                `"${new Date(submission.submissionDate).toLocaleString('fr-FR')}"`
+            ];
+            csvRows.push(row.join(','));
+        });
+        
+        const csvContent = csvRows.join('\n');
+        
+        // Set headers for file download
+        const filename = `contact-submissions-${new Date().toISOString().slice(0, 10)}.csv`;
+        res.setHeader('Content-Type', 'text/csv; charset=utf-8');
+        res.setHeader('Content-Disposition', `attachment; filename="${filename}"`);
+        res.setHeader('Content-Length', Buffer.byteLength(csvContent, 'utf8'));
+        
+        // Add BOM for proper Excel UTF-8 handling
+        res.write('\ufeff');
+        res.write(csvContent);
+        res.end();
+        
+    } catch(error) {
+        console.error('Error exporting CSV:', error);
+        res.status(500).json({ error: 'Error exporting data' });
+    }
+};
+
 exports.getAllSubmissions = async (req, res) => {
     try {
         const submissions = await ContactService.getAllSubmissions();

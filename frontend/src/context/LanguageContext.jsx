@@ -126,6 +126,16 @@ const TRANSLATIONS = {
         message: 'Votre message',
       },
       submit: 'Soumettre',
+      submitting: 'Envoi en cours...',
+      success: {
+        title: 'Votre message a été enregistré',
+        message: 'Merci de nous avoir contactés. Nous vous répondrons dans les plus brefs délais.',
+        button: 'Envoyer un autre message'
+      },
+      errors: {
+        server: 'Une erreur est survenue lors de l\'envoi du message',
+        connection: 'Erreur de connexion. Veuillez réessayer plus tard.'
+      }
     },
     mission: {
       title: 'Notre mission',
@@ -456,6 +466,16 @@ const TRANSLATIONS = {
         message: 'رسالتكم',
       },
       submit: 'إرسال',
+      submitting: 'جاري الإرسال...',
+      success: {
+        title: 'تم تسجيل رسالتكم',
+        message: 'شكرًا لتواصلكم معنا. سنرد عليكم في أقرب وقت ممكن.',
+        button: 'إرسال رسالة أخرى'
+      },
+      errors: {
+        server: 'حدث خطأ أثناء إرسال الرسالة',
+        connection: 'خطأ في الاتصال. يرجى المحاولة مرة أخرى لاحقًا.'
+      }
     },
     mission: {
       title: 'مهمتنا',
