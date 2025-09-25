@@ -110,7 +110,8 @@ const Navbar = () => {
             </li>
             <li 
               className="nav-item dropdown mx-2"
-              onClick={() => setServicesOpen(prev => !prev)}
+              onMouseEnter={() => setServicesOpen(true)}
+              onMouseLeave={() => setServicesOpen(false)}
             >
               <button
                 className={`nav-link dropdown-toggle btn btn-link ${servicesOpen ? 'active' : ''}`}
