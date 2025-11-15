@@ -13,6 +13,7 @@ import Policy from './pages/Policy';
 import LegalMentions from './pages/LegalMentions';
 import ScrollToTop from './components/ScrollToTop';
 import FloatingContactButton from './components/FloatingContactButton';
+import FloatingWhatsAppButton from './components/FloatingWhatsAppButton';
 import { LanguageProvider } from './context/LanguageContext';
 
 function AnimatedRoutes() {
@@ -45,6 +46,7 @@ function App() {
           <ScrollToTop />
           <AnimatedRoutes />
           <FloatingContactButton />
+          <FloatingWhatsAppButton />
         </Router>
       </LanguageProvider>
     </div>
