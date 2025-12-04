@@ -40,11 +40,12 @@ exports.getPublishedArticles = async (req, res) => {
     }
 };
 
-// Get single article by slug
+// Get single article by ID
 exports.getArticleBySlug = async (req, res) => {
     try {
         const { slug } = req.params;
-        const article = await ArticleService.getArticleBySlug(slug, true);
+        // Convert slug param to id for backwards compatibility
+        const article = await ArticleService.getArticleByIdWithViews(slug, true);
 
         if (!article) {
             return res.status(404).json({ 
@@ -234,56 +235,47 @@ exports.getArticleById = async (req, res) => {
 // Create article - Admin only
 exports.createArticle = async (req, res) => {
     try {
-        const { title, slug, excerpt, content, featuredImage, category, tags, status, embeddedVideos } = req.body;
+        const { title, excerpt, content, category, tags, status } = req.body;
         
         // Get author from authenticated user
         const author = req.user.username || 'SOSC Admin';
 
-        // Generate slug if not provided
-        const finalSlug = slug || Article.generateSlug(title);
+        // Validate category
+        const validCategories = ['crédit', 'recouvrement', 'formation'];
+        if (category && !validCategories.includes(category)) {
+            return res.status(400).json({ 
+                success: false,
+                error: 'Invalid category. Must be one of: crédit, recouvrement, formation' 
+            });
+        }
 
         // Validate article data
         const articleData = new Article(
             title, 
-            finalSlug, 
             content, 
             author, 
             excerpt, 
-            featuredImage, 
             category, 
             tags, 
-            status || 'draft',
-            embeddedVideos || []
+            status || 'draft'
         );
 
         if (!articleData.isValid()) {
             return res.status(400).json({ 
                 success: false,
-                error: 'Invalid article data. Title, slug, content, and author are required.' 
-            });
-        }
-
-        // Check if slug already exists
-        const existingArticle = await ArticleService.getArticleBySlug(finalSlug, false);
-        if (existingArticle) {
-            return res.status(400).json({ 
-                success: false,
-                error: 'An article with this slug already exists' 
+                error: 'Invalid article data. Title, content, and author are required.' 
             });
         }
 
         // Create article
         const article = await ArticleService.createArticle({
             title,
-            slug: finalSlug,
             excerpt,
             content,
             author,
-            featuredImage,
             category,
             tags,
-            status: status || 'draft',
-            embeddedVideos: embeddedVideos || []
+            status: status || 'draft'
         });
 
         res.status(201).json({
@@ -293,13 +285,6 @@ exports.createArticle = async (req, res) => {
         });
     } catch (error) {
         console.error('Error creating article:', error);
-        
-        if (error.code === '23505') { // Unique constraint violation
-            return res.status(400).json({ 
-                success: false,
-                error: 'An article with this slug already exists' 
-            });
-        }
 
         res.status(500).json({ 
             success: false,
@@ -312,7 +297,7 @@ exports.createArticle = async (req, res) => {
 exports.updateArticle = async (req, res) => {
     try {
         const { id } = req.params;
-        const { title, slug, excerpt, content, featuredImage, category, tags, status, embeddedVideos } = req.body;
+        const { title, excerpt, content, category, tags, status } = req.body;
 
         // Check if article exists
         const existingArticle = await ArticleService.getArticleById(id);
@@ -323,29 +308,24 @@ exports.updateArticle = async (req, res) => {
             });
         }
 
-        // If slug is being changed, check if new slug already exists
-        if (slug && slug !== existingArticle.slug) {
-            const articleWithSlug = await ArticleService.getArticleBySlug(slug, false);
-            if (articleWithSlug) {
-                return res.status(400).json({ 
-                    success: false,
-                    error: 'An article with this slug already exists' 
-                });
-            }
+        // Validate category if provided
+        const validCategories = ['crédit', 'recouvrement', 'formation'];
+        if (category && !validCategories.includes(category)) {
+            return res.status(400).json({ 
+                success: false,
+                error: 'Invalid category. Must be one of: crédit, recouvrement, formation' 
+            });
         }
 
         // Update article
         const updateData = {
             title: title || existingArticle.title,
-            slug: slug || existingArticle.slug,
             excerpt: excerpt !== undefined ? excerpt : existingArticle.excerpt,
             content: content || existingArticle.content,
             author: existingArticle.author, // Keep original author
-            featuredImage: featuredImage !== undefined ? featuredImage : existingArticle.featured_image,
             category: category !== undefined ? category : existingArticle.category,
             tags: tags || existingArticle.tags,
-            status: status || existingArticle.status,
-            embeddedVideos: embeddedVideos !== undefined ? embeddedVideos : existingArticle.embedded_videos
+            status: status || existingArticle.status
         };
 
         const article = await ArticleService.updateArticle(id, updateData);
@@ -357,13 +337,6 @@ exports.updateArticle = async (req, res) => {
         });
     } catch (error) {
         console.error('Error updating article:', error);
-        
-        if (error.code === '23505') { // Unique constraint violation
-            return res.status(400).json({ 
-                success: false,
-                error: 'An article with this slug already exists' 
-            });
-        }
 
         res.status(500).json({ 
             success: false,

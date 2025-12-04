@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { FaClock, FaUserGraduate } from "react-icons/fa";
-import courseImage from "../assets/images/contact/contact-section-bg.png";
+import courseImage from "../assets/images/contact/contact-section-bg.jpg";
 import { useLanguage } from "../context/LanguageContext";
 
 const CourseCard = ({ image, title, description, level, hours, link }) => {

@@ -2,12 +2,10 @@
 CREATE TABLE IF NOT EXISTS blog_articles (
     id SERIAL PRIMARY KEY,
     title VARCHAR(255) NOT NULL,
-    slug VARCHAR(255) UNIQUE NOT NULL,
     excerpt TEXT,
     content TEXT NOT NULL,
     author VARCHAR(100) NOT NULL,
-    featured_image VARCHAR(500),
-    category VARCHAR(50),
+    category VARCHAR(50) CHECK (category IS NULL OR category IN ('crédit', 'recouvrement', 'formation')),
     tags TEXT[], -- Array of tags
     status VARCHAR(20) DEFAULT 'draft', -- draft, published, archived
     views INTEGER DEFAULT 0,
@@ -17,7 +15,6 @@ CREATE TABLE IF NOT EXISTS blog_articles (
 );
 
 -- Create indexes for better performance
-CREATE INDEX IF NOT EXISTS idx_blog_articles_slug ON blog_articles(slug);
 CREATE INDEX IF NOT EXISTS idx_blog_articles_status ON blog_articles(status);
 CREATE INDEX IF NOT EXISTS idx_blog_articles_category ON blog_articles(category);
 CREATE INDEX IF NOT EXISTS idx_blog_articles_published_at ON blog_articles(published_at DESC);
@@ -40,27 +37,25 @@ CREATE TRIGGER trigger_update_blog_articles_updated_at
     EXECUTE FUNCTION update_blog_articles_updated_at();
 
 -- Insert sample data (optional)
-INSERT INTO blog_articles (title, slug, excerpt, content, author, category, tags, status, published_at) VALUES 
+INSERT INTO blog_articles (title, excerpt, content, author, category, tags, status, published_at) VALUES 
 (
     'Les avantages du crédit professionnel pour votre entreprise',
-    'avantages-credit-professionnel',
     'Découvrez comment un crédit professionnel peut aider votre entreprise à se développer et à prospérer.',
     '<h2>Introduction</h2><p>Le crédit professionnel est un outil essentiel pour les entreprises...</p><h2>Les principaux avantages</h2><p>1. Financement de la croissance...</p>',
     'SOSC Admin',
-    'Crédit',
+    'crédit',
     ARRAY['crédit', 'entreprise', 'financement'],
     'published',
     CURRENT_TIMESTAMP
 ),
 (
     'Comment améliorer la gestion du recouvrement de créances',
-    'gestion-recouvrement-creances',
     'Les meilleures pratiques pour optimiser votre processus de recouvrement de créances.',
     '<h2>Stratégies efficaces</h2><p>Le recouvrement de créances est crucial pour maintenir la santé financière...</p>',
     'SOSC Admin',
-    'Recouvrement',
+    'recouvrement',
     ARRAY['recouvrement', 'créances', 'gestion'],
     'published',
     CURRENT_TIMESTAMP
 )
-ON CONFLICT (slug) DO NOTHING;
+ON CONFLICT DO NOTHING;

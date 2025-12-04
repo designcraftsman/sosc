@@ -2,7 +2,7 @@ import React from "react";
 import { useParams } from "react-router-dom";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
-import backgroundImage from '../assets/images/contact/contact-section-bg.png';
+import backgroundImage from '../assets/images/contact/contact-section-bg.jpg';
 import { FaClock, FaUserGraduate } from "react-icons/fa";
 import CallToAction from "../components/CallToAction";
 import { FaLightbulb } from "react-icons/fa";

@@ -1,5 +1,5 @@
 import React from "react";
-import ctaBg from "../assets/images/contact/contact-section-bg.png";
+import ctaBg from "../assets/images/contact/contact-section-bg.jpg";
 import { CiPhone } from "react-icons/ci";
 import { FiArrowUpRight, FiArrowUpLeft } from "react-icons/fi";
 import { useLanguage } from "../context/LanguageContext";

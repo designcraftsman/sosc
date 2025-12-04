@@ -4,17 +4,17 @@ const Article = require('../models/Article');
 class ArticleService {
     // Create a new article
     static async createArticle(articleData) {
-        const { title, slug, excerpt, content, author, featuredImage, category, tags, status, embeddedVideos } = articleData;
+        const { title, excerpt, content, author, category, tags, status } = articleData;
         
         const query = `
             INSERT INTO blog_articles 
-            (title, slug, excerpt, content, author, featured_image, category, tags, status, embedded_videos, published_at)
-            VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11)
+            (title, excerpt, content, author, category, tags, status, published_at)
+            VALUES ($1, $2, $3, $4, $5, $6, $7, $8)
             RETURNING *
         `;
         
         const publishedAt = status === 'published' ? new Date() : null;
-        const values = [title, slug, excerpt, content, author, featuredImage, category, tags, status, embeddedVideos || [], publishedAt];
+        const values = [title, excerpt, content, author, category, tags, status, publishedAt];
         
         try {
             const result = await db.query(query, values);
@@ -96,12 +96,12 @@ class ArticleService {
         }
     }
 
-    // Get article by slug and increment views
-    static async getArticleBySlug(slug, incrementViews = true) {
-        let query = 'SELECT * FROM blog_articles WHERE slug = $1';
+    // Get article by ID and increment views
+    static async getArticleByIdWithViews(id, incrementViews = true) {
+        let query = 'SELECT * FROM blog_articles WHERE id = $1';
         
         try {
-            const result = await db.query(query, [slug]);
+            const result = await db.query(query, [id]);
             const article = result.rows[0];
 
             if (article && incrementViews) {
@@ -111,29 +111,29 @@ class ArticleService {
 
             return article;
         } catch (error) {
-            console.error('Error fetching article by slug:', error);
+            console.error('Error fetching article by ID:', error);
             throw error;
         }
     }
 
     // Update article
     static async updateArticle(id, updateData) {
-        const { title, slug, excerpt, content, author, featuredImage, category, tags, status, embeddedVideos } = updateData;
+        const { title, excerpt, content, author, category, tags, status } = updateData;
         
         const query = `
             UPDATE blog_articles 
-            SET title = $1, slug = $2, excerpt = $3, content = $4, author = $5, 
-                featured_image = $6, category = $7, tags = $8, status = $9, embedded_videos = $10,
+            SET title = $1, excerpt = $2, content = $3, author = $4, 
+                category = $5, tags = $6, status = $7,
                 published_at = CASE 
-                    WHEN status != 'published' AND $9 = 'published' THEN CURRENT_TIMESTAMP
-                    WHEN status = 'published' AND $9 = 'published' THEN published_at
+                    WHEN status != 'published' AND $7 = 'published' THEN CURRENT_TIMESTAMP
+                    WHEN status = 'published' AND $7 = 'published' THEN published_at
                     ELSE NULL
                 END
-            WHERE id = $11
+            WHERE id = $8
             RETURNING *
         `;
         
-        const values = [title, slug, excerpt, content, author, featuredImage, category, tags, status, embeddedVideos, id];
+        const values = [title, excerpt, content, author, category, tags, status, id];
         
         try {
             const result = await db.query(query, values);
