@@ -1,0 +1,100 @@
+// Custom select styling - removes default chevron and appearance
+select {
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  background-image: none;
+  
+  &:focus {
+    outline: none;
+    box-shadow: 0 0 0 0.2rem rgba(52, 168, 74, 0.15);
+  }
+}
+
+// Custom dropdown wrapper
+.custom-select-wrapper {
+  position: relative;
+  
+  select,
+  .form-select {
+    width: 100%;
+    padding-right: 2.5rem;
+    border: 2px solid #e9ecef;
+    transition: all 0.3s ease;
+    
+    &:focus {
+      border-color: #34A84A;
+    }
+  }
+  
+  .dropdown-icon {
+    position: absolute;
+    top: 50%;
+    right: 1rem;
+    transform: translateY(-50%);
+    pointer-events: none;
+    color: #6c757d;
+    font-size: 18px;
+    transition: all 0.3s ease;
+  }
+  
+  select:focus ~ .dropdown-icon {
+    color: #34A84A;
+  }
+}
+
+// Sort select wrapper
+.sort-select-wrapper {
+  position: relative;
+  
+  select,
+  .form-select {
+    border: 2px solid #e9ecef;
+    padding-right: 2.5rem;
+    min-width: 180px;
+    transition: all 0.3s ease;
+    
+    &:focus {
+      border-color: #34A84A;
+    }
+  }
+  
+  .dropdown-icon {
+    position: absolute;
+    top: 50%;
+    right: 1rem;
+    transform: translateY(-50%);
+    pointer-events: none;
+    color: #6c757d;
+    font-size: 18px;
+    transition: all 0.3s ease;
+  }
+  
+  select:focus ~ .dropdown-icon {
+    color: #34A84A;
+  }
+}
+
+// Mobile responsive
+@media (max-width: 576px) {
+  .custom-select-wrapper,
+  .sort-select-wrapper {
+    select,
+    .form-select {
+      font-size: 0.875rem;
+      padding: 0.5rem 2rem 0.5rem 0.75rem;
+    }
+    
+    .dropdown-icon {
+      font-size: 16px;
+      right: 0.75rem;
+    }
+  }
+  
+  .sort-select-wrapper {
+    select,
+    .form-select {
+      min-width: 150px;
+    }
+  }
+}

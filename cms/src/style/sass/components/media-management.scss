@@ -1,0 +1,78 @@
+// Media Management Page
+.media-management {
+  min-height: 100vh;
+  background: linear-gradient(135deg, $light-color 0%, #c3cfe2 100%);
+  padding: 2rem;
+
+  .page-header h1 {
+    color: $dark-color;
+  }
+
+  // Upload section
+  .upload-section {
+    h3 {
+      color: $dark-color;
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, $primary-color 0%, $accent-color 100%);
+      border: none;
+
+      &:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 4px 12px rgba($primary-color, 0.3);
+      }
+    }
+  }
+
+  // Filters section
+  .filters-section {
+    .btn-primary {
+      background: linear-gradient(135deg, $primary-color 0%, $accent-color 100%);
+      border: none;
+
+      &:hover {
+        box-shadow: 0 2px 8px rgba($primary-color, 0.3);
+      }
+    }
+  }
+
+  // Media grid
+  .media-grid {
+    .media-card {
+      .media-info {
+        h5 {
+          color: $dark-color;
+        }
+
+        .btn-primary:hover {
+          box-shadow: 0 2px 8px rgba(0, 123, 255, 0.3);
+        }
+      }
+    }
+  }
+
+  // Pagination
+  .pagination {
+    .page-link:hover {
+      background-color: $primary-color;
+      border-color: $primary-color;
+    }
+
+    .page-item.active .page-link {
+      background: linear-gradient(135deg, $primary-color 0%, $accent-color 100%);
+      box-shadow: 0 2px 8px rgba($primary-color, 0.3);
+    }
+  }
+
+  // Loading state
+  .spinner-border {
+    color: $primary-color;
+  }
+}
+
+@media (max-width: 768px) {
+  .media-management {
+    padding: 1rem;
+  }
+}

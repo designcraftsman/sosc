@@ -1,0 +1,188 @@
+// TopBar Styles
+.topbar-container {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+
+  // Center navigation
+  .topbar-nav {
+    display: flex;
+    gap: 2rem;
+    align-items: center;
+
+    .topbar-nav-link {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      color: $info;
+      text-decoration: none;
+      padding: 0.5rem 1rem;
+      border-radius: 0.5rem;
+      transition: all 0.3s ease;
+      font-weight: 500;
+      font-size: 1rem;
+
+      &:hover {
+        background-color: rgba(255, 255, 255, 0.1);
+        transform: translateY(-2px);
+        color: $info;
+      }
+
+      &.active {
+        background-color: rgba(255, 255, 255, 0.2);
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+        color: white;
+      }
+
+      svg {
+        flex-shrink: 0;
+      }
+    }
+  }
+}
+
+// Existing topbar dropdown styles
+.bg-primary {
+  background: linear-gradient(135deg, #34A84A 0%, #BCB600 100%) !important;
+  position: sticky;
+  top: 0;
+  z-index: 1040;
+  box-shadow: 0 2px 15px rgba(0, 0, 0, 0.1);
+}
+
+// Settings button rotation animation
+.settings-button {
+  transition: transform 0.3s ease;
+  color: white !important;
+
+  svg {
+    animation: rotate 2s linear infinite;
+    transition: animation-play-state 0.3s ease;
+  }
+
+  &.active svg {
+    animation-play-state: paused;
+    transform: rotate(0deg);
+  }
+
+  &::after {
+    display: none !important;
+  }
+  
+  &:hover {
+    transform: scale(1.1);
+  }
+}
+
+@keyframes rotate {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+// TopBar dropdown positioning
+.topbar-dropdown {
+  position: relative;
+
+  .dropdown-menu {
+    border: none;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+    border-radius: 8px;
+    padding: 8px 0;
+    min-width: 200px;
+    position: absolute !important;
+    right: 0 !important;
+    left: auto !important;
+    transform: none !important;
+    inset: auto 0px auto auto !important;
+    margin-top: 8px;
+    z-index: 1050;
+    max-width: calc(100vw - 20px);
+    overflow-x: hidden;
+
+    .dropdown-header {
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: #6c757d;
+      padding: 8px 16px;
+    }
+
+    .dropdown-item {
+      padding: 10px 16px;
+      font-size: 0.9rem;
+      transition: all 0.2s ease-in-out;
+
+      &:hover {
+        background-color: #f8f9fa;
+        color: #0d6efd;
+      }
+
+      &.text-danger:hover {
+        background-color: #f8d7da;
+        color: #dc3545;
+      }
+
+      i, svg {
+        width: 16px;
+        opacity: 0.7;
+      }
+    }
+
+    .dropdown-divider {
+      margin: 4px 0;
+    }
+  }
+}
+
+// TopBar responsive styling
+@media (max-width: 768px) {
+  .bg-primary {
+    padding: 0.75rem 1rem !important;
+    
+    .fw-normal {
+      font-size: 0.85rem;
+    }
+    
+    img {
+      width: 40px !important;
+      height: 40px !important;
+    }
+  }
+  
+  .settings-button svg {
+    width: 26px;
+    height: 26px;
+  }
+  
+  .topbar-dropdown .dropdown-menu {
+    font-size: 0.85rem;
+    min-width: 180px;
+    right: 0 !important;
+    left: auto !important;
+  }
+}
+
+@media (max-width: 576px) {
+  .bg-primary {
+    .fw-normal {
+      display: none;
+    }
+  }
+  
+  .settings-button svg {
+    width: 24px;
+    height: 24px;
+  }
+  
+  .topbar-dropdown .dropdown-menu {
+    min-width: 160px;
+    
+    .dropdown-item {
+      padding: 8px 12px;
+    }
+  }
+}

@@ -1,0 +1,81 @@
+// Comments Management Page
+.comments-management {
+  min-height: 100vh;
+  background: linear-gradient(135deg, $light-color 0%, #c3cfe2 100%);
+  padding: 2rem;
+
+  .page-header {
+    margin-bottom: 2rem;
+    
+    h1 {
+      color: $dark-color;
+    }
+  }
+
+  // Filters section
+  .filters-section {
+    .btn-primary {
+      background: linear-gradient(135deg, $primary-color 0%, $accent-color 100%);
+      border: none;
+
+      &:hover {
+        transform: translateY(-1px);
+        box-shadow: 0 2px 8px rgba($primary-color, 0.3);
+      }
+    }
+  }
+
+  // Comments list
+  .comments-list {
+    .comment-card {
+      &.status-pending {
+        border-left-color: #ffc107;
+      }
+
+      &.status-approved {
+        border-left-color: $primary-color;
+      }
+
+      .author-info h5 {
+        color: $dark-color;
+      }
+
+      .comment-content {
+        background-color: $light-color;
+        border-left-color: $primary-color;
+      }
+
+      .comment-actions {
+        .btn-success {
+          &:hover {
+            box-shadow: 0 2px 8px rgba($primary-color, 0.3);
+          }
+        }
+      }
+    }
+  }
+
+  // Pagination
+  .pagination {
+    .page-link:hover {
+      background-color: $primary-color;
+      border-color: $primary-color;
+    }
+
+    .page-item.active .page-link {
+      background: linear-gradient(135deg, $primary-color 0%, $accent-color 100%);
+      box-shadow: 0 2px 8px rgba($primary-color, 0.3);
+    }
+  }
+
+  // Loading state
+  .spinner-border {
+    color: $primary-color;
+  }
+}
+
+@media (max-width: 768px) {
+  .comments-management {
+    padding: 1rem;
+  }
+}

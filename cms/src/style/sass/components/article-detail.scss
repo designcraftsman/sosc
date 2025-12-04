@@ -1,0 +1,47 @@
+// Article Detail Page
+.article-detail {
+  min-height: 100vh;
+  background: linear-gradient(135deg, $light-color 0%, #c3cfe2 100%);
+
+  .card-header {
+    background: linear-gradient(135deg, $primary-color 0%, $accent-color 100%);
+    color: white;
+  }
+
+  .btn-primary {
+    background: linear-gradient(135deg, $primary-color 0%, $accent-color 100%);
+    border: none;
+
+    &:hover {
+      box-shadow: 0 4px 12px rgba($primary-color, 0.3);
+    }
+  }
+
+  .btn-outline-primary {
+    color: $primary-color;
+    border-color: $primary-color;
+
+    &:hover {
+      background-color: $primary-color;
+      color: white;
+    }
+  }
+
+  h1 {
+    color: $dark-color;
+  }
+
+  // Loading state
+  .spinner-border {
+    color: $primary-color;
+  }
+
+  // Comments section
+  .comments-list .comment-item {
+    background: $light-color;
+    
+    h6 {
+      color: $dark-color;
+    }
+  }
+}
