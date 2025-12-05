@@ -4,6 +4,7 @@ import { CiPhone } from "react-icons/ci";
 import { AiOutlineMail } from "react-icons/ai";
 import Map from "./Map";
 import { useLanguage } from "../context/LanguageContext";
+import {faker} from '@faker-js/faker';
 
 const ContactSection = () => {
   const { t } = useLanguage();
@@ -15,7 +16,17 @@ const ContactSection = () => {
     subject: '',
     message: ''
   });
+
+  const randoName=faker.person.fullName();
+  const randoEmail=faker.internet.email();
+  const randoSubject=faker.lorem.words(10);
+  const randoMessage=faker.lorem.paragraphs(2);
   
+  console.log("Random Name:", randoName);
+  console.log("Random Email:", randoEmail);
+  console.log("Random Subject:", randoSubject);
+  console.log("Random Message:", randoMessage);
+
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [submitError, setSubmitError] = useState('');

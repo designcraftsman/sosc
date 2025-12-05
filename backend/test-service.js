@@ -62,7 +62,7 @@ async function testContactService() {
         console.error('Stack trace:', error.stack);
     } finally {
         // Close the database connection
-        const pool = require('./src/config/db');
+        const pool = require('./src/config/Db');
         await pool.end();
     }
 }

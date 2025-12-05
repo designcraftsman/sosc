@@ -1,4 +1,4 @@
-const pool = require('../config/db');
+const pool = require('../config/Db');
 const ContactSubmission = require('../models/ContactSubmission');
 
 class ContactService {
