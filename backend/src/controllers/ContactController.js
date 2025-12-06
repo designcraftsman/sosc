@@ -1,11 +1,60 @@
 const ContactService = require('../services/ContactService');
 const ContactSubmission = require('../models/ContactSubmission');
 const MailService = require('../services/MailService');
+const SecurityService = require('../services/SecurityService');
+
+// Helper function to detect malicious content
+const detectMaliciousContent = (data) => {
+    const maliciousPatterns = [
+        /<script[\s\S]*?>[\s\S]*?<\/script>/gi,
+        /<iframe[\s\S]*?>[\s\S]*?<\/iframe>/gi,
+        /javascript:/gi,
+        /on\w+\s*=/gi,
+        /<img[^>]+onerror/gi,
+        /eval\s*\(/gi,
+        /document\.cookie/gi,
+        /<embed[\s\S]*?>/gi,
+        /<object[\s\S]*?>/gi
+    ];
+    
+    const allContent = Object.values(data).join(' ');
+    return maliciousPatterns.some(pattern => pattern.test(allContent));
+};
 
 exports.submitForm = async (req, res) => {  
     try {
         const { name, email, subject, message } = req.body;
         console.log('Form Data Received:', { name, email, subject, message });
+
+        // Detect malicious content before processing
+        const isMalicious = detectMaliciousContent({ name, email, subject, message });
+        
+        if (isMalicious) {
+            // Log security incident
+            const ipAddress = req.ip || 
+                             req.headers['x-forwarded-for'] || 
+                             req.connection.remoteAddress || 
+                             req.socket.remoteAddress;
+            
+            await SecurityService.createLog(
+                'XSS_ATTEMPT',
+                email,
+                ipAddress,
+                req.headers['user-agent'],
+                { name, email, subject, message }
+            );
+            
+            console.log('🚨 XSS Attack detected and logged:', {
+                email,
+                ip: ipAddress,
+                timestamp: new Date().toISOString()
+            });
+            
+            // Silent rejection - attacker thinks it succeeded
+            return res.status(200).json({ 
+                message: 'Form submitted successfully'
+            });
+        }
 
         // Create a ContactSubmission instance for validation
         const submissionData = new ContactSubmission(name, email, message, subject);

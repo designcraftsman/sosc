@@ -14,7 +14,12 @@ const sanitizeInput = (input) => {
       .replace(/javascript:/gi, '')
       .replace(/on\w+\s*=/gi, '') // Remove event handlers like onclick=
       .trim();
-  };
+};
+
+const valideEmail = (email) =>{
+  const emailRegex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+  return emailRegex.test(email);
+}
 
 const ContactSection = () => {
   const { t } = useLanguage();
@@ -48,6 +53,11 @@ const ContactSection = () => {
     
     if(!formData.name || !formData.email || !formData.message) {
       setSubmitError(t('contactSection.errors.validation'));
+      return;
+    }
+
+    if(!valideEmail(formData.email)) {
+      setSubmitError(t('contactSection.errors.email'));
       return;
     }
 
@@ -147,7 +157,6 @@ const ContactSection = () => {
                 </div>
                 <div className="mb-3 col-6">
                   <input 
-                    type="email" 
                     name="email"
                     data-cy="email-input"
                     value={formData.email}
