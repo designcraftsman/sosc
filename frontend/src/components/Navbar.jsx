@@ -58,12 +58,12 @@ const Navbar = () => {
   return (
     <>
       <nav 
-        className={`navbar navbar-expand-lg fixed-top sosc-navbar ${isScrolled ? 'scrolled' : ''}`}
+        className={`navbar navbar-expand-xl fixed-top sosc-navbar ${isScrolled ? 'scrolled' : ''}`}
         dir={dir}
       >
       <div className="container-fluid d-flex mx-md-5 justify-content-between align-items-center">
         {/* Mobile: Menu button on left */}
-        <div className="d-lg-none">
+        <div className="d-xl-none">
           <button 
             onClick={toggleMobileModal}
             className="menu-toggle-btn btn btn-outline-secondary"
@@ -77,7 +77,7 @@ const Navbar = () => {
         </div>
         
         {/* Logo - center on mobile, left on desktop */}
-        <div className="d-lg-block">
+        <div className="d-xl-block">
           <Link 
             className="navbar-brand fw-bold" 
             to="/" 
@@ -87,7 +87,7 @@ const Navbar = () => {
         </div>
 
         {/* Center nav - desktop only */}
-        <div className="collapse navbar-collapse justify-content-center d-none d-lg-flex" id="navbarNav">
+        <div className="collapse navbar-collapse justify-content-center d-none d-xl-flex" id="navbarNav">
           <ul className="navbar-nav">
             <li className="nav-item mx-2">
               <NavLink 
@@ -190,12 +190,12 @@ const Navbar = () => {
             </div>
           </div>
           {/* Discuss button - desktop only */}
-          <a href="/contact" className="btn btn-dark fw-bold text-white fs-6 rounded-pill py-2 px-3 mx-2 d-none d-lg-inline-flex">
+          <a href="/contact" className="btn btn-dark fw-bold text-white fs-6 rounded-pill py-2 px-3 mx-2 d-none d-xl-inline-flex">
             {t('nav.discuss')}
             <FiArrowUpRight className="ms-2 fs-3" />
           </a>
           {/* Desktop menu button */}
-          <div className="mx-3 d-none d-lg-block">
+          <div className="mx-3 d-none d-xl-block">
             <button 
               onClick={toggleModal}
               className="menu-toggle-btn"
@@ -210,14 +210,14 @@ const Navbar = () => {
     {/* Background Blur Overlay - Large screens only */}
     {isModalOpen && (
       <div 
-        className="modal-overlay d-none d-lg-block"
+        className="modal-overlay d-none d-xl-block"
         onClick={closeModal}
       />
     )}
 
     {/* Side Modal - Large screens only - Original Content */}
     <div 
-      className={`side-modal d-none d-lg-block ${isModalOpen ? 'open' : ''}`}
+      className={`side-modal d-none d-xl-block ${isModalOpen ? 'open' : ''}`}
       dir={dir}
     >
       {/* Modal Header */}
