@@ -4,7 +4,17 @@ import { CiPhone } from "react-icons/ci";
 import { AiOutlineMail } from "react-icons/ai";
 import Map from "./Map";
 import { useLanguage } from "../context/LanguageContext";
-import {faker} from '@faker-js/faker';
+
+
+const sanitizeInput = (input) => {
+  // Remove potential script tags and dangerous characters
+    return input
+      .replace(/<script\b[^<]*(?:(?!<\/script>)<[^<]*)*<\/script>/gi, '')
+      .replace(/<iframe\b[^<]*(?:(?!<\/iframe>)<[^<]*)*<\/iframe>/gi, '')
+      .replace(/javascript:/gi, '')
+      .replace(/on\w+\s*=/gi, '') // Remove event handlers like onclick=
+      .trim();
+  };
 
 const ContactSection = () => {
   const { t } = useLanguage();
@@ -17,19 +27,11 @@ const ContactSection = () => {
     message: ''
   });
 
-  const randoName=faker.person.fullName();
-  const randoEmail=faker.internet.email();
-  const randoSubject=faker.lorem.words(10);
-  const randoMessage=faker.lorem.paragraphs(2);
-  
-  console.log("Random Name:", randoName);
-  console.log("Random Email:", randoEmail);
-  console.log("Random Subject:", randoSubject);
-  console.log("Random Message:", randoMessage);
 
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [submitError, setSubmitError] = useState('');
+
 
   // Handle input changes
   const handleInputChange = (e) => {
@@ -43,8 +45,23 @@ const ContactSection = () => {
   // Handle form submission
   const handleSubmit = async (e) => {
     e.preventDefault();
+    
+    if(!formData.name || !formData.email || !formData.message) {
+      setSubmitError(t('contactSection.errors.validation'));
+      return;
+    }
+
     setIsSubmitting(true);
     setSubmitError('');
+
+    const sanitizedData = {
+      name: sanitizeInput(formData.name),
+      email: sanitizeInput(formData.email),
+      subject: sanitizeInput(formData.subject),
+      message: sanitizeInput(formData.message)
+    };
+
+    console.log('📤 Sending to backend:', sanitizedData);
 
     try {
       const response = await fetch('http://localhost:5000/api/submit-form', {
@@ -52,15 +69,13 @@ const ContactSection = () => {
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify(formData)
+        body: JSON.stringify(sanitizedData) // Send sanitized data
       });
 
       const data = await response.json();
 
       if (response.ok) {
-        // Success - hide form and show success message
         setIsSubmitted(true);
-        // Reset form
         setFormData({
           name: '',
           email: '',
@@ -68,7 +83,6 @@ const ContactSection = () => {
           message: ''
         });
       } else {
-        // Error from server
         setSubmitError(data.error || t('contactSection.errors.server'));
       }
     } catch (error) {
@@ -125,9 +139,9 @@ const ContactSection = () => {
                     name="name"
                     value={formData.name}
                     onChange={handleInputChange}
+                    data-cy="name-input"
                     className="form-control rounded-pill px-4 py-3" 
                     placeholder={t('contactSection.placeholders.name')} 
-                    required 
                     disabled={isSubmitting}
                   />
                 </div>
@@ -135,11 +149,11 @@ const ContactSection = () => {
                   <input 
                     type="email" 
                     name="email"
+                    data-cy="email-input"
                     value={formData.email}
                     onChange={handleInputChange}
                     className="form-control rounded-pill px-4 py-3" 
                     placeholder={t('contactSection.placeholders.email')} 
-                    required 
                     disabled={isSubmitting}
                   />
                 </div>
@@ -147,6 +161,7 @@ const ContactSection = () => {
                   <input 
                     type="text" 
                     name="subject"
+                    data-cy="subject-input"
                     value={formData.subject}
                     onChange={handleInputChange}
                     className="form-control rounded-pill px-4 py-3" 
@@ -157,19 +172,19 @@ const ContactSection = () => {
                 <div className="mb-3">
                   <textarea 
                     name="message"
+                    data-cy="message-input"
                     value={formData.message}
                     onChange={handleInputChange}
                     className="form-control rounded-5 px-4 py-3" 
                     rows="5" 
                     placeholder={t('contactSection.placeholders.message')} 
-                    required
                     disabled={isSubmitting}
                   ></textarea>
                 </div>
                 
                 {submitError && (
                   <div className="mb-3">
-                    <div className="alert alert-danger rounded-pill px-4 py-2">
+                    <div className="alert alert-danger rounded-pill px-4 py-2" data-cy="submit-error">
                       {submitError}
                     </div>
                   </div>
@@ -179,6 +194,7 @@ const ContactSection = () => {
                   <button 
                     type="submit" 
                     className="btn btn-secondary text-white fw-bold rounded-pill px-4"
+                    data-cy="submit-button"
                     disabled={isSubmitting}
                   >
                     {isSubmitting ? (
@@ -199,7 +215,7 @@ const ContactSection = () => {
                     ✅
                   </div>
                   <h4 className="text-success fw-bold mb-3">{t('contactSection.success.title')}</h4>
-                  <p className="text-muted mb-4">
+                  <p className="text-muted mb-4" data-cy="success-message">
                     {t('contactSection.success.message')}
                   </p>
                   <button 

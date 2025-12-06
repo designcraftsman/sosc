@@ -7,6 +7,7 @@ const AuthRoutes = require('./routes/AuthRoutes');
 const ArticleRoutes = require('./routes/ArticleRoutes');
 const CommentRoutes = require('./routes/CommentRoutes');
 const MediaRoutes = require('./routes/MediaRoutes');
+const SecurityRoutes = require('./routes/SecurityRoutes');
 
 const app = express();
 
@@ -28,6 +29,7 @@ app.use('/api', ContactRoutes);
 app.use('/api/blog', ArticleRoutes);
 app.use('/api/blog', CommentRoutes);
 app.use('/api/blog', MediaRoutes);
+app.use('/api/security', SecurityRoutes);
 
 app.use((err, req, res, next) => {
   console.error(err.stack);

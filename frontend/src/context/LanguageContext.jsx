@@ -133,6 +133,8 @@ const TRANSLATIONS = {
         button: 'Envoyer un autre message'
       },
       errors: {
+        email: 'Veuillez entrer une adresse e-mail valide.',
+        validation: 'Veuillez remplir tous les champs.',
         server: 'Une erreur est survenue lors de l\'envoi du message',
         connection: 'Erreur de connexion. Veuillez réessayer plus tard.'
       }
@@ -473,6 +475,8 @@ const TRANSLATIONS = {
         button: 'إرسال رسالة أخرى'
       },
       errors: {
+        email: 'يرجى إدخال عنوان بريد إلكتروني صالح.',
+        validation: 'يرجى ملء جميع الحقول.',
         server: 'حدث خطأ أثناء إرسال الرسالة',
         connection: 'خطأ في الاتصال. يرجى المحاولة مرة أخرى لاحقًا.'
       }
