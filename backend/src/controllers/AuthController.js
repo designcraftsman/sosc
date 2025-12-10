@@ -208,7 +208,7 @@ class AuthController {
         RETURNING id, username, email
       `;
       
-      const pool = require('../config/db');
+      const pool = require('../config/Db');
       const result = await pool.query(query, [tempAdmin.password, adminId]);
 
       res.json({
