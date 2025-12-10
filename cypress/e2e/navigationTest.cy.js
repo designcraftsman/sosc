@@ -88,4 +88,12 @@ describe('Navigation Tests',()=>{
             cy.url().should('eq', Cypress.env('baseURL')+'/legal-mentions');
         });
     })
+
+    describe('Other Navigation Elements',()=>{
+        it('Should navigate to Home page when clicking on logo',()=>{
+            cy.visit(Cypress.env('baseURL')+'/about');
+            cy.get('[data-cy="logo-header"]').click();
+            cy.url().should('eq', Cypress.env('baseURL')+'/');
+        });
+    })
 })

@@ -1,6 +1,7 @@
 const { defineConfig } = require("cypress");
 
 module.exports = defineConfig({
+  projectId: "sosc",
   e2e: {
     setupNodeEvents(on, config) {
       // implement node event listeners here
@@ -9,5 +10,5 @@ module.exports = defineConfig({
   env:{
     baseURL:"http://localhost:3000",
     apiURL:"http://localhost:5000/api"
-  }
+  },
 });
