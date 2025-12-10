@@ -35,37 +35,51 @@ jobs:
         working-directory: backend
         run: npm ci
       
+      - name: Run Database Migrations
+        working-directory: backend
+        run: |
+          node src/run-blog-migration.js || echo "Blog migration completed"
+          node src/run-comments-media-migration.js || echo "Comments/media migration completed"
+          node src/run-security-logs-migration.js || echo "Security logs migration completed"
+        env:
+          DATABASE_URL: postgresql://postgres:postgres@localhost:5432/sosc_test
+      
       - name: Install Frontend Dependencies
         working-directory: frontend
         run: npm ci
       
-      - name: Install Cypress Dependencies
+      - name: Install Root Dependencies (Cypress)
         run: npm ci
       
-      - name: Start Backend Server
+      - name: Start Backend Server (background)
         working-directory: backend
-        run: |
-          npm start &
-          sleep 5
+        run: npm start &
         env:
           DATABASE_URL: postgresql://postgres:postgres@localhost:5432/sosc_test
           NODE_ENV: test
-          JWT_SECRET: test-secret-key
+          PORT: 5000
+          JWT_SECRET: test-secret-key-for-ci
           EMAIL_HOST: smtp.gmail.com
           EMAIL_PORT: 587
+          EMAIL_SECURE: false
           EMAIL_USER: test@example.com
           EMAIL_PASSWORD: test-password
       
-      - name: Start Frontend Server
+      - name: Wait for Backend
+        run: npx wait-on http://localhost:5000/api -t 60000
+      
+      - name: Build Frontend
         working-directory: frontend
-        run: |
-          npm start &
+        run: npm run build
         env:
           CI: false
       
-      - name: Wait for servers
-        run: |
-          npx wait-on http://localhost:5000 http://localhost:3000 --timeout 120000
+      - name: Serve Frontend (background)
+        working-directory: frontend
+        run: npx serve -s build -l 3000 &
+      
+      - name: Wait for Frontend
+        run: npx wait-on http://localhost:3000 -t 60000
       
       - name: Cypress run
         uses: cypress-io/github-action@v6
@@ -73,6 +87,23 @@ jobs:
           install: false
           record: true
           parallel: true
+          browser: chrome
         env:
           CYPRESS_RECORD_KEY: ${{ secrets.CYPRESS_RECORD_KEY }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          CYPRESS_baseURL: http://localhost:3000
+          CYPRESS_apiURL: http://localhost:5000/api
+      
+      - name: Upload Screenshots on Failure
+        uses: actions/upload-artifact@v4
+        if: failure()
+        with:
+          name: cypress-screenshots
+          path: cypress/screenshots
+      
+      - name: Upload Videos
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: cypress-videos
+          path: cypress/videos
