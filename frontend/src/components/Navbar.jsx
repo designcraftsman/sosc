@@ -62,9 +62,10 @@ const Navbar = () => {
         dir={dir}
       >
       <div className="container-fluid d-flex mx-md-5 justify-content-between align-items-center">
-        {/* Mobile: Menu button on left */}
+        {/* Small Screens: Menu button on left */}
         <div className="d-xl-none">
           <button 
+            data-cy="menu-small-open"
             onClick={toggleMobileModal}
             className="menu-toggle-btn btn btn-outline-secondary"
             style={{ 
@@ -87,11 +88,12 @@ const Navbar = () => {
         </div>
 
         {/* Center nav - desktop only */}
-        <div className="collapse navbar-collapse justify-content-center d-none d-xl-flex" id="navbarNav">
+        <div className="navbar-collapse justify-content-center d-none d-xl-flex" id="navbarNav">
           <ul className="navbar-nav">
             <li className="nav-item mx-2">
               <NavLink 
                 end
+                data-cy="home-link"
                 className={({ isActive }) => `nav-link ${isActive ? 'active fw-bold' : ''}`}
                 to="/"
                 style={{ color: '#000' }}
@@ -101,6 +103,7 @@ const Navbar = () => {
             </li>
             <li className="nav-item mx-2">
               <NavLink 
+                data-cy="about-link"
                 className={({ isActive }) => `nav-link ${isActive ? 'active fw-bold' : ''}`} 
                 to="/about"
                 style={{ color: '#000' }}
@@ -110,6 +113,7 @@ const Navbar = () => {
             </li>
             <li 
               className="nav-item dropdown mx-2"
+              data-cy="services-dropdown"
               onMouseEnter={() => setServicesOpen(true)}
               onMouseLeave={() => setServicesOpen(false)}
             >
@@ -134,19 +138,20 @@ const Navbar = () => {
                 className={`dropdown-menu ${servicesOpen ? ' show' : ''} ${dropdownTextAlign}`}
                 style={{ position: 'absolute' }}
               >
-                <NavLink className={({ isActive }) => `dropdown-item mb-2 ${isActive ? 'active' : ''}`} to="/services/crédit" onClick={() => setServicesOpen(false)}>
+                <NavLink data-cy="credit-link" className={({ isActive }) => `dropdown-item mb-2 ${isActive ? 'active' : ''}`} to="/services/credit" onClick={() => setServicesOpen(false)}>
                   {t('nav.credit')}
                 </NavLink>
-                <NavLink className={({ isActive }) => `dropdown-item mb-2 ${isActive ? 'active' : ''}`} to="/services/recouvrement" onClick={() => setServicesOpen(false)}>
+                <NavLink data-cy="recovery-link" className={({ isActive }) => `dropdown-item mb-2 ${isActive ? 'active' : ''}`} to="/services/recouvrement" onClick={() => setServicesOpen(false)}>
                   {t('nav.recovery')}
                 </NavLink>
-                <NavLink className={({ isActive }) => `dropdown-item ${isActive ? 'active' : ''}`} to="/services/formations" onClick={() => setServicesOpen(false)}>
+                <NavLink data-cy="courses-link" className={({ isActive }) => `dropdown-item ${isActive ? 'active' : ''}`} to="/services/formations" onClick={() => setServicesOpen(false)}>
                   {t('nav.courses')}
                 </NavLink>
               </div>
             </li>
             <li className="nav-item mx-2">
               <NavLink 
+                data-cy="contact-link"
                 className={({ isActive }) => `nav-link ${isActive ? 'active' : ''}`} 
                 to="/contact"
               >
@@ -155,6 +160,7 @@ const Navbar = () => {
             </li>
             <li className="nav-item mx-2">
               <NavLink 
+                data-cy="faq-link"
                 className={({ isActive }) => `nav-link ${isActive ? 'active' : ''}`} 
                 to="/faq"
               >
@@ -277,7 +283,7 @@ const Navbar = () => {
     </div>
 
     {/* Bootstrap Modal - Small screens only */}
-    <div className={`modal d-lg-none ${isMobileModalOpen ? 'show' : ''}`} 
+    <div className={`modal ${isMobileModalOpen ? 'show' : ''}`} 
          id="mobileNavModal" 
          tabIndex="-1" 
          style={{ 
@@ -312,7 +318,7 @@ const Navbar = () => {
                       opacity: isMobileModalOpen ? 1 : 0,
                       transition: 'all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.2s'
                     }}>
-                  <NavLink to="/" className="text-decoration-none fs-5" onClick={closeMobileModal}>{t('nav.home')}</NavLink>
+                  <NavLink data-cy="home-link-small" to="/" className="text-decoration-none fs-5" onClick={closeMobileModal}>{t('nav.home')}</NavLink>
                 </li>
                 <hr />
                 <li className="mb-3"
@@ -321,7 +327,7 @@ const Navbar = () => {
                       opacity: isMobileModalOpen ? 1 : 0,
                       transition: 'all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.3s'
                     }}>
-                  <NavLink to="/about" className="text-decoration-none fs-5" onClick={closeMobileModal}>{t('nav.about')}</NavLink>
+                  <NavLink data-cy="about-link-small" to="/about" className="text-decoration-none fs-5" onClick={closeMobileModal}>{t('nav.about')}</NavLink>
                 </li>
                 <hr />
                 <li className="mb-3"
@@ -333,6 +339,7 @@ const Navbar = () => {
                   <button 
                     onClick={() => setMobileServicesOpen(prev => !prev)}
                     className="btn btn-link text-decoration-none fs-5 p-0"
+                    data-cy="services-dropdown-small"
                     style={{ 
                       color: 'inherit',
                       border: 'none',
@@ -360,11 +367,11 @@ const Navbar = () => {
                     }}
                   >
                     <ul className="list-unstyled mt-2 ms-3">
-                      <li className="mb-2"><NavLink to="/services/crédit" className="text-decoration-none" onClick={closeMobileModal}>{t('nav.credit')}</NavLink></li>
+                      <li className="mb-2"><NavLink data-cy="credit-link-small" to="/services/credit" className="text-decoration-none" onClick={closeMobileModal}>{t('nav.credit')}</NavLink></li>
                       <hr />
-                      <li className="mb-2"><NavLink to="/services/recouvrement" className="text-decoration-none" onClick={closeMobileModal}>{t('nav.recovery')}</NavLink></li>
+                      <li className="mb-2"><NavLink data-cy="recovery-link-small" to="/services/recouvrement" className="text-decoration-none" onClick={closeMobileModal}>{t('nav.recovery')}</NavLink></li>
                       <hr />
-                      <li className="mb-2"><NavLink to="/services/formations" className="text-decoration-none" onClick={closeMobileModal}>{t('nav.courses')}</NavLink></li>
+                      <li className="mb-2"><NavLink data-cy="courses-link-small" to="/services/formations" className="text-decoration-none" onClick={closeMobileModal}>{t('nav.courses')}</NavLink></li>
                     </ul>
                   </div>
                 </li>
@@ -375,7 +382,7 @@ const Navbar = () => {
                       opacity: isMobileModalOpen ? 1 : 0,
                       transition: 'all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.5s'
                     }}>
-                  <NavLink to="/faq" className="text-decoration-none fs-5" onClick={closeMobileModal}>{t('nav.faq')}</NavLink>
+                  <NavLink data-cy="faq-link-small" to="/faq" className="text-decoration-none fs-5" onClick={closeMobileModal}>{t('nav.faq')}</NavLink>
                 </li>
                 <hr />
                 <li className="mb-3"
@@ -384,7 +391,7 @@ const Navbar = () => {
                       opacity: isMobileModalOpen ? 1 : 0,
                       transition: 'all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.6s'
                     }}>
-                  <NavLink to="/contact" className="text-decoration-none fs-5" onClick={closeMobileModal}>{t('nav.contact')}</NavLink>
+                  <NavLink data-cy="contact-link-small" to="/contact" className="text-decoration-none fs-5" onClick={closeMobileModal}>{t('nav.contact')}</NavLink>
                 </li>
               </ul>
 

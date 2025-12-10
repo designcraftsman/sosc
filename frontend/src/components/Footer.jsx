@@ -28,13 +28,13 @@ const Footer = () => {
             <h5 className="fw-medium fs-5 mb-3">{t('footer.company')}</h5>
             <ul className="list-unstyled m-0 p-0 footer-links">
               <li className="mb-2">
-                <Link to="/about" className="text-white opacity-75 fw-light small footer-link">{t('footer.about')}</Link>
+                <Link data-cy="about-footer-link" to="/about" className="text-white opacity-75 fw-light small footer-link">{t('footer.about')}</Link>
               </li>
               <li className="mb-2">
-                <Link to="/services" className="text-white opacity-75 fw-light small footer-link">{t('footer.services')}</Link>
+                <Link data-cy="services-footer-link" to="/services" className="text-white opacity-75 fw-light small footer-link">{t('footer.services')}</Link>
               </li>
               <li className="mb-2">
-                <Link to="/about#team" className="text-white opacity-75 fw-light small footer-link">{t('footer.team')}</Link>
+                <Link data-cy="team-footer-link" to="/about#team" className="text-white opacity-75 fw-light small footer-link">{t('footer.team')}</Link>
               </li>
             </ul>
           </div>
@@ -58,9 +58,9 @@ const Footer = () => {
             <p className="mb-0 small">© 2024 <span className="text-secondary">SOSC</span>. {t('footer.rights')}</p>
           </div>
           <div className="d-flex flex-wrap gap-5 justify-content-center col-md-5 col-12 footer-links mb-md-0 mb-5 order-md-2">
-            <Link to="/policy" className="text-white opacity-75 small footer-link">{t('footer.privacy')}</Link>
-            <Link to="/terms" className="text-white opacity-75 small footer-link">{t('footer.terms')}</Link>
-            <Link to="/legal-mentions" className="text-white opacity-75 small footer-link">{t('footer.legalMentions')}</Link>
+            <Link data-cy="policy-footer-link" to="/policy" className="text-white opacity-75 small footer-link">{t('footer.privacy')}</Link>
+            <Link data-cy="terms-footer-link" to="/terms" className="text-white opacity-75 small footer-link">{t('footer.terms')}</Link>
+            <Link data-cy="legal-mentions-footer-link" to="/legal-mentions" className="text-white opacity-75 small footer-link">{t('footer.legalMentions')}</Link>
           </div>
         </div>
       {/* Footer hover animation styles */}

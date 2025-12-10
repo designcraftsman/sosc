@@ -12,6 +12,10 @@ class MailService {
                 user: process.env.EMAIL_USER,
                 pass: process.env.EMAIL_PASSWORD,
             },
+            tls: {
+                // Accept self-signed certificates in development
+                rejectUnauthorized: process.env.NODE_ENV === 'production'
+            }
         });
 
         // Verify transporter configuration

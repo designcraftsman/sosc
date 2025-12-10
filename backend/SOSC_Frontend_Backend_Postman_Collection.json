@@ -1,0 +1,801 @@
+{
+	"info": {
+		"_postman_id": "sosc-frontend-backend-api",
+		"name": "SOSC Frontend-Backend API Collection",
+		"description": "Complete API collection for all frontend-backend communication in SOSC project",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"variable": [
+		{
+			"key": "baseUrl",
+			"value": "http://localhost:5000",
+			"type": "string"
+		},
+		{
+			"key": "token",
+			"value": "",
+			"type": "string"
+		}
+	],
+	"item": [
+		{
+			"name": "Contact Form",
+			"item": [
+				{
+					"name": "Submit Contact Form",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200 or 201\", function () {",
+									"    pm.expect(pm.response.code).to.be.oneOf([200, 201]);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"name\": \"John Doe\",\n  \"email\": \"john.doe@example.com\",\n  \"subject\": \"Demande de renseignements\",\n  \"message\": \"Je souhaite en savoir plus sur vos services de crédit.\",\n  \"suspicious\": false\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/submit-form",
+							"host": ["{{baseUrl}}"],
+							"path": ["api", "submit-form"]
+						},
+						"description": "Public endpoint - Submit contact form from frontend"
+					},
+					"response": []
+				},
+				{
+					"name": "Submit Contact Form (XSS Attack Test)",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"name\": \"Attacker\",\n  \"email\": \"attacker@evil.com\",\n  \"subject\": \"Test\",\n  \"message\": \"Normal message\",\n  \"suspicious\": true\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/submit-form",
+							"host": ["{{baseUrl}}"],
+							"path": ["api", "submit-form"]
+						},
+						"description": "Test XSS detection with suspicious flag set to true"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Authentication",
+			"item": [
+				{
+					"name": "Login",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"if (pm.response.code === 200) {",
+									"    var jsonData = pm.response.json();",
+									"    pm.collectionVariables.set(\"token\", jsonData.token);",
+									"}"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"username\": \"admin\",\n  \"password\": \"your_password\"\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/auth/login",
+							"host": ["{{baseUrl}}"],
+							"path": ["api", "auth", "login"]
+						},
+						"description": "Admin login - Returns JWT token"
+					},
+					"response": []
+				},
+				{
+					"name": "Get Current User",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/api/auth/me",
+							"host": ["{{baseUrl}}"],
+							"path": ["api", "auth", "me"]
+						},
+						"description": "Get current authenticated user info"
+					},
+					"response": []
+				},
+				{
+					"name": "Change Password",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"currentPassword\": \"old_password\",\n  \"newPassword\": \"new_password\"\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/auth/change-password",
+							"host": ["{{baseUrl}}"],
+							"path": ["api", "auth", "change-password"]
+						},
+						"description": "Change user password"
+					},
+					"response": []
+				},
+				{
+					"name": "Logout",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/api/auth/logout",
+							"host": ["{{baseUrl}}"],
+							"path": ["api", "auth", "logout"]
+						},
+						"description": "Logout current user"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Blog Articles (Public)",
+			"item": [
+				{
+					"name": "Get Published Articles",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/api/blog/articles?page=1&limit=10&category=crédit",
+							"host": ["{{baseUrl}}"],
+							"path": ["api", "blog", "articles"],
+							"query": [
+								{
+									"key": "page",
+									"value": "1"
+								},
+								{
+									"key": "limit",
+									"value": "10"
+								},
+								{
+									"key": "category",
+									"value": "crédit",
+									"description": "crédit, recouvrement, or formation"
+								}
+							]
+						},
+						"description": "Get all published articles with pagination and filters"
+					},
+					"response": []
+				},
+				{
+					"name": "Get Article by ID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/api/blog/articles/:id",
+							"host": ["{{baseUrl}}"],
+							"path": ["api", "blog", "articles", ":id"],
+							"variable": [
+								{
+									"key": "id",
+									"value": "1"
+								}
+							]
+						},
+						"description": "Get single article by ID with related articles"
+					},
+					"response": []
+				},
+				{
+					"name": "Get Featured Articles",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/api/blog/articles/featured?limit=3",
+							"host": ["{{baseUrl}}"],
+							"path": ["api", "blog", "articles", "featured"],
+							"query": [
+								{
+									"key": "limit",
+									"value": "3"
+								}
+							]
+						},
+						"description": "Get featured articles"
+					},
+					"response": []
+				},
+				{
+					"name": "Search Articles",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/api/blog/articles/search?q=crédit&limit=10",
+							"host": ["{{baseUrl}}"],
+							"path": ["api", "blog", "articles", "search"],
+							"query": [
+								{
+									"key": "q",
+									"value": "crédit"
+								},
+								{
+									"key": "limit",
+									"value": "10"
+								}
+							]
+						},
+						"description": "Search articles by keyword"
+					},
+					"response": []
+				},
+				{
+					"name": "Get Categories",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/api/blog/articles/categories",
+							"host": ["{{baseUrl}}"],
+							"path": ["api", "blog", "articles", "categories"]
+						},
+						"description": "Get all article categories"
+					},
+					"response": []
+				},
+				{
+					"name": "Get Tags",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/api/blog/articles/tags",
+							"host": ["{{baseUrl}}"],
+							"path": ["api", "blog", "articles", "tags"]
+						},
+						"description": "Get all article tags"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Blog Articles (Admin)",
+			"item": [
+				{
+					"name": "Get All Articles (Admin)",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/api/blog/admin/articles?page=1&limit=10&status=published&category=crédit",
+							"host": ["{{baseUrl}}"],
+							"path": ["api", "blog", "admin", "articles"],
+							"query": [
+								{
+									"key": "page",
+									"value": "1"
+								},
+								{
+									"key": "limit",
+									"value": "10"
+								},
+								{
+									"key": "status",
+									"value": "published",
+									"description": "draft, published, or archived"
+								},
+								{
+									"key": "category",
+									"value": "crédit"
+								}
+							]
+						},
+						"description": "Admin: Get all articles including drafts"
+					},
+					"response": []
+				},
+				{
+					"name": "Get Article by ID (Admin)",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/api/blog/admin/articles/:id",
+							"host": ["{{baseUrl}}"],
+							"path": ["api", "blog", "admin", "articles", ":id"],
+							"variable": [
+								{
+									"key": "id",
+									"value": "1"
+								}
+							]
+						},
+						"description": "Admin: Get article by ID"
+					},
+					"response": []
+				},
+				{
+					"name": "Create Article",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"title\": \"Nouveau guide sur le crédit professionnel\",\n  \"excerpt\": \"Tout ce que vous devez savoir sur le crédit professionnel\",\n  \"content\": \"<h2>Introduction</h2><p>Le crédit professionnel est essentiel...</p>\",\n  \"category\": \"crédit\",\n  \"tags\": [\"crédit\", \"entreprise\", \"financement\"],\n  \"status\": \"draft\"\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/blog/admin/articles",
+							"host": ["{{baseUrl}}"],
+							"path": ["api", "blog", "admin", "articles"]
+						},
+						"description": "Admin: Create new article"
+					},
+					"response": []
+				},
+				{
+					"name": "Update Article",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"title\": \"Titre mis à jour\",\n  \"excerpt\": \"Extrait mis à jour\",\n  \"content\": \"<h2>Contenu mis à jour</h2><p>...</p>\",\n  \"category\": \"recouvrement\",\n  \"tags\": [\"recouvrement\", \"créances\"],\n  \"status\": \"published\"\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/blog/admin/articles/:id",
+							"host": ["{{baseUrl}}"],
+							"path": ["api", "blog", "admin", "articles", ":id"],
+							"variable": [
+								{
+									"key": "id",
+									"value": "1"
+								}
+							]
+						},
+						"description": "Admin: Update article"
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Article",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/api/blog/admin/articles/:id",
+							"host": ["{{baseUrl}}"],
+							"path": ["api", "blog", "admin", "articles", ":id"],
+							"variable": [
+								{
+									"key": "id",
+									"value": "1"
+								}
+							]
+						},
+						"description": "Admin: Delete article"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Blog Comments (Admin)",
+			"item": [
+				{
+					"name": "Get All Comments",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/api/blog/admin/comments?article_id=1&status=pending",
+							"host": ["{{baseUrl}}"],
+							"path": ["api", "blog", "admin", "comments"],
+							"query": [
+								{
+									"key": "article_id",
+									"value": "1"
+								},
+								{
+									"key": "status",
+									"value": "pending",
+									"description": "pending, approved, rejected, spam"
+								}
+							]
+						},
+						"description": "Admin: Get all comments with filters"
+					},
+					"response": []
+				},
+				{
+					"name": "Update Comment Status",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"status\": \"approved\"\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/blog/admin/comments/:id/status",
+							"host": ["{{baseUrl}}"],
+							"path": ["api", "blog", "admin", "comments", ":id", "status"],
+							"variable": [
+								{
+									"key": "id",
+									"value": "1"
+								}
+							]
+						},
+						"description": "Admin: Update comment status (approve/reject/spam)"
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Comment",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/api/blog/admin/comments/:id",
+							"host": ["{{baseUrl}}"],
+							"path": ["api", "blog", "admin", "comments", ":id"],
+							"variable": [
+								{
+									"key": "id",
+									"value": "1"
+								}
+							]
+						},
+						"description": "Admin: Delete comment"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Contact Submissions (Admin)",
+			"item": [
+				{
+					"name": "Get All Submissions",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/api/contact-submissions",
+							"host": ["{{baseUrl}}"],
+							"path": ["api", "contact-submissions"]
+						},
+						"description": "Admin: Get all contact form submissions"
+					},
+					"response": []
+				},
+				{
+					"name": "Get Submission by ID",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/api/contact-submissions/:id",
+							"host": ["{{baseUrl}}"],
+							"path": ["api", "contact-submissions", ":id"],
+							"variable": [
+								{
+									"key": "id",
+									"value": "1"
+								}
+							]
+						},
+						"description": "Admin: Get specific submission"
+					},
+					"response": []
+				},
+				{
+					"name": "Update Submission Status",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"status\": \"read\"\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/contact-submissions/:id/status",
+							"host": ["{{baseUrl}}"],
+							"path": ["api", "contact-submissions", ":id", "status"],
+							"variable": [
+								{
+									"key": "id",
+									"value": "1"
+								}
+							]
+						},
+						"description": "Admin: Update submission status"
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Submission",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/api/contact-submissions/:id",
+							"host": ["{{baseUrl}}"],
+							"path": ["api", "contact-submissions", ":id"],
+							"variable": [
+								{
+									"key": "id",
+									"value": "1"
+								}
+							]
+						},
+						"description": "Admin: Delete submission"
+					},
+					"response": []
+				},
+				{
+					"name": "Export Submissions CSV",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/api/contact-submissions/export/csv",
+							"host": ["{{baseUrl}}"],
+							"path": ["api", "contact-submissions", "export", "csv"]
+						},
+						"description": "Admin: Export all submissions as CSV"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Security Logs (Admin)",
+			"item": [
+				{
+					"name": "Get All Security Logs",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/api/security/logs?type=XSS_ATTEMPT&page=1&limit=50",
+							"host": ["{{baseUrl}}"],
+							"path": ["api", "security", "logs"],
+							"query": [
+								{
+									"key": "type",
+									"value": "XSS_ATTEMPT",
+									"description": "XSS_ATTEMPT, SQL_INJECTION, etc."
+								},
+								{
+									"key": "page",
+									"value": "1"
+								},
+								{
+									"key": "limit",
+									"value": "50"
+								}
+							]
+						},
+						"description": "Admin: Get all security logs"
+					},
+					"response": []
+				},
+				{
+					"name": "Get Security Log by ID",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/api/security/logs/:id",
+							"host": ["{{baseUrl}}"],
+							"path": ["api", "security", "logs", ":id"],
+							"variable": [
+								{
+									"key": "id",
+									"value": "1"
+								}
+							]
+						},
+						"description": "Admin: Get specific security log"
+					},
+					"response": []
+				},
+				{
+					"name": "Get Security Statistics",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/api/security/statistics",
+							"host": ["{{baseUrl}}"],
+							"path": ["api", "security", "statistics"]
+						},
+						"description": "Admin: Get security statistics"
+					},
+					"response": []
+				},
+				{
+					"name": "Cleanup Old Logs",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"daysOld\": 90\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/security/cleanup",
+							"host": ["{{baseUrl}}"],
+							"path": ["api", "security", "cleanup"]
+						},
+						"description": "Admin: Delete security logs older than specified days"
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}

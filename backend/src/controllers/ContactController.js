@@ -50,7 +50,7 @@ exports.submitForm = async (req, res) => {
                 timestamp: new Date().toISOString()
             });
             
-            // Silent rejection - attacker thinks it succeeded
+            // Silent rejection - attacker thinks it succeeded (return 200 to match normal flow)
             return res.status(200).json({ 
                 message: 'Form submitted successfully'
             });

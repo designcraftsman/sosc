@@ -6,16 +6,6 @@ import Map from "./Map";
 import { useLanguage } from "../context/LanguageContext";
 
 
-const sanitizeInput = (input) => {
-  // Remove potential script tags and dangerous characters
-    return input
-      .replace(/<script\b[^<]*(?:(?!<\/script>)<[^<]*)*<\/script>/gi, '')
-      .replace(/<iframe\b[^<]*(?:(?!<\/iframe>)<[^<]*)*<\/iframe>/gi, '')
-      .replace(/javascript:/gi, '')
-      .replace(/on\w+\s*=/gi, '') // Remove event handlers like onclick=
-      .trim();
-};
-
 const valideEmail = (email) =>{
   const emailRegex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
   return emailRegex.test(email);
@@ -64,14 +54,7 @@ const ContactSection = () => {
     setIsSubmitting(true);
     setSubmitError('');
 
-    const sanitizedData = {
-      name: sanitizeInput(formData.name),
-      email: sanitizeInput(formData.email),
-      subject: sanitizeInput(formData.subject),
-      message: sanitizeInput(formData.message)
-    };
-
-    console.log('📤 Sending to backend:', sanitizedData);
+  
 
     try {
       const response = await fetch('http://localhost:5000/api/submit-form', {
@@ -79,7 +62,7 @@ const ContactSection = () => {
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify(sanitizedData) // Send sanitized data
+        body: JSON.stringify(formData)
       });
 
       const data = await response.json();

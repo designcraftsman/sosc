@@ -11,6 +11,9 @@ const SecurityRoutes = require('./routes/SecurityRoutes');
 
 const app = express();
 
+// Trust proxy - needed for correct IP detection behind load balancers/proxies
+app.set('trust proxy', true);
+
 const corsOptions = {
     origin: '*', // Allow only this origin
     methods: ['GET', 'POST', 'PUT', 'DELETE'],

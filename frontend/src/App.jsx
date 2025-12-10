@@ -25,7 +25,7 @@ function AnimatedRoutes() {
         <Route path="/about" element={<About />} />
         <Route path="/services" element={<Services />} />
         <Route path="/contact" element={<Contact />} />
-        <Route path="/services/crédit" element={<Loan />} />
+        <Route path="/services/credit" element={<Loan />} />
         <Route path="/services/recouvrement" element={<Recovery />} />
         <Route path="/services/formations" element={<Courses />} />
         <Route path="/services/formations/:id" element={<CourseDetails />} />
