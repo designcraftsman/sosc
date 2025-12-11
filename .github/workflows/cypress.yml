@@ -3,132 +3,31 @@ on: [push]
 jobs:
   cypress-run:
     runs-on: ubuntu-latest
+    # Runs tests in parallel with matrix strategy https://docs.cypress.io/guides/guides/parallelization
+    # https://docs.github.com/en/actions/using-jobs/using-a-matrix-for-your-jobs
+    # Also see warning here https://github.com/cypress-io/github-action#parallel
     strategy:
-      fail-fast: false
+      fail-fast: false # https://github.com/cypress-io/github-action/issues/48
       matrix:
-        containers: [1, 2]
-    
-    services:
-      postgres:
-        image: postgres:15
-        env:
-          POSTGRES_PASSWORD: postgres
-          POSTGRES_DB: sosc_test
-        options: >-
-          --health-cmd pg_isready
-          --health-interval 10s
-          --health-timeout 5s
-          --health-retries 5
-        ports:
-          - 5432:5432
-    
+        containers: [1, 2] # Uses 2 parallel instances
     steps:
       - name: Checkout
         uses: actions/checkout@v4
-      
-      - name: Setup Node
-        uses: actions/setup-node@v4
-        with:
-          node-version: '18'
-      
-      - name: Install Backend Dependencies
-        working-directory: backend
-        run: npm ci
-      
-      - name: Run Database Migrations
-        working-directory: backend
-        run: |
-          node src/run-blog-migration.js || echo "Blog migration completed"
-          node src/run-comments-media-migration.js || echo "Comments/media migration completed"
-          node src/run-security-logs-migration.js || echo "Security logs migration completed"
-        env:
-          DATABASE_URL: postgresql://postgres:postgres@localhost:5432/sosc_test
-      
-      - name: Install Frontend Dependencies
-        working-directory: frontend
-        run: npm ci
-      
-      - name: Install Root Dependencies (Cypress)
-        run: npm ci
-      
-      - name: Create .env file for backend
-        working-directory: backend
-        run: |
-          cat > .env << 'EOF'
-          DB_HOST=localhost
-          DB_PORT=5432
-          DB_NAME=sosc_test
-          DB_USER=postgres
-          DB_PASSWORD=postgres
-          PORT=5000
-          NODE_ENV=test
-          JWT_SECRET=test-secret-key-for-ci
-          EMAIL_HOST=smtp.gmail.com
-          EMAIL_PORT=587
-          EMAIL_SECURE=false
-          EMAIL_USER=test@example.com
-          EMAIL_PASSWORD=test-password
-          ADMIN_EMAIL=test@example.com
-          COMPANY_NAME=SOSC
-          COMPANY_ADDRESS=Test Address
-          COMPANY_PHONE=+212 529 555 101
-          EOF
-      
-      - name: Start Backend Server (background)
-        working-directory: backend
-        run: |
-          nohup npm start > backend.log 2>&1 &
-          echo $! > backend.pid
-          sleep 5
-      
-      - name: Check Backend Status
-        run: |
-          cat backend/backend.log || echo "No backend log"
-          ps aux | grep node || echo "No node processes"
-      
-      - name: Wait for Backend
-        run: npx wait-on http://localhost:5000 -t 60000 || (cat backend/backend.log && exit 1)
-      
-      - name: Build Frontend
-        working-directory: frontend
-        run: npm run build
-        env:
-          CI: false
-      
-      - name: Serve Frontend (background)
-        working-directory: frontend
-        run: npx serve -s build -l 3000 &
-      
-      - name: Wait for Frontend
-        run: npx wait-on http://localhost:3000 -t 60000
-      
       - name: Cypress run
+        # Uses the official Cypress GitHub action https://github.com/cypress-io/github-action
         uses: cypress-io/github-action@v6
         with:
-          install: false
+          # Starts web server for E2E tests - replace with your own server invocation
+          # https://docs.cypress.io/guides/continuous-integration/introduction#Boot-your-server
+          start: npm start
+          wait-on: 'http://localhost:3000, http://localhost:5000' # Waits for both frontend and backend
+          # Records to Cypress Cloud 
+          # https://docs.cypress.io/guides/cloud/projects#Set-up-a-project-to-record
           record: true
-          parallel: true
-          browser: chrome
+          parallel: true # Runs test in parallel using settings above
         env:
+          # For recording and parallelization to work you must set your CYPRESS_RECORD_KEY
+          # in GitHub repo → Settings → Secrets → Actions
           CYPRESS_RECORD_KEY: ${{ secrets.CYPRESS_RECORD_KEY }}
+          # Creating a token https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/creating-a-personal-access-token
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          CYPRESS_baseURL: http://localhost:3000
-          CYPRESS_apiURL: http://localhost:5000/api
-      
-      - name: Upload Screenshots on Failure
-        uses: actions/upload-artifact@v4
-        if: failure()
-        with:
-          name: cypress-screenshots-${{ matrix.containers }}
-          path: cypress/screenshots
-      
-      - name: Upload Videos
-        uses: actions/upload-artifact@v4
-        if: always()
-        with:
-          name: cypress-videos-${{ matrix.containers }}
-          path: cypress/videos
-      
-      - name: Show Backend Logs on Failure
-        if: failure()
-        run: cat backend/backend.log || echo "No backend logs"
