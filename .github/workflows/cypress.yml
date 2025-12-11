@@ -10,6 +10,20 @@ jobs:
       fail-fast: false # https://github.com/cypress-io/github-action/issues/48
       matrix:
         containers: [1, 2] # Uses 2 parallel instances
+    services:
+      postgres:
+        image: postgres:14
+        env:
+          POSTGRES_PASSWORD: postgres
+          POSTGRES_USER: postgres
+          POSTGRES_DB: testdb
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -30,6 +44,15 @@ jobs:
           record: true
           parallel: true # Runs test in parallel using settings above
         env:
+          # Backend environment variables
+          DB_USER: postgres
+          DB_HOST: localhost
+          DB_NAME: testdb
+          DB_PASSWORD: postgres
+          DB_PORT: 5432
+          PORT: 5000
+          NODE_ENV: test
+          JWT_SECRET: test-secret-key
           # For recording and parallelization to work you must set your CYPRESS_RECORD_KEY
           # in GitHub repo → Settings → Secrets → Actions
           CYPRESS_RECORD_KEY: ${{ secrets.CYPRESS_RECORD_KEY }}
