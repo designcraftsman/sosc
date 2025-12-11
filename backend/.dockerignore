@@ -1,0 +1,15 @@
+# Docker
+node_modules/
+npm-debug.log
+uploads/
+.env
+
+# Git
+.git/
+.gitignore
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo

@@ -3,60 +3,45 @@ on: [push]
 jobs:
   cypress-run:
     runs-on: ubuntu-latest
-    # Runs tests in parallel with matrix strategy https://docs.cypress.io/guides/guides/parallelization
-    # https://docs.github.com/en/actions/using-jobs/using-a-matrix-for-your-jobs
-    # Also see warning here https://github.com/cypress-io/github-action#parallel
     strategy:
-      fail-fast: false # https://github.com/cypress-io/github-action/issues/48
+      fail-fast: false
       matrix:
         containers: [1, 2] # Uses 2 parallel instances
-    services:
-      postgres:
-        image: postgres:14
-        env:
-          POSTGRES_PASSWORD: postgres
-          POSTGRES_USER: postgres
-          POSTGRES_DB: testdb
-        ports:
-          - 5432:5432
-        options: >-
-          --health-cmd pg_isready
-          --health-interval 10s
-          --health-timeout 5s
-          --health-retries 5
     steps:
       - name: Checkout
         uses: actions/checkout@v4
-      - name: Install backend dependencies
-        run: cd backend && npm ci
-      - name: Install frontend dependencies
-        run: cd frontend && npm ci
+      
+      - name: Start services with Docker Compose
+        run: |
+          docker compose -f docker-compose.ci.yml up -d
+          docker compose -f docker-compose.ci.yml ps
+      
+      - name: Wait for services to be healthy
+        run: |
+          echo "Waiting for backend to be ready..."
+          timeout 60 bash -c 'until curl -f http://localhost:5000/api/health || curl -f http://localhost:5000; do sleep 2; done' || echo "Backend might not have health endpoint, continuing..."
+          echo "Waiting for frontend to be ready..."
+          timeout 90 bash -c 'until curl -f http://localhost:3000; do sleep 2; done'
+          echo "All services are ready!"
+      
+      - name: Show service logs
+        if: always()
+        run: docker compose -f docker-compose.ci.yml logs
+      
       - name: Cypress run
-        # Uses the official Cypress GitHub action https://github.com/cypress-io/github-action
         uses: cypress-io/github-action@v6
         with:
-          # Starts web server for E2E tests - replace with your own server invocation
-          # https://docs.cypress.io/guides/continuous-integration/introduction#Boot-your-server
-          start: npm start
-          wait-on: 'http://localhost:3000, http://localhost:5000' # Waits for both frontend and backend
-          # Records to Cypress Cloud 
-          # https://docs.cypress.io/guides/cloud/projects#Set-up-a-project-to-record
+          install: true
+          wait-on: 'http://localhost:3000, http://localhost:5000'
+          wait-on-timeout: 120
           record: true
-          parallel: true # Runs test in parallel using settings above
+          parallel: true
         env:
-          # Backend environment variables
-          DB_USER: postgres
-          DB_HOST: localhost
-          DB_NAME: testdb
-          DB_PASSWORD: postgres
-          DB_PORT: 5432
-          PORT: 5000
-          NODE_ENV: test
-          JWT_SECRET: test-secret-key
-          # Frontend port
-          BROWSER: none
-          # For recording and parallelization to work you must set your CYPRESS_RECORD_KEY
-          # in GitHub repo → Settings → Secrets → Actions
           CYPRESS_RECORD_KEY: ${{ secrets.CYPRESS_RECORD_KEY }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      
+      - name: Stop services
+        if: always()
+        run: docker compose -f docker-compose.ci.yml down -v
           # Creating a token https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/creating-a-personal-access-token
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

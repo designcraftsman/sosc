@@ -1,0 +1,17 @@
+# Docker
+node_modules/
+npm-debug.log
+build/
+
+# Git
+.git/
+.gitignore
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Testing
+coverage/
